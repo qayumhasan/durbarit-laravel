@@ -596,7 +596,11 @@ class ComposerStaticInitdf453bd97a560f1c4c3ce4cf7726529f
         'App\\AboutUs' => __DIR__ . '/../..' . '/app/AboutUs.php',
         'App\\AddToCart' => __DIR__ . '/../..' . '/app/AddToCart.php',
         'App\\Admin' => __DIR__ . '/../..' . '/app/Admin.php',
+
+        'App\\Apply' => __DIR__ . '/../..' . '/app/Apply.php',
+
         'App\\Billing' => __DIR__ . '/../..' . '/app/Billing.php',
+
         'App\\Career' => __DIR__ . '/../..' . '/app/Career.php',
         'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',
         'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',

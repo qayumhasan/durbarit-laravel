@@ -22,6 +22,7 @@ use App\Project;
 use App\ContactMessage;
 use App\Subscriber;
 use App\Whychoseus;
+use App\Apply;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 class FrontendController extends ApiController
@@ -46,6 +47,63 @@ class FrontendController extends ApiController
         public function carrer(){
             $carrer=Career::where('status',1)->latest()->get();
             return view('frontend.carrer.carrerpage',compact('carrer'));
+        }
+         public function carrerapply($id){
+
+            $apply=Career::where('id',$id)->first();
+            return view('frontend.carrer.carrerapply',compact('apply'));
+
+        }
+
+        
+
+        public function applysubmit(Request $request){
+               $validatedData = $request->validate([
+                        'name' => 'required|max:255',
+                        'email' => 'required',
+                        'mobile' => 'required',
+                        'resume' => 'required',
+                        'joindate' => 'required',
+                        'location' => 'required',
+                        'experience' => 'required',
+                        'ex_selary' => 'required',
+                    ]);
+              $product = new Apply;
+              $product->name = $request->name;
+              $product->email = $request->email;
+              $product->phone = $request->mobile;
+              $product->joindate = $request->joindate;
+              $product->location = $request->location;
+              $product->experience = $request->experience;
+              $product->ex_selary = $request->ex_selary;
+              $product->coverlatter = $request->coverlatter;
+              $product->protfolio = $request->protfolio;
+              $product->jobid = $request->jobid;
+               // upload file
+            if ($request->hasFile('resume')) {
+
+                $product->resume = $request->file('resume')->store('public/uploads/');
+            }
+               if($product->save()){
+               $notification = array(
+                   'messege' => 'Apply success',
+                   'alert-type' => 'success'
+                     );
+                     return Redirect()->back()->with($notification);
+                }else{
+                     $notification = array(
+                         'messege' => 'Aplly Faild',
+                         'alert-type' => 'error'
+                     );
+                     return Redirect()->back()->with($notification);
+              }
+
+
+
+
+
+
+
         }
 
         public function contact(){

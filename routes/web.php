@@ -202,6 +202,15 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
 
 });
 
+Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(function(){
+  Route::get(md5('/apply/index'),'ApplyController@index')->name('admin.apply.index');
+  Route::get('/apply/active/{id}','ApplyController@active');
+  Route::get('/apply/view/{id}','ApplyController@view');
+  Route::get('/apply/delete/{id}','ApplyController@delete');
+  
+
+});
+
 
 Route::prefix('customer')->namespace('Frontend')->group(function(){
 
@@ -228,6 +237,9 @@ Route::get('/','Frontend\FrontendController@index');
 Route::get('/product','Frontend\FrontendController@product');
 Route::get('/product/details/{id}','Frontend\FrontendController@productdetails');
 Route::get('/carrer','Frontend\FrontendController@carrer');
+Route::get('/carrer/apply/{id}','Frontend\FrontendController@carrerapply');
+Route::post('/carrer/apply/submit','Frontend\FrontendController@applysubmit');
+
 Route::get('/contact','Frontend\FrontendController@contact');
 Route::get('/team','Frontend\FrontendController@team');
 Route::get('/customer/login','Frontend\FrontendController@loginpage')->name('auth.login');

@@ -8,22 +8,20 @@
 		<link rel="icon" href="assets/images/favicon.png" >
 		<!--Page title-->
 		<title>Admin DIT</title>
-
 		<link rel="stylesheet" href="{{asset('public/assets/css/bootstrap.min.css')}}">
 		<!--font awesome-->
 		<link rel="stylesheet" href="{{asset('public/assets/css/all.css')}}">
 		<link href="{{asset('public/assets/plugins/icheck/skins/all.css')}}" rel="stylesheet">
 		<!-- metis menu -->
 		<link rel="stylesheet" href="{{asset('public/assets/plugins/metismenu-3.0.4/assets/css/metisMenu.min.css')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/plugins/metismenu-3.0.4/assets/css/mm-vertical-hover.css')}}">
+   		<link rel="stylesheet" href="{{asset('public/assets/plugins/metismenu-3.0.4/assets/css/mm-vertical-hover.css')}}">
         <!-- chart -->
         <!-- <link rel="stylesheet" href="assets/plugins/chartjs-bar-chart/chart.css"> -->
 		<!-- donut-chart -->
-    <link rel="stylesheet" href="{{asset('public/assets/plugins/donut-chart/dist/style.css')}}">
+   		<link rel="stylesheet" href="{{asset('public/assets/plugins/donut-chart/dist/style.css')}}">
 		<!--Custom CSS-->
 		<!-- datatable -->
 		<link href="{{asset('public')}}/assets/plugins/datatables/dataTables.min.css" rel="stylesheet" type="text/css">
-
 		<!-- enddatatable -->
 		<link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
@@ -32,8 +30,6 @@
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 
 	</head>
 	<body id="page-top">

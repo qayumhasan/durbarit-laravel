@@ -9,7 +9,11 @@ return array(
     'App\\AboutUs' => $baseDir . '/app/AboutUs.php',
     'App\\AddToCart' => $baseDir . '/app/AddToCart.php',
     'App\\Admin' => $baseDir . '/app/Admin.php',
+
+    'App\\Apply' => $baseDir . '/app/Apply.php',
+
     'App\\Billing' => $baseDir . '/app/Billing.php',
+
     'App\\Career' => $baseDir . '/app/Career.php',
     'App\\Category' => $baseDir . '/app/Category.php',
     'App\\Client' => $baseDir . '/app/Client.php',

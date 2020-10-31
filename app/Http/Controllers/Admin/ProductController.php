@@ -219,8 +219,6 @@ class ProductController extends Controller
             $data->gallary_image = json_encode($photos);
       }
 
-
-
       if($data->save()){
        $notification = array(
            'messege' => 'Product update success',
