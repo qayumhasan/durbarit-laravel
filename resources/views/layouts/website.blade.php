@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{asset('public/frontend')}}/css/product_detail.css">
     <link rel="stylesheet" href="{{asset('public/frontend')}}/css/cart.css">
     <link rel="stylesheet" href="{{asset('public/frontend')}}/css/style.css">
+    <link rel="stylesheet" href="{{asset('public/frontend')}}/css/user.css">
+    
    
 </head>
 

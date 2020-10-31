@@ -16,12 +16,10 @@ class CreateAddToCartsTable extends Migration
         Schema::create('add_to_carts', function (Blueprint $table) {
             $table->id();
             $table->string('user_ip');
-            $table->integer('product_id');
-            $table->integer('package_id');
-            $table->string('price');
-            $table->string('sku');
-            $table->string('image');
-            $table->string('extr_price')->nullable();
+            $table->string('product_id');
+            $table->string('package_id');
+            $table->text('product');
+            $table->string('extra_price')->nullable();
             $table->timestamps();
         });
     }
