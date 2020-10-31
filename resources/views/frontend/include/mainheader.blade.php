@@ -110,6 +110,12 @@
                                     <li>
                                         <a href="{{url('/contact')}}">Contact Us</a>
                                     </li>
+                                    @php
+                                        $cart =App\AddToCart::where('user_ip',\Request::ip())->get()->count();
+                                    @endphp
+                                    <li>
+                                        <a href="{{route('product.cart.page')}}"><i class="fas fa-cart-arrow-down"></i><span id="cartdatacount"> {{$cart}}</span></a>
+                                    </li>
 
                                 </ul>
                             </nav>
@@ -168,8 +174,15 @@
                  <li> <a href="{{url('/carrer')}}">Career</a> </li>
                 <li><a href="{{url('/contact')}}">Contact</a></li>
                 <!-- <li><a href="trial.html" class="submenu_btn_link">Free Trial</a></li> -->
+                @php
+                    $user = Auth::user();
+                @endphp
+                @if($user)
+                <li><a href="{{route('customar.dashboard')}}"><i class="fas fa-user"></i> Account</a></li>
+                @else
                 <li><a href="{{url('/customer/login')}}"><i class="fas fa-user"></i> Login</a></li>
                 <li><a href="{{url('/customer/login')}}"><i class="fas fa-sign-in-alt"></i> Sign Up</a></li>
+                @endif
             </ul>
         </div>
     </section>

@@ -596,7 +596,11 @@ class ComposerStaticInitdf453bd97a560f1c4c3ce4cf7726529f
         'App\\AboutUs' => __DIR__ . '/../..' . '/app/AboutUs.php',
         'App\\AddToCart' => __DIR__ . '/../..' . '/app/AddToCart.php',
         'App\\Admin' => __DIR__ . '/../..' . '/app/Admin.php',
+
         'App\\Apply' => __DIR__ . '/../..' . '/app/Apply.php',
+
+        'App\\Billing' => __DIR__ . '/../..' . '/app/Billing.php',
+
         'App\\Career' => __DIR__ . '/../..' . '/app/Career.php',
         'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',
         'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',
@@ -638,6 +642,8 @@ class ComposerStaticInitdf453bd97a560f1c4c3ce4cf7726529f
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\Frontend\\AddToCartController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/AddToCartController.php',
+        'App\\Http\\Controllers\\Frontend\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/AdminController.php',
         'App\\Http\\Controllers\\Frontend\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/AuthController.php',
         'App\\Http\\Controllers\\Frontend\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/CartController.php',
         'App\\Http\\Controllers\\Frontend\\FrontendController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/FrontendController.php',

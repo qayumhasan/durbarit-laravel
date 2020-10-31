@@ -1,8 +1,9 @@
 <?php
 
 
-
-
+Route::get('/checkout',function(){
+  return view('frontend.shopping.checkout');
+});
 
 
 
@@ -211,6 +212,26 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
 });
 
 
+Route::prefix('customer')->namespace('Frontend')->group(function(){
+
+  Route::post('/login','AuthController@login')->name('customar.login');
+  Route::get('/logout','AuthController@logout')->name('customar.logout');
+  Route::get('/add/to/cart','AddToCartController@addToCart')->name('product.add.cart');  
+  Route::get('/product/cart','AddToCartController@showCart')->name('product.cart.page');  
+
+});
+
+Route::prefix('customer')->middleware('auth:web')->namespace('Frontend')->group(function(){
+
+  Route::get('/dashboard','AdminController@index')->name('customar.dashboard');
+  Route::get('/checkout','AddToCartController@checkout')->name('customar.checkout');
+  Route::post('/checkout','AddToCartController@customarBilling')->name('customar.billing');
+  Route::post('/cart/delete','AddToCartController@cartDelete')->name('cart.data.delete');
+  
+
+});
+
+
 
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/product','Frontend\FrontendController@product');
@@ -221,7 +242,7 @@ Route::post('/carrer/apply/submit','Frontend\FrontendController@applysubmit');
 
 Route::get('/contact','Frontend\FrontendController@contact');
 Route::get('/team','Frontend\FrontendController@team');
-Route::get('/customer/login','Frontend\FrontendController@loginpage');
+Route::get('/customer/login','Frontend\FrontendController@loginpage')->name('auth.login');
 Route::get('/page/{id}','Frontend\FrontendController@page');
 Route::get('/service/{id}','Frontend\FrontendController@servicepage');
 Route::post('/subscriber/website','Frontend\FrontendController@subcrive');

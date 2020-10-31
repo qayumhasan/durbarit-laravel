@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class AddToCart extends Model
 {
-    public function getCartCountAttribute($value)
-{
-    return count($value);
-}
+    protected $guarded = [];
+
+    public function getproductAttribute($value)
+    {
+        return json_decode($value);
+    }
 }

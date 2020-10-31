@@ -9,7 +9,11 @@ return array(
     'App\\AboutUs' => $baseDir . '/app/AboutUs.php',
     'App\\AddToCart' => $baseDir . '/app/AddToCart.php',
     'App\\Admin' => $baseDir . '/app/Admin.php',
+
     'App\\Apply' => $baseDir . '/app/Apply.php',
+
+    'App\\Billing' => $baseDir . '/app/Billing.php',
+
     'App\\Career' => $baseDir . '/app/Career.php',
     'App\\Category' => $baseDir . '/app/Category.php',
     'App\\Client' => $baseDir . '/app/Client.php',
@@ -51,6 +55,8 @@ return array(
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\Frontend\\AddToCartController' => $baseDir . '/app/Http/Controllers/Frontend/AddToCartController.php',
+    'App\\Http\\Controllers\\Frontend\\AdminController' => $baseDir . '/app/Http/Controllers/Frontend/AdminController.php',
     'App\\Http\\Controllers\\Frontend\\AuthController' => $baseDir . '/app/Http/Controllers/Frontend/AuthController.php',
     'App\\Http\\Controllers\\Frontend\\CartController' => $baseDir . '/app/Http/Controllers/Frontend/CartController.php',
     'App\\Http\\Controllers\\Frontend\\FrontendController' => $baseDir . '/app/Http/Controllers/Frontend/FrontendController.php',
