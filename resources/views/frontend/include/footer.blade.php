@@ -72,14 +72,35 @@
                                 <div class="email_form">
                                 <form action="{{url('subscriber/website')}}" method="post">
                                     @csrf
-                                    <div class="input-group mb-2 mr-sm-2">
+                                    <!-- <div class="input-group mb-2 mr-sm-2">
                                         <input type="email" name="email" class="form-control" id="inlineFormInputGroupUsername2" placeholder="email" required>
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><button type="submit"><i class="fas fa-envelope"></i></button></div>
                                         </div>
-                                    </div>
+                                    </div> -->
+                                    <div class="input-group mb-2 mr-sm-2">
+    
+    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+    <span class="em_bt"><button type="submit"><i class="fas fa-envelope"></i></button></span>
+  </div>
                                 </form>
-                             
+                             <style>
+                               span.em_bt button {
+    background-color: #26abe2;
+    color: #000000;
+    width: 35px;
+    height: 33px;
+    border-style: none;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+                           span.em_bt {
+    background-color: #26abe2;
+    border: 1px solid #26abe2;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+                             </style>
                                 </div>
                             </div>
                         </div>

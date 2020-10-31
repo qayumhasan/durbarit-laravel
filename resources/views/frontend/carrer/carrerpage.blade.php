@@ -52,7 +52,7 @@
                                     </td>
                                     <td>
                                         <div class="apply_btn">
-                                            <a href="{$care->link}}">apply now</a>
+                                            <a href="{{url('/carrer/apply/'.$care->id)}}">apply now</a>
                                         </div>
                                     </td>
 
