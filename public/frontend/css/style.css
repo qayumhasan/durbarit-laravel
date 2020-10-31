@@ -1842,7 +1842,61 @@ ul.mob_sub_nav{
     visibility: visible;
     opacity: 1;
 }
+#checkout {
+    padding: 80px 0px;
+}
 
+.billing_form {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #dedede;
+}
+
+.billing_form h3 {
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+}
+
+.btn-save {
+    background-color: #26abe2;
+    border-style: none;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.card-header.cardh {
+    background-color: #fff;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 18px;
+}
+
+.sub {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+td.dlr {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: right;
+    text-transform: capitalize;
+}
+
+.payment h3 {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.sup_tab{
+    margin-bottom: 0px;
+}
 
 
 
