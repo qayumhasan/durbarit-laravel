@@ -27,6 +27,15 @@
                                 </div>
                                 
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" name="phone" class="form-control" placeholder="Phone" value="" placeholder="Email" required>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="company" placeholder="Company Name">
                             </div>
@@ -41,37 +50,28 @@
                                 </select>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="city" placeholder="City">
+                                        <textarea class="form-control" class="form-control" id="exampleFormControlTextarea1" name="address" placeholder="Address" rows="3"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="state" placeholder="State / Province / Region"
-                                            required>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="postal_code" placeholder="Zip / Postal Code"
-                                            required>
-                                    </div>
-                                </div>
+                            
                             </div>
+
+                            
                             <div class="payment">
                                 <h3>Payment Method</h3>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment_method" value="1">
                                     <label class="form-check-label" for="exampleRadios1">
-                                        Paypal
+                                        Stripe
                                     </label>
                                 </div>
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment_method" value="2">
                                     <label class="form-check-label" for="exampleRadios1">
-                                        Payoneer
+                                    SslCommerz
                                     </label>
                                 </div>
                                 <div class="form-check">
@@ -96,6 +96,9 @@
                             <div class="card-body">
                                 <table class="table">
                                     <tbody>
+                                    @php
+                                    $support = 0
+                                    @endphp
 
                                     @foreach($cartcount as $row)
                                         <tr>
@@ -106,14 +109,18 @@
                                             <td class="dlr">{{$row->product->premium_price}}</td>
                                             @endif
                                         </tr>
+
                                         @if($row->extra_price !=null)
-                                        <tr>
-                                            <td>Support</td>
-                                            <td class="dlr">{{$row->extra_price}}</td>
-                                        </tr>
+                                            @php
+                                                $support = $support + $row->extra_price;
+                                            @endphp
                                         @endif
                                         
                                     @endforeach
+                                    <tr>
+                                            <td>Support</td>
+                                            <td class="dlr">{{$support}}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                            

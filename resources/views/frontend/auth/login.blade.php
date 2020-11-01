@@ -40,23 +40,35 @@
                                 </div>
                             </div>
                             </form>
+                            <form action="{{route('customar.register')}}" method="post">
+                                @csrf
                             <div class="sign-up-htm">
                                 <div class="group">
                                     <label for="user" class="label">Username</label>
-                                    <input  type="text" class="input">
-                                </div>
-                                <div class="group">
-                                    <label for="pass" class="label">Password</label>
-                                    <input  type="password" class="input" data-type="password">
-                                </div>
-                                <div class="group">
-                                    <label for="pass" class="label">Repeat Password</label>
-                                    <input  type="password" class="input" data-type="password">
+                                    <input  type="text" name="name" value="{{old('name')}}" class="input">
+                                    @error('name')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                                 </div>
                                 <div class="group">
                                     <label for="pass" class="label">Email Address</label>
-                                    <input  type="email" class="input">
+                                    <input  type="email" name="email" value="{{old('email')}}" class="input">
+                                    @error('email')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                                 </div>
+                                <div class="group">
+                                    <label for="pass" class="label">Password</label>
+                                    <input  type="password" class="input" name="password" data-type="password">
+                                    @error('password')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
+                                </div>
+                                <div class="group">
+                                    <label for="pass" class="label">Repeat Password</label>
+                                    <input  type="password" class="input" name="password_confirmation" data-type="password">
+                                </div>
+                                
                                 <div class="group">
                                     <input type="submit" class="button" value="Sign Up">
                                 </div>
@@ -65,6 +77,7 @@
                                 <!--    <label for="tab-1">Already Member?</a>-->
                                 <!--</div>-->
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

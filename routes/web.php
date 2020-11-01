@@ -215,18 +215,22 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
 Route::prefix('customer')->namespace('Frontend')->group(function(){
 
   Route::post('/login','AuthController@login')->name('customar.login');
+  Route::post('/register','AuthController@register')->name('customar.register');
   Route::get('/logout','AuthController@logout')->name('customar.logout');
   Route::get('/add/to/cart','AddToCartController@addToCart')->name('product.add.cart');  
-  Route::get('/product/cart','AddToCartController@showCart')->name('product.cart.page');  
+  Route::get('/product/cart','AddToCartController@showCart')->name('product.cart.page'); 
+  Route::get('/checkout','AddToCartController@checkout')->name('customar.checkout'); 
+  Route::post('/profile/update','AdminController@profileUpdate')->name('customar.profile.update'); 
 
 });
 
 Route::prefix('customer')->middleware('auth:web')->namespace('Frontend')->group(function(){
 
   Route::get('/dashboard','AdminController@index')->name('customar.dashboard');
-  Route::get('/checkout','AddToCartController@checkout')->name('customar.checkout');
+  
   Route::post('/checkout','AddToCartController@customarBilling')->name('customar.billing');
   Route::post('/cart/delete','AddToCartController@cartDelete')->name('cart.data.delete');
+  Route::post('/stripe','AddToCartController@stripePayment')->name('payment.stripe.submit');
   
 
 });
