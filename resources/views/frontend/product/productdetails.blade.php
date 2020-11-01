@@ -185,7 +185,7 @@
                     </ul>
 
                     <div class="mt-4">
-                        <input type="checkbox" id="exSupport"  name="exSupport" value="500">
+                        <input type="checkbox" onclick="document.getElementById('chk2').checked = this.checked;" id="exSupport"  name="exSupport" value="500">
                         <label for="exSupport">Extend support to 6 months</label>
                         <span class="float-right font-weight-bold">$<span class="supPrice">500</span></span>
                     </div>
@@ -197,6 +197,7 @@
                                     <input type="hidden" name="product_id" value="{{$product->id}}"/>
                                     <input type="hidden" name="product_type" value="1"/>
                                     <input type="hidden" id="package_id" name="package_id" value="1"/>
+                                    <input style="opacity: 0;" type="checkbox" id="chk2" name="extra_price" value="500">
                                     <button type="button" id="purchase-now" class="cart_btn margin-top-30"> <i class="fas fa-shopping-cart"></i> Add to Cart</button>
                                 </form>
 
@@ -283,6 +284,7 @@
                     data: $('#option-choice-form').serializeArray(),
 
                     success: function(data) {
+                        
                         toastr.success(data.data);
                         document.getElementById('cartdatacount').innerHTML = data.count;
                     }

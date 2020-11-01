@@ -39,25 +39,25 @@ class AuthController extends Controller
     }
 
   
-    public function register(UserRequest $request)
+    public function register(Request $request)
     {
-        $token = Str::random(60);
-        $verify_code = rand(9999,99999);
-        $user =$this->createUser($request,$token,$verify_code);
-        $fieldType =$this->checkUserInfo($request);
+        $this->validate($request, [
+            'name' => 'required|min:3|max:50',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+        
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        $notification = array(
+            'messege' => 'Your Account created Successfully!Login Now',
+            'alert-type' => 'error'
+        );
+        return redirect()->route('customar.login')->with($notification);
 
-        if($fieldType == 'email'){
-            $user->email = $request->phone_email;    
-           $this->verifyEmailSend($token,$request->phone_email);
-           $user->save();
-           session()->flash('errorMsg', 'A Verification Mail Send tO YOUR Email Address. Please Check Your Mail...');
-            return redirect()->route('customar.login.form');
-       }else{
-            $user->phone = $request->phone_email;     
-            $this->sendSMS($request,$verify_code);
-            $user->save();
-            return redirect()->route('customar.verification.page',$token);  
-       }   
         
 
     }

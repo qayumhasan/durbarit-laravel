@@ -111,10 +111,11 @@
                                         <a href="{{url('/contact')}}">Contact Us</a>
                                     </li>
                                     @php
-                                        $cart =App\AddToCart::where('user_ip',\Request::ip())->get()->count();
+                                        $cart =App\AddToCart::where('user_ip',\Request::ip())->get();
+                                        $cart = $cart->sum('qty');
                                     @endphp
                                     <li>
-                                        <a href="{{route('product.cart.page')}}"><i class="fas fa-cart-arrow-down"></i><span id="cartdatacount"> {{$cart}}</span></a>
+                                        <a href="{{route('product.cart.page')}}"><i class="fas fa-cart-arrow-down"></i><span id="cartdatacount" data-totalitems="0"> {{$cart}}</span></a>
                                     </li>
 
                                 </ul>

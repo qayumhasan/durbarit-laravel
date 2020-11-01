@@ -114,15 +114,14 @@
                                         <div class="right-content">
                                             <div class="total without-coupon" style="font-size: 18px;">
                                                 <span class="title"><b>Total Amount</b></span>
-                                                <span class="total-price"><b>US$59</b></span>
+                                                <span class="total-price"><b>US $ {{$total}}</b></span>
                                             </div>
                                             <div class="mt-3">
                                                 <p class="text-info">You have to login before purchase!</p>
                                             </div>
                                             
                                             <a href="{{route('customar.checkout')}}" class="btn btn-dark"
-                                                style="margin-right:10px;">Register</a>
-
+                                                style="margin-right:10px;">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
