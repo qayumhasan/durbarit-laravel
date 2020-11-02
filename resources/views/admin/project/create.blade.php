@@ -38,22 +38,18 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-3 col-form-label text-right">Project Link:</label>
+
+                    <label for="inputEmail3" class="col-sm-3 col-form-label text-right">Product:</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" name="link" placeholder="Enter Project Link" required>
+                        <select class="form-control" name="product_id" id="exampleFormControlSelect1">
+                            <option selected disabled>Select A Product</option>
+                            @foreach($products as $row)
+                                <option value="{{$row->id}}">{{$row->product_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-
-
-       
-
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-3 col-form-label text-right">Image:</label>
-                    <div class="col-sm-6">
-                        <input type="file" name="image" required>
-                        <p>(390px*390px)</p>
-                    </div>
-                </div>
+             
 
 
 

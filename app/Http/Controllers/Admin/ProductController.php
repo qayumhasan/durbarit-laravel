@@ -100,7 +100,7 @@ class ProductController extends Controller
        if ($request->hasFile('thumbnail_img')) {
             $image = $request->file('thumbnail_img');
             $ImageName = 'th' . '_' . time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(590, 300)->save('public/uploads/product/' . $ImageName);
+            Image::make($image)->resize(800,600)->save('public/uploads/product/' . $ImageName);
             Image::make($image)->resize(350, 270)->save('public/uploads/product/smallthum/' . $ImageName);
             $data->image = $ImageName;
         }
@@ -197,7 +197,7 @@ class ProductController extends Controller
       if ($request->hasFile('thumbnail_img')) {
             $image = $request->file('thumbnail_img');
             $ImageName = 'th' . '_' . time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(590, 300)->save('public/uploads/product/' . $ImageName);
+            Image::make($image)->resize(800,600)->save('public/uploads/product/' . $ImageName);
             Image::make($image)->resize(350, 270)->save('public/uploads/product/smallthum/' . $ImageName);
             $data->image = $ImageName;
         }

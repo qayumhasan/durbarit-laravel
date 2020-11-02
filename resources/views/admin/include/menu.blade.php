@@ -29,6 +29,7 @@
                            <li><a href="{{route('slider.index')}}">Slider/Banner</a></li>
                            <li><a href="{{route('admin.service.index')}}">Our Services</a></li>
                            <li><a href="{{route('admin.logo.index')}}">Site Logo</a></li>
+                           <li><a href="{{route('admin.video.index')}}">Video Section</a></li>
                          </ul>
                    </li>
 

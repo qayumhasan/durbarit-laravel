@@ -38,25 +38,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-3 col-form-label text-right">Project Link:</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="link" value="{{$project->link}}" required>
-                    </div>
+
+                <label for="inputEmail3" class="col-sm-3 col-form-label text-right">Product:</label>
+                <div class="col-sm-6">
+                    <select class="form-control" name="product_id" id="exampleFormControlSelect1">
+                        <option selected disabled>Select A Product</option>
+                        @foreach($products as $row)
+                            <option value="{{$row->id}}" @if($row->id == $project->product_id) selected @endif>{{$row->product_name}}</option>
+                        @endforeach
+                    </select>
                 </div>
-
-
-       
-
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-3 col-form-label text-right">Partner Image:</label>
-                    <div class="col-sm-4">
-                        <input type="file" name="image">
-                        <p>(390px*390px)</p>
-                    </div>
-                    <div class="col-sm-3">
-                        
-                        <img src="{{asset('public/images/project/')}}/{{$project->image}}" alt="" width="50%"/>
-                    </div>
                 </div>
 
 

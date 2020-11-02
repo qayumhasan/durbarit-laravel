@@ -204,7 +204,7 @@
 
                                                                     <option selected disabled>Country</option>
                                                                     @foreach($countries as $row)
-                                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                                    <option value="{{$row->name}}">{{$row->name}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -330,7 +330,7 @@
                                 </div>
                             </div>
                             @php
-                                $products = App\Billing::where('user_id',auth()->user()->id)->get();
+                            $products = App\Billing::where('user_id',auth()->user()->id)->paginate(10);
                             @endphp
 
                             <div class="tab-pane fade" id="v-pills-invoice" role="tabpanel">
@@ -339,32 +339,33 @@
                                         Invoice</h3>
                                     <div class="tran_box">
 
-                                    <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Order Number</th>
-      <th scope="col">Image</th>
-      <th scope="col">Product Name</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Product Type</th>
-      <th scope="col">Total Price</th>
-      
-      
-    </tr>
-  </thead>
-  <tbody>
-      @foreach($products as $row)
-    <tr>
-      <th scope="row">{{$row->order_id}}</th>
-      <td>Mark</td>
-      <td>eSchool - Education & J.</td>
-      <td>{{$row->qty}}</td>
-      <td>Reqular</td>
-      <td>{{$row->total}}</td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
+                                        <table class="table">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col">Order Number</th>
+                                                    <th scope="col">Quantity</th>
+                                                    <th scope="col">Product Satatus</th>
+                                                    <th scope="col">Total Price</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($products as $row)
+                                                <tr>
+                                                    <th scope="row">{{$row->order_id}}</th>
+                                                    <td>{{$row->qty}}</td>
+                                                    @if($row->is_payment == 1)
+                                                    <td>Paid</td>
+                                                    @else
+                                                    <td>UnPaid</td>
+                                                    @endif
+                                                    <td>{{$row->total}}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        {{$products->links()}}
 
 
                                         <h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">No

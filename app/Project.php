@@ -13,4 +13,11 @@ class Project extends Model
     {
         return $this->hasOne('App\Category','id','cat_id')->withDefault();
     }
+
+    public function product()
+    {
+        return $this->hasOne('App\product','id','product_id')->withDefault();
+    }
+
+
 }

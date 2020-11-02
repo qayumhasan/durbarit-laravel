@@ -301,8 +301,8 @@
                 <div class="col-xl-12">
                     <div class="video_section_content text-center">
                         <h3>Our Work Process Video</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        <a class="js-modal-btn" data-video-id="VNGxECpJNTw"> <i class="fas fa-play"></i></a>
+                        <p>{{$video->title}} </p>
+                        <a class="js-modal-btn" data-video-id="{{$video->link}}"> <i class="fas fa-play"></i></a>
                    
                     </div>
                 </div>
@@ -324,88 +324,42 @@
             </div>
       <div class="row">
                 <div class="col-sm-12 text-center">
+
+
+
+
+
                     <!-- Main area start -->
                     <div class="portfolio-area">
 
                         <div class="controls">
+
                             <button type="button" data-filter="all">All</button>
-                            <button type="button" data-filter=".design">Web Design</button>
-                            <button type="button" data-filter=".develop">Web Development</button>
-                            <button type="button" data-filter=".graphics">Graphics Design</button>
+                            @foreach($categores as $row)
+                                <button type="button" data-filter=".category{{$row->id}}">{{$row->name}}</button>
+                            @endforeach
                         </div>
+
+
+
                         <div class="portfolio-item">
-                            <div class="single-item mix design">
+
+
+                            @foreach($projects as $row)
+
+                            <div class="single-item mix category{{$row->cat_id}}">
                                 <div class="img-thumbnail">
-                                    <img src="{{asset('public/frontend')}}/images/img_1.jpg" alt="image">
+                                    <img src="{{asset('public/uploads/product/'.$row->product->image)}}" alt="image" class="w-100" width="100%">
                                 </div>
                                 <div class="img-content">
-                                    <h2>Web Design</h2>
-                                   <a href="#">Live Now</a>
+                                    <h2>{{$row->title}}</h2>
+                                   <a href="{{url('/product/details/'.$row->product_id)}}">Live Now</a>
                                 </div>
                             </div>
-                            <div class="single-item mix develop">
-                                <div class="img-thumbnail">
-                                    <img src="{{asset('public/frontend')}}/images/img_2.jpg" alt="image">
-                                </div>
-                                <div class="img-content">
-                                    <h2>Web Development</h2>
-                                    <a href="#">Live Now</a>
-                                </div>
-                            </div>
-                            <div class="single-item mix design">
-                                <div class="img-thumbnail">
-                                    <img src="{{asset('public/frontend')}}/images/img_3.jpg" alt="image">
-                                </div>
-                                <div class="img-content">
-                                    <h2>Web Design</h2>
-                                    <a href="#">Live Now</a>
-                                </div>
-                            </div>
-                            <div class="single-item mix develop">
-                                <div class="img-thumbnail">
-                                    <img src="{{asset('public/frontend')}}/images/img_4.jpg" alt="image">
-                                </div>
-                                <div class="img-content">
-                                    <h2>Web Development</h2>
-                                    <a href="#">Live Now</a>
-                                </div>
-                            </div>
-                            <div class="single-item mix design">
-                                <div class="img-thumbnail">
-                                    <img src="{{asset('public/frontend')}}/images/img_5.jpg" alt="image">
-                                </div>
-                                <div class="img-content">
-                                    <h2>Web Design</h2>
-                                    <a href="#">Live Now</a>
-                                </div>
-                            </div>
-                            <div class="single-item mix graphics">
-                                <div class="img-thumbnail">
-                                    <img src="{{asset('public/frontend')}}/images/img_6.jpg" alt="image">
-                                </div>
-                                <div class="img-content">
-                                    <h2>Graphics Design</h2>
-                                    <a href="#">Live Now</a>
-                                </div>
-                            </div>
-                            <div class="single-item mix graphics develop">
-                                <div class="img-thumbnail">
-                                    <img src="{{asset('public/frontend')}}/images/img_1.jpg" alt="image">
-                                </div>
-                                <div class="img-content">
-                                    <h2>Graphics Design</h2>
-                                    <a href="#">Live Now</a>
-                                </div>
-                            </div>
-                            <div class="single-item mix develop">
-                                <div class="img-thumbnail">
-                                    <img src="{{asset('public/frontend')}}/images/img_6.jpg" alt="image">
-                                </div>
-                                <div class="img-content">
-                                    <h2>Web Development</h2>
-                                    <a href="#">Live Now</a>
-                                </div>
-                            </div>
+                            @endforeach
+
+
+                        
                         </div>
                     </div>
                 </div>

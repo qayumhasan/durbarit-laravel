@@ -14,6 +14,9 @@
                                     <div class="form-group">
                                         <input type="text" name="name" class="form-control" value="{{$user->name ? $user->name:' '}}" placeholder="Name" required>
                                     </div>
+                                    @error('name')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
 
                                 </div>
                                 
@@ -23,6 +26,9 @@
                                     <div class="form-group">
                                         <input type="text" name="email" class="form-control" value="{{$user->email ? $user->email:' '}}" placeholder="Email" required>
                                     </div>
+                                    @error('email')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
 
                                 </div>
                                 
@@ -30,14 +36,20 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" name="phone" class="form-control" placeholder="Phone" value="" placeholder="Email" required>
+                                        <input type="text" name="phone" class="form-control" placeholder="Phone" value="{{$user->phone ?? ''}}" placeholder="Email" required>
                                     </div>
+                                    @error('phone')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
 
                                 </div>
                                 
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="company" placeholder="Company Name">
+                                @error('company')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                             </div>
                             <div class="form-group">
 
@@ -45,27 +57,37 @@
 
                                     <option selected disabled>Country</option>
                                     @foreach($countries as $row)
-                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        <option value="{{$row->id}}" @if($user->country == $row->id) selected @endif>{{$row->name}}</option>
                                     @endforeach
                                 </select>
+                                @error('country')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" class="form-control" id="exampleFormControlTextarea1" name="address" placeholder="Address" rows="3"></textarea>
+                                        <textarea class="form-control" class="form-control" id="exampleFormControlTextarea1" name="address" placeholder="Address" rows="3">{{$user->address?? ''}}</textarea>
                                     </div>
                                 </div>
+                                @error('address')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                             
                             </div>
 
                             
                             <div class="payment">
                                 <h3>Payment Method</h3>
+                                @error('payment_method')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment_method" value="1">
                                     <label class="form-check-label" for="exampleRadios1">
                                         Stripe
                                     </label>
+                                    
                                 </div>
 
                                 <div class="form-check">
@@ -73,12 +95,14 @@
                                     <label class="form-check-label" for="exampleRadios1">
                                     SslCommerz
                                     </label>
+                                    
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment_method" value="3">
                                     <label class="form-check-label" for="exampleRadios1">
-                                        Bkash
+                                        Paypal
                                     </label>
+                                    
                                 </div>
 
                             </div>

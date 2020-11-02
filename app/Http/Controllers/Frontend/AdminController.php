@@ -25,8 +25,7 @@ class AdminController extends Controller
         $user->phone = $request->phone;
         $user->country = $request->country;
         $user->address = $request->address;
-
-        
+        $user->save();
         if($user->image !='user.jpg'){
             $link = base_path('public/images/user/') . $user->image;
 		    unlink($link);
@@ -35,11 +34,11 @@ class AdminController extends Controller
             
             $image = $request->file('image');
             $ImageName = 'th' . '_' . time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(650, 425)->save('public/images/user/' . $ImageName);
+            Image::make($image)->resize(650, 425)->save(base_path('public/images/user/' . $ImageName),100);
             $user->image = $ImageName;
+            $user->save();
 
         }
-        $user->save();
 
         $notification = array(
             'messege' => 'Profile Update SUccessfully😄😄',

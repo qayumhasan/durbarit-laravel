@@ -29,7 +29,7 @@
                        
                         <div class="product_price">
                             <div class="product_cont">
-                                <h5><a href="{{url('/product/details/'.$pro->id)}}">{{$pro->product_name}}</a></h5>
+                                <h5><a href="{{url('/product/details/'.$pro->id)}}">{{ Str::limit($pro->product_name,'32','..')}}</a></h5>
                                 <span> by {{$pro->owner}}</span>
                             </div>
                             <div class="product_price_left">
@@ -41,7 +41,7 @@
                                         <span><i class="fas fa-star"></i></span>
                                         <span><i class="fas fa-star"></i></span>
                                     </li>
-                                    <li><span style="font-size: 12px;">{{$pro->number_of_sale}} 10 K Sales</span></li>
+                                    <li><span style="font-size: 12px;">{{$pro->number_of_sale}} Sales</span></li>
                                 </ul>
                             </div>
                             <div class="product_price_right">
