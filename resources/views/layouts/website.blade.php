@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{asset('public/frontend')}}/css/cart.css">
     <link rel="stylesheet" href="{{asset('public/frontend')}}/css/style.css">
     <link rel="stylesheet" href="{{asset('public/frontend')}}/css/user.css">
-    
+   
    
 </head>
 
@@ -63,6 +63,7 @@
     <!--- footer part start -->
     @include('frontend.include.footer')
     <!--- footer part end -->
+ 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="{{asset('public/frontend')}}/js/owl.carousel.min.js"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -154,6 +155,8 @@ $('.closebtn').on('click',function(){
     
 
     </script>
+
+  
 
 
 

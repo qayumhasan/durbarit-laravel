@@ -58,6 +58,13 @@
                                     @enderror
                                 </div>
                                 <div class="group">
+                                    <label for="pass" class="label">Mobile</label>
+                                    <input  type="phone" name="phone" value="{{old('phone')}}" class="input">
+                                    @error('phone')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
+                                </div>
+                                <div class="group">
                                     <label for="pass" class="label">Password</label>
                                     <input  type="password" class="input" name="password" data-type="password">
                                     @error('password')

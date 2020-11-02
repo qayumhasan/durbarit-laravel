@@ -30,7 +30,7 @@
                             </th>
                             <th >Category Name</th>
                             <th >Title</th>
-                            <th >Image</th>
+                            <th >Product Name</th>
                             <th>Status</th>
                             <th>manage</th>
                         </tr>
@@ -44,9 +44,11 @@
 
                             <td> {{$row->category->name}} </td>
                             <td> {{$row->title}} </td>
-                            <td>
-                                <img src="{{asset('public/images/project/')}}/{{$row->image}}" alt="" height="45px">
-                            </td>
+                            @php
+                                $product=App\Product::findOrFail($row->product_id);
+                            @endphp
+                            <td> {{$product->product_name}} </td>
+                           
                             @if($row->status == 1)
                                 <td class="center"><span class="btn btn-success">Active</span></td>
                             @else

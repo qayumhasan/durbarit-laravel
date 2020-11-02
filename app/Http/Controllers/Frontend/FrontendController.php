@@ -23,6 +23,7 @@ use App\ContactMessage;
 use App\Subscriber;
 use App\Whychoseus;
 use App\Apply;
+use App\Video;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 class FrontendController extends ApiController
@@ -33,7 +34,10 @@ class FrontendController extends ApiController
             $teatimonial=Client::where('status',1)->orderBy('id','DESC')->get();
             $aboutus=AboutUs::first();
             $slider=Slider::where('status',1)->latest()->get();
-            return view('frontend.home.index',compact('slider','aboutus','whyschochus','teatimonial'));
+            $projects = Project::all();
+            $categores = Category::all();
+            $video = Video::findOrFail(1);
+            return view('frontend.home.index',compact('slider','aboutus','whyschochus','teatimonial','categores','projects','video'));
         }
         public function product(){
             $product=Product::where('status',1)->latest()->get();

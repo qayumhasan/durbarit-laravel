@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Product;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Str;
@@ -22,7 +23,8 @@ class ProjectController extends Controller
     public function create()
     {
         $categores = Category::all();
-        return view('admin.project.create',compact('categores'));
+        $products = Product::all();
+        return view('admin.project.create',compact('categores','products'));
     }
 
     public function store(Request $request)
@@ -32,16 +34,7 @@ class ProjectController extends Controller
         $project = new Project();
         $project->cat_id = $request->cat_id;
         $project->title = $request->title;
-        $project->link = $request->link;
-        
-
-        if ($request->hasFile('image')) {
-            $project_id =Str::random(6);
-            $project_img = $request->file('image');
-            $imagename = $project_id . '.' . $project_img->getClientOriginalExtension();
-            Image::make($project_img)->resize(390, 390)->save(base_path('public/images/project/' . $imagename), 50);
-            $project->image = $imagename;
-        }
+        $project->product_id = $request->product_id;
         $project->save();
 
         $notification=array(
@@ -54,7 +47,8 @@ class ProjectController extends Controller
     public function edit ($id)
     {   $categores = Category::all();
         $project = Project::findOrFail($id);
-        return view('admin.project.edit',compact('project','categores'));
+        $products = Product::all();
+        return view('admin.project.edit',compact('project','categores','products'));
     }
 
     public function update (Request $request,$id)
@@ -63,18 +57,10 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->cat_id = $request->cat_id;
         $project->title = $request->title;
-        $project->link = $request->link;
+        $project->product_id = $request->product_id;
         
         
 
-        if ($request->hasFile('image')) {
-            unlink(base_path('public/images/project/'.$project->image));
-            $project_id =Str::random(6);
-            $project_img = $request->file('image');
-            $imagename = $project_id . '.' . $project_img->getClientOriginalExtension();
-            Image::make($project_img)->resize(390, 390)->save(base_path('public/images/project/' . $imagename), 50);
-            $project->image = $imagename;
-        }
 
         $project->save();
 
@@ -109,7 +95,7 @@ class ProjectController extends Controller
     {
         
         $project = Project::findOrFail($id);
-        unlink(base_path('public/images/project/'.$project->image));
+        
         $project->delete();
         $notification=array(
             'messege'=>' Project Deleted Successfully.',

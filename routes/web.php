@@ -35,6 +35,12 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::get('/status/{id}','ServiceController@status')->name('admin.service.status');
     Route::get('/delete/{id}','ServiceController@delete')->name('admin.service.delete');
   });
+  
+  Route::prefix('video')->group(function(){
+    Route::get('/section','VideoController@index')->name('admin.video.index');
+    Route::post('/update','VideoController@update')->name('admin.video.update');
+
+  });
 
   Route::prefix('partner')->group(function(){
     Route::get('/','PartnerController@index')->name('admin.partner.index');
@@ -135,6 +141,8 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::get('/','AboutUsController@index')->name('admin.aboutus.index');
     Route::post('/update','AboutUsController@update')->name('admin.aboutus.update');
   });
+
+
   Route::prefix('profile')->group(function(){
     Route::get('/{id}','ProfileController@showProfile')->name('admin.profile.index');
     Route::get('/edit/{id}','ProfileController@editProfile')->name('admin.profile.edit');
@@ -211,7 +219,9 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
 
 });
 
-
+Route::post('payment/ssl_commercez/success','Frontend\AddToCartController@successSSL');
+Route::post('payment/ssl_commercez/fail','Frontend\AddToCartController@successSSL');
+Route::post('payment/ssl_commercez/cancel','Frontend\AddToCartController@successSSL');
 Route::prefix('customer')->namespace('Frontend')->group(function(){
 
   Route::post('/login','AuthController@login')->name('customar.login');
@@ -221,13 +231,15 @@ Route::prefix('customer')->namespace('Frontend')->group(function(){
   Route::get('/product/cart','AddToCartController@showCart')->name('product.cart.page'); 
   Route::get('/checkout','AddToCartController@checkout')->name('customar.checkout'); 
   Route::post('/profile/update','AdminController@profileUpdate')->name('customar.profile.update'); 
+  Route::get('/customar/verification/{token}','AuthController@verification')->name('customar.verification'); 
+  Route::post('/customar/verify','AuthController@verifyAccount')->name('customar.verify'); 
+  
 
 });
 
 Route::prefix('customer')->middleware('auth:web')->namespace('Frontend')->group(function(){
 
   Route::get('/dashboard','AdminController@index')->name('customar.dashboard');
-  
   Route::post('/checkout','AddToCartController@customarBilling')->name('customar.billing');
   Route::post('/cart/delete','AddToCartController@cartDelete')->name('cart.data.delete');
   Route::post('/stripe','AddToCartController@stripePayment')->name('payment.stripe.submit');

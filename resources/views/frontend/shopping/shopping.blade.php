@@ -120,7 +120,7 @@
                                                 <p class="text-info">You have to login before purchase!</p>
                                             </div>
                                             
-                                            <a href="{{route('customar.checkout')}}" class="btn btn-dark"
+                                            <a href="{{route('customar.checkout')}}" class="btn btn-success p-2"
                                                 style="margin-right:10px;">Checkout</a>
                                         </div>
                                     </div>
