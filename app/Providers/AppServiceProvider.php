@@ -31,8 +31,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $contactinfo=ContactInformation::first();
         view()->share('contactinfo',$contactinfo);
+
         $logo=Logo::first();
         view()->share('logo',$logo);
+        
         $partner=partner::where('status',1)->get();
         view()->share('partner',$partner);
 

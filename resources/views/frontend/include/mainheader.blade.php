@@ -110,12 +110,9 @@
                                     <li>
                                         <a href="{{url('/contact')}}">Contact Us</a>
                                     </li>
-                                    @php
-                                        $cart =App\AddToCart::where('user_ip',\Request::ip())->get();
-                                        $cart = $cart->sum('qty');
-                                    @endphp
+                                  
                                     <li>
-                                        <a href="{{route('product.cart.page')}}"><i class="fas fa-cart-arrow-down"></i><span id="cartdatacount" data-totalitems="0"> {{$cart}}</span></a>
+                                        <a href="{{route('product.cart.page')}}"><i class="fas fa-cart-arrow-down"></i><span id="cartdatacount" data-totalitems="0">@if($cart >0){{$cart}}@endif</span></a>
                                     </li>
 
                                 </ul>
