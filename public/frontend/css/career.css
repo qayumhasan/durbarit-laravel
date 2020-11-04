@@ -57,7 +57,7 @@ body {
     content: '';
     position: absolute;
     left: 0px;
-    top: 50px;
+    top: 60px;
     width: 50%;
     height: 2px;
     background-color: #26abe2;
@@ -67,12 +67,11 @@ body {
     content: '';
     position: absolute;
     right: 0px;
-    top: 35px;
+    top: 44px;
     width: 50%;
     height: 2px;
     background-color: #26abe2;
 }
-
 .triangle_career {
     position: relative;
 }
@@ -130,7 +129,7 @@ body {
 
 span.job {
     font-weight: 600;
- 
+
 }
 
 span.type {

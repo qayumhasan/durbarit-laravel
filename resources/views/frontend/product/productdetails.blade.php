@@ -172,7 +172,7 @@
                         @foreach($product->reqularpricefeture as $row)
                         <li><i class="fas fa-check-circle"></i> {{$row}}</li>
                         @endforeach
-                        
+
                     </ul>
 
 
@@ -181,7 +181,7 @@
                         @foreach($product->premiumpricefeture as $row)
                         <li><i class="fas fa-check-circle"></i> {{$row}}</li>
                         @endforeach
-                        
+
                     </ul>
 
                     <div class="mt-4">
@@ -280,20 +280,22 @@
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    
+
         $(document).ready(function() {
+
             $('#addtocart').on('click', function() {
                 
                 
                 
                 
+
                 $.ajax({
                     type: 'GET',
                     url: "{{ route('product.add.cart') }}",
                     data: $('#option-choice-form').serializeArray(),
 
                     success: function(data) {
-                        
+
                         toastr.success(data.data);
                         const cart = document.querySelector('#cart');
                         cart.dataset.totalitems=data.count;
@@ -317,9 +319,9 @@
                 document.getElementById("premium_price").style.display = "block";
                 document.getElementById("regular_price").style.display = "none";
             }
-            
-            
-               
+
+
+
 
                 // $.ajax({
                 //     type: 'GET',
@@ -331,7 +333,7 @@
                 //         document.getElementById('cartdatacount').innerHTML = data.count;
                 //     }
                 // });
-            
+
     }
 </script>
 

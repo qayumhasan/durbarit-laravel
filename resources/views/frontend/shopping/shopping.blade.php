@@ -45,9 +45,9 @@
 
 
                                                 @foreach($cartcount as $row)
-                                                
 
-                                                    
+
+
                                                     <tr id="cartdelete{{$row->id}}">
                                                         <td>{{$loop->iteration}}</td>
                                                         <td>
@@ -73,18 +73,18 @@
                                                         @endif
                                                         <td><span><button onclick="cartDatadelete(this)" value="{{$row->id}}"><i
                                                                         class="fas fa-trash-alt"></i></button></span></td>
-                                                      
+
                                                     </tr>
 
                                                 @endforeach
-                                                   
+
                                                 </tbody>
                                             </table>
                                             {{ $cartcount->links() }}
-                                           
+
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -104,7 +104,7 @@
                                                     </div>
                                                     <div class="col-auto">
                                                         <button type="submit"
-                                                            class="btn btn-primary mb-2">Submit</button>
+                                                            class="btn_cart">Submit</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -119,10 +119,33 @@
                                             <div class="mt-3">
                                                 <p class="text-info">You have to login before purchase!</p>
                                             </div>
-                                            
-                                            <a href="{{route('customar.checkout')}}" class="btn btn-success p-2"
+
+                                            <a href="{{route('customar.checkout')}}" class="btn_check"
                                                 style="margin-right:10px;">Checkout</a>
                                         </div>
+                                        <style>
+                                                button.btn_cart {
+                                                    background-color: #26abe2;
+                                                    border-style: none;
+                                                    color: #fff;
+                                                    padding: 7px 20px;
+                                                    /* height: 32px; */
+                                                    position: relative;
+                                                    bottom: 3px;
+                                                    border-radius: 5px;
+                                                }
+                                                a.btn_check {
+                                                    background-color: #008c20;
+                                                    border-style: none;
+                                                    color: #fff;
+                                                    padding: 7px 20px;
+                                                    /* height: 32px; */
+                                                    position: relative;
+                                                    bottom: 3px;
+                                                    text-decoration: none;
+                                                    border-radius: 5px;
+                                                }
+                                        </style>
                                     </div>
                                 </div>
                             </div>
@@ -135,8 +158,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
     function cartDatadelete(el) {
-        
-       
+
+
         $.post('{{ route('cart.data.delete') }}', {_token: '{{ csrf_token() }}',cart_id: el.value},
             function(data) {
                 $('#cartdata').html(data);
@@ -146,12 +169,12 @@
                     document.getElementById("cartdelete"+el.value).style.display = "none";
                     toastr.success(data.data);
                     document.getElementById('cartdatacount').innerHTML = data.count;
-                    
-                } 
-               
+
+                }
+
             });
 	}
-	
+
 	cartDatadelete();
 </script>
 
