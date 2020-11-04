@@ -564,74 +564,19 @@ button.owl-prev {
     background-color: #f7f7f7;
 }
 
-.service_header h3 {
-    font-weight: 600;
-    margin-bottom: 50px;
-    position: relative;
-    display: inline-block;
-}
-
-.service_header h3:before {
-    content: '';
-    position: absolute;
-    left: 0px;
-    top: 50px;
-    width: 50%;
-    height: 2px;
-    background-color: #26abe2;
-}
-
-.service_header h3:after {
-    content: '';
-    position: absolute;
-    right: 0px;
-    top: 35px;
-    width: 50%;
-    height: 2px;
-    background-color: #26abe2;
-}
-
-.triangle_service {
-    position: relative;
-}
-
-.triangle_service:before {
-    content: '';
-    position: absolute;
-    /* right: 0px; */
-    left: -92px;
-    top: 28px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 15px solid #26abe2;
-}
-
-.triangle_service:after {
-    content: '';
-    position: absolute;
-    /* right: 0px; */
-    right: 59px;
-    top: 28px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 15px solid #26abe2
-}
 .service_header p {
     margin-bottom: 30px;
     padding: 0px 208px;
     font-weight: 400;
     font-size: 14px;
+    margin-top: 50px;
 }
-a.nav_link{
-    transition:0.6s linear;
-}
-a.nav_link:hover {
-    background-color: #26abe2;
-}
+        a.nav_link{
+            transition:0.6s linear;
+        }
+        a.nav_link:hover {
+            background-color: #26abe2;
+        }
 /*tab_part*/
 /*
 .tab_part ul li {

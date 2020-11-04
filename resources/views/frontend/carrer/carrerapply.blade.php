@@ -16,46 +16,56 @@
 
         </div>
         <style>
-#career_box{
-	padding: 80px 0px;
-	background-color: #000;
-}
-.apply_box h3 {
-    color: #fff;
-    font-weight: 600;
-    text-transform: capitalize;
-    font-size: 26px;
-    margin-bottom: 25px;
-}
-span.fl {
-    background-color: #fff;
-    padding: 4px 9px;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-span.ad {
-    color: #fff;
-    margin-right: 10px;
-}
-span.ex {
-    color: #fff;
-    margin-right: 10px;
-}
-span.dt {
-    color: #fff;
-}
-.ap h3{
-	font-size: 24px;
-	font-weight: 600;
-	margin-bottom: 30px;
-}
-.input-group-text button {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-style: none;
-    border-radius: 2px;
-}
+                    #career_box{
+                        padding: 80px 0px;
+                        background-color: #000;
+                    }
+                    .apply_box h3 {
+                        color: #fff;
+                        font-weight: 600;
+                        text-transform: capitalize;
+                        font-size: 26px;
+                        margin-bottom: 25px;
+                    }
+                    span.fl {
+                        background-color: #fff;
+                        padding: 4px 9px;
+                        border-radius: 5px;
+                        margin-right: 10px;
+                    }
+                    span.ad {
+                        color: #fff;
+                        margin-right: 10px;
+                    }
+                    span.ex {
+                        color: #fff;
+                        margin-right: 10px;
+                    }
+                    span.dt {
+                        color: #fff;
+                    }
+                    .ap h3{
+                        font-size: 24px;
+                        font-weight: 600;
+                        margin-bottom: 30px;
+                    }
+                    .input-group-text button {
+                        width: 40px;
+                        height: 40px;
+                        line-height: 40px;
+                        border-style: none;
+                        border-radius: 2px;
+                    }
+                    button.btn_submit {
+                        /* display: block; */
+                        background-color: #007bff;
+                        border-style: none;
+                        color: #fff;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        width: 100%;
+                    }
+
                 </style>
     </section>
     <div id="career_post">
@@ -70,7 +80,7 @@ span.dt {
             <div class="row">
 
                 <div class="col-sm-12">
-            
+
                     <div class="job_list wow animate__animated animate__fadeIn animate__delay-0.7s">
                        <form action="{{url('/carrer/apply/submit')}}" method="post" enctype="multipart/form-data">
                        	@csrf
@@ -158,10 +168,12 @@ span.dt {
 							   		 </div>
 							  </div>
 
-							     <div class="row text-center">
-								  	<div class="form-group col-md-12">
-									 <button type="submit" class="btn btn-primary">Submit Application</button>
-								     </div>
+							     <div class="row">
+                                     <div class="col-sm-12 text-center">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn_submit">Submit Application</button>
+                                            </div>
+                                     </div>
 							     </div>
 
 
@@ -169,7 +181,7 @@ span.dt {
 
 
 
-						 
+
 						</form>
                     </div>
                 </div>

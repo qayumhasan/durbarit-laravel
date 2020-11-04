@@ -5,12 +5,15 @@
 
                 <div class="col-sm-12 ">
                     <div class="main_nav">
-
-                        <div class="wow backInUp main_logo">
+                        <style>
+                            .main_logo img{
+                                width: 200px !important;
+                                height: 60px !important;
+                            }
+                        </style>
+                        <div class="main_logo  wow animate__animated animate__fadeIn">
                             <a href="{{url('/')}}">
                                 <img src="{{asset('public/images/logo/'.$logo->lazyloader )}}" data-src="{{asset('public/images/logo/'.$logo->flogo)}}" class="lazy" alt="logo-image">
-                              
-                              
                             </a>
                         </div>
                         <div class="main_menu">
@@ -26,7 +29,7 @@
                                             @foreach($service as $serv)
                                                 <li><a href="{{url('service/'.$serv->id)}}"><i class="fas fa-circle"></i>{{$serv->name}}</a></li>
                                             @endforeach
-                                         
+
                                             </ul>
                                         </div>
 
@@ -34,7 +37,7 @@
                                     <li>
                                         <a href="#work">Portfolio</a>
                                     </li>
-                                   
+
                                     <!-- <li class="active"><a href="#">Mega Menu</a>
                                         <div class="mega_menu">
                                             <div class="row">
@@ -106,7 +109,7 @@
                                       <li>
                                         <a href="{{url('/carrer')}}">Career</a>
                                     </li>
-                                   
+
                                     <li>
                                         <a href="{{url('/contact')}}">Contact Us</a>
                                     </li>
@@ -136,7 +139,7 @@
                     <div class="mobile_menu_logo">
                         <a href="{{url('/')}}">
                              <img class="lazy img-fluid" src="{{asset('public/images/logo/'.$logo->lazyloader )}}" data-src="{{asset('public/images/logo/'.$logo->flogo)}}"  alt="logo-image">
-                           
+
                         </a>
                     </div>
                 </div>
@@ -153,7 +156,7 @@
         <div class="mobile_menu_content">
             <ul>
                 <li><a href="{{url('/')}}">Home</a></li>
-              
+
                 <!-- <li><a href="#">Price</a></li>
                 <li>
                     <a data-toggle="collapse" href="#collapseExample2" role="button">About Company</a>
@@ -164,7 +167,7 @@
                                 <li><a href="#">Our Pricelist</a></li>
                                 <li><a href="#">Why Choose Us</a></li>
                                 <li><a href="#">Work Sample</a></li>
-                               
+
                             </ul>
                         </div>
                     </div>

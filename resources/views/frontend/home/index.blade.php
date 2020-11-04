@@ -39,7 +39,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-7">
-                    <div class="ab_head wow animate__animated animate__slideInLeft animate__delay-1s">
+                    <div class="ab_head wow animate__animated animate__fadeIn">
                         <h3>Welcome to <span>Durbar It Limited</span>:<br>Always Ready To Help</h3>
                         <p>{{$aboutus->details}}
                         </p>
@@ -60,15 +60,17 @@
 
     </section>
 <!--- about part end -->
- 
+
     <!--- service part start -->
     <section id="service">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <div class="service_header  wow animate__animated animate__fadeIn animate__delay-0.7s">
-                        <h3>Our Service</h3>
-                        <span class="triangle_service"></span>
+                    <div class="service_header wow animate__animated animate__zoomIn animate__delay-0.6s">
+                            <h4>Our Services</h4>
+                            <div class="title_border">
+                                <span></span>
+                            </div>
                         <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
                             classical Latin literature from 45 BC</p>
                     </div>
@@ -91,9 +93,9 @@
                                 </a>
                             </li>
                         @endforeach
-                        
-                          
-                       
+
+
+
                         </ul>
                     </div>
                 </div>
@@ -101,7 +103,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="tab-content" id="pills-tabContent">
-              
+
                     @foreach($service as $key => $serv)
                         <div @if($key==0)  class="tab-pane fade show active" @else class="tab-pane fade show" @endif id="pills-content{{++$key}}" role="tabpanel">
                             <div class="row">
@@ -118,7 +120,7 @@
                                         @foreach(explode(',', $serv->details) as $letter)
                                             <li class="sub_panel"><i class="fas fa-check"></i>{{$letter}}</li>
                                         @endforeach
-                         
+
                                         </ul>
                                     </div>
                                 </div>
@@ -163,7 +165,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="strength_main wow animate__animated animate__fadeIn animate__delay-1s">
+                    <div class="strength_main wow animate__animated animate__zoomIn animate__delay-0.6s">
                         <h3>our strength</h3>
                         <p>We have a profoundly talented group of specialists who are experts in visual image altering
                             sector. This enables us to give a wide range of image handling administrations everywhere
@@ -218,7 +220,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="choose_us wow animate__animated animate__fadeIn animate__delay-1s">
+                    <div class="choose_us wow animate__animated animate__zoomIn animate__delay-0.6s">
                         <h3>why choose us?</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dicta ratione rerum recusandae
                             amet a unde reiciendis ipsa porro, dolorum qui aperiam odio illum aspernatur. Deserunt culpa
@@ -246,7 +248,7 @@
                             <div class="card-header str_card" id="headingTwo">
                                 <a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
                                     aria-controls="collapseTwo" class="collapsed">VIP Client Service</a>
-                            </div> 
+                            </div>
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion"
                                 style="">
                                 <div class="card-body">
@@ -300,10 +302,10 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="video_section_content text-center">
-                        <h3>Our Work Process Video</h3>
+                        <h3 class="wow animate__animated animate__zoomIn animate__delay-0.6s">Our Work Process Video</h3>
                         <p>{{$video->title}} </p>
                         <a class="js-modal-btn" data-video-id="{{$video->link}}"> <i class="fas fa-play"></i></a>
-                   
+
                     </div>
                 </div>
             </div>
@@ -314,9 +316,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <div class="work_head wow animate__animated animate__fadeIn animate__delay-1s">
-                        <h3>Our Project</h3>
-                        <span class="triangle_work"></span>
+                    <div class="service_header wow animate__animated animate__zoomIn animate__delay-0.6s">
+                        <h4>Our Project</h4>
+                        <div class="title_border">
+                            <span></span>
+                        </div>
                         <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
                             classical Latin literature from 45 BC</p>
                     </div>
@@ -324,11 +328,6 @@
             </div>
       <div class="row">
                 <div class="col-sm-12 text-center">
-
-
-
-
-
                     <!-- Main area start -->
                     <div class="portfolio-area">
 
@@ -359,7 +358,7 @@
                             @endforeach
 
 
-                        
+
                         </div>
                     </div>
                 </div>
@@ -368,18 +367,20 @@
 
 
             </div>
-    
+
     </section>
     <!--- project part end -->
- 
+
        <!--- client part start -->
     <section id="client">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <div class="client_head wow animate__animated animate__fadeIn animate__delay-0.7s">
-                        <h3>What our client are saying</h3>
-                        <span class="triangle_client"></span>
+                    <div class="service_header wow animate__animated animate__zoomIn animate__delay-0.6s">
+                        <h4>What our client are saying</h4>
+                        <div class="title_border">
+                            <span></span>
+                        </div>
                         <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
                             classical Latin literature from 45 BC</p>
                     </div>
@@ -415,7 +416,7 @@
 
                             </div>
                             @endforeach
-                     
+
 
                         </div>
                     </div>
@@ -427,7 +428,67 @@
                 </div>
             </div>
         </div>
-
+<style>
+    .service_header h4 {
+    font-size: 28px;
+    position: relative;
+    font-weight: 600;
+    color: #000;
+    text-transform: uppercase;
+    padding-bottom: 2px;
+    }
+    .title_border {
+        position: absolute;
+        width: 154px;
+        margin: 0 auto;
+        height: 15px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+    .title_border::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 62px;
+        left: 0;
+        height: 1px;
+        background-color: #26abe2;
+    }
+    .title_border::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 63px;
+            right: 0;
+            height: 1px;
+            background-color: #26abe2;
+        }
+        .title_border span::before {
+            content: '';
+            position: absolute;
+            /* right: 0px; */
+            left: 61px;
+            top:0px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 15px solid #26abe2;
+       }
+       .title_border span::after {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 62px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 16px solid #26abe2;
+        }
+</style>
     </section>
 @endsection
 

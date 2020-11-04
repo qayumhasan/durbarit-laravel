@@ -5,9 +5,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <div class="contact_header">
-                        <h3>Contact</h3>
-                        <span class="triangle_contact"></span>
+                    <div class="service_header">
+                        <h4>Contact With Us</h4>
+                        <div class="title_border">
+                            <span></span>
+                        </div>
 
                     </div>
                 </div>
@@ -53,13 +55,90 @@
                                             required=""></textarea>
                                     </div>
                                 </div>
-                              
+
                                     <!-- <div class="form-group">
 
                                         <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
                                     </div> -->
-                              
-                                <button type="submit" class="btn submit_con">Sign in</button>
+
+                                <button type="submit" class="submit_con">Sign in</button>
+                                <style>
+                                    button.submit_con {
+                                        background-color: #26abe2;
+                                        border-style: none;
+                                        color: #fff;
+                                        padding: 10px 40px;
+                                        border-radius: 5px;
+                                        text-transform: capitalize;
+                                        font-weight: 600;
+                                        transition: 0.5s linear;
+                                    }
+
+                                    button.submit_con:hover {
+
+
+                                    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+                                    }
+                                    .service_header h4 {
+                    font-size: 28px;
+                    position: relative;
+                    font-weight: 600;
+                    color: #fff;
+                    text-transform: uppercase;
+                    padding-bottom: 2px;
+                    }
+                    .title_border {
+                        position: absolute;
+                        width: 154px;
+                        margin: 0 auto;
+                        height: 15px;
+                        left: 50%;
+                        -webkit-transform: translateX(-50%);
+                        -ms-transform: translateX(-50%);
+                        transform: translateX(-50%);
+                    }
+                    .title_border::before {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        width: 62px;
+                        left: 0;
+                        height: 1px;
+                        background-color: #26abe2;
+                    }
+                    .title_border::after {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            width: 63px;
+                            right: 0;
+                            height: 1px;
+                            background-color: #26abe2;
+                        }
+                        .title_border span::before {
+                            content: '';
+                            position: absolute;
+                            /* right: 0px; */
+                            left: 61px;
+                            top:0px;
+                            width: 0;
+                            height: 0;
+                            border-left: 8px solid transparent;
+                            border-right: 8px solid transparent;
+                            border-bottom: 15px solid #26abe2;
+                       }
+                       .title_border span::after {
+                            position: absolute;
+                            content: "";
+                            top: 0;
+                            right: 62px;
+                            width: 0;
+                            height: 0;
+                            border-left: 8px solid transparent;
+                            border-right: 8px solid transparent;
+                            border-top: 16px solid #26abe2;
+                        }
+                                </style>
                             </form>
                         </div>
                     </div>

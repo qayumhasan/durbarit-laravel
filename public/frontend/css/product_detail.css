@@ -350,12 +350,6 @@ h4.sales-count {
 }
 
 
-.tsk-content-block {
-    padding: 20px;
-    border-radius: 3px;
-    background-color: #fbfbfb;
-    border: 1px solid #e8e8e8;
-}
 
 .tsk-content-block.white .title,
 .tsk-content-block.white .content-title {
@@ -401,4 +395,26 @@ a.btn-tsk.d-block.margin-top-30.text-center {
 .detail_box_image img{
     height:360px;
 }
+.tag ul li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 3px;
+    margin-bottom: 9px;
+}
+h4.sales-count {
+    background-color: #fff;
+    padding: 8px 0px;
+    border-radius: 5px;
+    font-size: 16px;
+    position: relative;
+
+}
+.tsk-content-block {
+
+    border-radius: 3px;
+
+    border: 1px solid #e8e8e8;
+}
+.info_head {
+    margin-top: 40px;
 }

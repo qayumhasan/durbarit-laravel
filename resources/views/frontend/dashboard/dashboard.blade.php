@@ -339,37 +339,94 @@
                                         Invoice</h3>
                                     <div class="tran_box">
 
-                                        <table class="table">
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th scope="col">Order Number</th>
-                                                    <th scope="col">Quantity</th>
-                                                    <th scope="col">Product Satatus</th>
-                                                    <th scope="col">Total Price</th>
+                                       <div class="row">
+                                           <div class="col-sm-12">
+                                            <table class="table table-bordered">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">Order Number</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Product Satatus</th>
+                                                        <th scope="col">Total Price</th>
+                                                        <th scope="col">Action</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($products as $row)
+                                                    <tr>
+                                                        <th scope="row">{{$row->order_id}}</th>
+                                                        <td>{{$row->qty}}</td>
+                                                        @if($row->is_payment == 1)
+                                                        <td>Paid</td>
+                                                        @else
+                                                        <td>UnPaid</td>
+                                                        @endif
+                                                        <td>{{$row->total}}</td>
+                                                        <td><a class="icon">
+
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </a>
+                                                        <div class="action_list" style="display: none;">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="#">Edit</a>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                        <style>
+                                                            .icon{
+                                                                position: relative;
+                                                            }
+                                                            .action_list ul li {
+                                                                 list-style: none;
+                                                                 display: block;
+                                                                 margin-bottom: 10px;
+                                                             }
+                                                             .action_list {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    width: 150px;
+    right: 0px;
+}
+.action_list {
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+
+    padding: 10px;
+    position: absolute;
+    width: 150px;
+    right: 0px;
+}
+button.icon {
+    background: none;
+    border-style: none;
+    /* text-align: right; */
+    position: relative;
+    left: 57px;
+}
+
+                                                        </style>
+
+                                                    </div>
+                                                </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                            {{$products->links()}}
 
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($products as $row)
-                                                <tr>
-                                                    <th scope="row">{{$row->order_id}}</th>
-                                                    <td>{{$row->qty}}</td>
-                                                    @if($row->is_payment == 1)
-                                                    <td>Paid</td>
-                                                    @else
-                                                    <td>UnPaid</td>
-                                                    @endif
-                                                    <td>{{$row->total}}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        {{$products->links()}}
-
-
-                                        <h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">No
-                                            Transaction Yet!</h4>
+                                            {{-- <h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">No
+                                                Transaction Yet!</h4> --}}
+                                           </div>
+                                       </div>
                                     </div>
                                 </div>
                             </div>
@@ -406,5 +463,5 @@
         </div>
     </div>
 </section>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection
