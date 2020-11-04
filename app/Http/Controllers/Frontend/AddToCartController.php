@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\AddToCart;
 use App\Billing;
+use App\Collection;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
@@ -281,6 +282,8 @@ class AddToCartController extends Controller
                 'alert-type' => 'error'
             ); 
             return redirect()->route('customar.dashboard')->with($notification);
+        }elseif($request->payment_method == 3){
+            return redirect()->route('paypal.submit');
         }
          
      }
@@ -444,6 +447,37 @@ class AddToCartController extends Controller
         $pdf = PDF::loadView('frontend.shopping.invoicedownload',compact('order'));
         $ordername='invoice_no_'.$order->order_id;
         return $pdf->download($ordername.'.pdf');
+         
+         
+     }
+
+     public function addToCollect($id)
+     {
+         if(!Auth::check()){
+            return response()->json([
+                'data'=>'Please Login First!'
+            ]);
+         }else{
+            $cal = Collection::where('product_id',$id)->first();
+            
+            if($cal && $cal->product_id == $id){
+                return response()->json([
+                    'data'=>'You are allready add this product on collection!'
+                ]);
+
+               
+            }else{
+                
+
+                $collection =new Collection;
+                $collection->user_id =auth()->user()->id;
+                $collection->product_id =$id;
+                $collection->save();
+                return response()->json([
+                    'data'=>'Product add to collection successfully!Check Your Collection Now'
+                ]);
+            }
+         }
          
          
      }

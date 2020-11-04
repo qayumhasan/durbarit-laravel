@@ -49,6 +49,7 @@
 
 	                          <li><a href="{{route('admin.aboutus.index')}}">About Us</a></li>
 	                          <li><a href="{{route('admin.project.index')}}">Our Project</a></li>
+	                          <li><a href="{{route('admin.sms.setting')}}">Sms Setting</a></li>
 
 
 	                        </ul>

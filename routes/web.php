@@ -38,7 +38,13 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
   
   Route::prefix('video')->group(function(){
     Route::get('/section','VideoController@index')->name('admin.video.index');
-    Route::post('/update','VideoController@update')->name('admin.video.update');
+    Route::post('/update','VideoController@update')->name('admin.sms.update');
+
+  });
+  
+  Route::prefix('sms/setting')->group(function(){
+    Route::get('/','SmsController@index')->name('admin.sms.setting');
+    Route::post('/update','SmsController@update')->name('admin.sms.update');
 
   });
   Route::prefix('order')->group(function(){
@@ -225,9 +231,13 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
 
 });
 
+
+
 Route::post('payment/ssl_commercez/success','Frontend\AddToCartController@successSSL');
 Route::post('payment/ssl_commercez/fail','Frontend\AddToCartController@successSSL');
 Route::post('payment/ssl_commercez/cancel','Frontend\AddToCartController@successSSL');
+
+
 Route::prefix('customer')->namespace('Frontend')->group(function(){
 
   Route::post('/login','AuthController@login')->name('customar.login');
@@ -240,6 +250,14 @@ Route::prefix('customer')->namespace('Frontend')->group(function(){
   Route::get('/customar/verification/{token}','AuthController@verification')->name('customar.verification'); 
   Route::post('/customar/verify','AuthController@verifyAccount')->name('customar.verify'); 
   Route::post('/cart/delete','AddToCartController@cartDelete')->name('cart.data.delete');
+
+  Route::get('/forgot/password','AuthController@checkPhone')->name('customar.forgot.phone');
+  Route::post('/forgot/password','AuthController@cartDelete')->name('customar.forgot.verify');
+  Route::post('/forgot/phone/submit','AuthController@phoneSubmit')->name('customar.forgot.phone.submit');
+  Route::post('/forgot/code/submit','AuthController@codeSubmit')->name('customar.forgot.code.submit');
+  Route::post('/forgot/password/submit','AuthController@passwordSubmit')->name('customar.forgot.password.submit');
+  Route::get('/forgot/code/show/{token}','AuthController@showForgetcodeform')->name('customar.forgot.code');
+  Route::get('/forgot/password/show/{token}/{code}','AuthController@showForgetPasswordform')->name('customar.forgot.password');
   
 
 });
@@ -252,11 +270,15 @@ Route::prefix('customer')->middleware('auth:web')->namespace('Frontend')->group(
   Route::get('/invoice/details/{orderid}','AddToCartController@invoiceDetails')->name('customar.invoice.details');
   Route::get('/invoice/download/{orderid}','AddToCartController@invoiceDownload')->name('customar.invoice.download');
   
+  
 
 });
 
 
+Route::get('/product/collection/{id}','Frontend\AddToCartController@addToCollect');
 
+
+Route::get('/paypal','Frontend\PaymentController@paywithpaypal')->name('paypal.submit');
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/product','Frontend\FrontendController@product');
 Route::get('/product/details/{id}','Frontend\FrontendController@productdetails');

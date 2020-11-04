@@ -62,8 +62,8 @@
                             <div class="sec_box">
                                 <div class="detail_button_bottom text-center">
                                     <ul>
-                                        <li><a href="#"><i class="fas fa-heart"></i> Add to Wishlist</a></li>
-                                        <li><a href="#"><i class="fas fa-book"></i> Add to Collection</a></li>
+                                        <li><a onclick="addtocollection({{$product->id}})" style="cursor: pointer;" ><i class="fas fa-heart"></i> Add to Wishlist</a></li>
+                                        <li><a onclick="addtocollection({{$product->id}})" style="cursor: pointer;"><i class="fas fa-book"></i> Add to Collection</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -333,6 +333,22 @@
                 //         document.getElementById('cartdatacount').innerHTML = data.count;
                 //     }
                 // });
+
+    }
+</script>
+
+<script>
+    function addtocollection(id){
+       
+
+            $.ajax({
+                    type: 'GET',
+                    url: "{{ url('/product/collection') }}/" + id,
+                    processData: false,
+                    success: function(data) {
+                        toastr.success(data.data);
+                    }
+                });
 
     }
 </script>
