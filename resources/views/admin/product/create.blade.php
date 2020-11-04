@@ -178,7 +178,7 @@
                       <label for="inputEmail3" class="col-sm-3 col-form-label text-right">Screenshot:</label>
                       <div class="col-sm-6">
                         <div id="thumbnail_img" class="row">
-
+                        
   					           </div>
                       </div>
                     </div>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Svg\Tag\Rect;
 
 class AuthController extends Controller
 {
@@ -109,7 +110,107 @@ class AuthController extends Controller
         
     }
 
+
+    public function checkPhone ()
+    {
+        
+        return view('frontend.auth.forgotphone');
+    }
+
+
+
+    public function phoneSubmit(Request $request)
+    {
+        $this->validate($request, [
+            'phone' => 'required',
+        ]);
+        $user = User::where('phone',$request->phone)->first();
+        if($user){
+            $user->remember_token = str::random(90);
+            $user->verify_code = rand(1111,9999);
+            $user->save();
+
+            return redirect()->route('customar.forgot.code',$user->remember_token);
+            
+
+        }else{
+            
+        $notification = array(
+            'messege' => 'This Phone Number is not exist in our list!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+        }
+    }
+
+    public function showForgetcodeform($token)
+    {
+        
+        return view('frontend.auth.forgotcode',compact('token'));
+    }
     
+    public function codeSubmit(Request $request)
+    {
+        
+
+        $this->validate($request, [
+            'token' => 'required',
+            'code' => 'required',
+        ]);
+        
+        $user = User::where('remember_token',$request->token)->where('verify_code',$request->code)->first();
+
+        if($user){
+            $this->sendSMS($request,$request->code);
+            
+
+            return redirect()->route('customar.forgot.password',[$request->token,$request->code]);
+            
+
+        }else{
+            
+        $notification = array(
+            'messege' => 'This code is invalid!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+        }
+
+        
+ 
+        
+    }
+    
+   
+
+    public function showForgetPasswordform($token,$code)
+    {
+        return view('frontend.auth.forgot',compact('token','code'));
+    }
+    
+    public function passwordSubmit(Request $request)
+    {
+    
+        $this->validate($request, [
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $user = User::where('remember_token',$request->token)->where('verify_code',$request->code)->first();
+
+        if($user){
+            $user->status = 1;
+            $user->remember_token = null;
+            $user->verify_code = null;
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
+
+        $notification = array(
+            'messege' => 'Your Password Change Successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('customar.login')->with($notification);
+    }
 
 
 
@@ -130,7 +231,7 @@ class AuthController extends Controller
             'username'=>urlencode($smsname),
             'password'=>urlencode($smspassword),
             'sms_content'=>$sms_text,
-            'number'=>urlencode($request->phone_email),
+            'number'=>urlencode($request->phone),
             'sms_type'=>1,
             
         );
@@ -154,4 +255,6 @@ class AuthController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+
 }

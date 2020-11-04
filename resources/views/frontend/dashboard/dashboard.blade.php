@@ -67,14 +67,14 @@
 
                     <a class="nav-link" id="v-pills-favourite-tab" data-toggle="pill" href="#v-pills-favourite" role="tab" aria-selected="false"><i class="fas fa-heart"></i> Favourite</a>
 
-                    <a class="nav-link" id="v-pills-download-tab" data-toggle="pill" href="#v-pills-download" role="tab" aria-selected="false"><i class="fas fa-download"></i> Download</a>
+                    <!-- <a class="nav-link" id="v-pills-download-tab" data-toggle="pill" href="#v-pills-download" role="tab" aria-selected="false"><i class="fas fa-download"></i> Download</a> -->
 
-                    <a class="nav-link" id="v-pills-fund-tab" data-toggle="pill" href="#v-pills-fund" role="tab" aria-selected="false"><i class="fas fa-money-check-alt"></i>
-                        Add Fund</a>
+                    <!-- <a class="nav-link" id="v-pills-fund-tab" data-toggle="pill" href="#v-pills-fund" role="tab" aria-selected="false"><i class="fas fa-money-check-alt"></i>
+                        Add Fund</a> -->
 
                     <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-invoice" role="tab" aria-selected="false"><i class="fas fa-receipt"></i> My Invoice</a>
 
-                    <a class="nav-link" id="v-pills-transaction-tab" data-toggle="pill" href="#v-pills-transaction" role="tab" aria-selected="false"><i class="fab fa-typo3"></i> Transaction</a>
+                    <!-- <a class="nav-link" id="v-pills-transaction-tab" data-toggle="pill" href="#v-pills-transaction" role="tab" aria-selected="false"><i class="fab fa-typo3"></i> Transaction</a> -->
 
                     <a class="nav-link" id="v-pills-support-tab" data-toggle="pill" href="#v-pills-support" role="tab" aria-selected="false"><i class="fab fa-artstation"></i> Support</a>
 
@@ -270,13 +270,51 @@
                                 </div>
                             </div>
 
+                            @php
+                            $favourit = App\Collection::where('user_id',Auth::user()->id)->get();
+                            @endphp
                             <div class="tab-pane fade" id="v-pills-favourite" role="tabpanel">
                                 <div class="favourite_part">
                                     <h3 style="font-size: 22px;text-transform: capitalize;font-weight: 600;">My
                                         Favourite</h3>
                                     <div class="tran_box">
-                                        <h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">You
-                                            did not purchase any item from our Market yet!</h4>
+                                    <div class="tran_box">
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">SL</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Product Type</th>
+            <!-- <th scope="col">Action</th> -->
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($favourit as $row)
+        
+        <tr>
+            <th scope="row">{{$loop->iteration}}</th>
+            <td><a href="{{url('/product/details/'.$row->id)}}"> {{$row->product->product_name}} </a></td>
+            <td>{{$row->product->reqular_price}}</td>
+            <td>{{$row->product->category_id}}</td>
+            
+                        
+
+        </tr>
+
+        
+        @endforeach
+    </tbody>
+</table>
+
+
+
+<h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">No
+    Transaction Yet!</h4>
+</div>
                                     </div>
                                 </div>
                             </div>
