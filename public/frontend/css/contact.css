@@ -106,21 +106,7 @@ body {
     border: 1px solid #d2d2d2;
 }
 
-button.btn.submit_con {
-    background-color: #26abe2 !important;
-    padding: 10px 40px;
-    color: #fff;
-    -webkit-box-shadow: 1px 5px 15px -7px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 1px 5px 15px -7px rgba(0, 0, 0, 0.75);
-    box-shadow: 1px 5px 15px -7px rgba(0, 0, 0, 0.75);
-    transition: 0.4s all;
-}
 
-button.btn.submit_con:hover {
-   
-   
-    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
-}
 .form_head h3 {
     font-weight: 600;
     margin-bottom: 20px;
@@ -150,12 +136,12 @@ button.btn.submit_con:hover {
     /* color: #fff; */
     margin-right: 10px;
 }
-
 .social_icon_contact i {
     background-color: #26abe2;
     color: #fff;
     width: 40px;
     height: 40px;
+    border-radius: 5px;
     line-height: 40px;
     text-align: center;
     font-size: 20px;
@@ -165,8 +151,8 @@ button.btn.submit_con:hover {
     transition: 0.4s all;
 }
 .social_icon_contact i:hover {
-   
-   
+
+
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
 }
 #map{

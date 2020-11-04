@@ -441,8 +441,20 @@
                                         {{$products->links()}}
 
 
-                                        <h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">No
-                                            Transaction Yet!</h4>
+
+                                                    </div>
+                                                </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                            {{$products->links()}}
+
+
+                                            {{-- <h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">No
+                                                Transaction Yet!</h4> --}}
+                                           </div>
+                                       </div>
                                     </div>
                                 </div>
                             </div>
@@ -479,5 +491,5 @@
         </div>
     </div>
 </section>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection

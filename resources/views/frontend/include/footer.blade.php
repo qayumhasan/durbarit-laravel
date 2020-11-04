@@ -2,6 +2,43 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
+                    <style>
+                        .owl-stage-outer {
+                            position: relative;
+                            top: 10px;
+                        }
+                        .icon_slider button.owl-prev {
+                        position: absolute;
+                        left: -10px;
+                        top: 31px;
+                        background-color: #26abe200 !important;
+                        color: #26abe2 !important;
+                        width: 35px;
+                        border-style: none;
+                        height: 35px;
+                        border-radius: 3px;
+                    }
+                    .icon_slider button.owl-next {
+                        position: absolute;
+                        right: -10px;
+                        top: 31px;
+                        background-color: #26abe200 !important;
+                        color: #26abe2 !important;
+                        width: 35px;
+                        border-style: none;
+                        height: 35px;
+                        border-radius: 3px;
+                    }
+                    .slider_icon {
+                        background-color: #fff;
+                        padding: 20px;
+                        box-shadow: 4px 10px 34px rgba(0, 0, 0, 0.4);
+                    }
+                    .footer_logo img{
+                    width: 220px !important;
+                    height: 70px !important;
+                    }
+                    </style>
                     <div class="slider_icon">
                         <div class="icon_slider owl-carousel  owl-theme">
                         @foreach($partner as $part)
@@ -11,20 +48,19 @@
                                 </div>
                             </div>
                         @endforeach
-                       
+
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="row footer_logo_container wow animate__animated animate__fadeInDown animate__delay-1s">
+            <div class="row footer_logo_container wow animate__animated animate__fadeInUp animate__delay-0.6s">
                 <div class="col-sm-4">
                     <div class="footer_about">
 
                         <div class="footer_logo">
                             <a href="{{url('/')}}">
-                                <img src="{{asset('public/images/logo/'.$logo->lazyloader )}}" data-src="{{asset('public/images/logo/'.$logo->flogo)}}" class="lazy w-100" alt="no-logo"
-                                    style="width:250px !important; height: auto;">
+                                <img src="{{asset('public/images/logo/'.$logo->lazyloader )}}" data-src="{{asset('public/images/logo/'.$logo->flogo)}}" class="lazy w-100" alt="no-logo">
                             </a>
                             <p>{{$contactinfo->description}}</p>
                             <div class="social_icon">
@@ -50,7 +86,7 @@
                                 @foreach($allpage as $page)
                                     <li><a href="{{url('/page/'.$page->id)}}">- {{$page->title}}</a></li>
                                 @endforeach
-                                    
+
                                 </ul>
                             </div>
                         </div>
@@ -79,7 +115,7 @@
                                         </div>
                                     </div> -->
                                     <div class="input-group mb-2 mr-sm-2">
-    
+
     <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
     <span class="em_bt"><button type="submit"><i class="fas fa-envelope"></i></button></span>
   </div>

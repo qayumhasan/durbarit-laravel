@@ -92,10 +92,10 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                           
+
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -114,8 +114,7 @@
                                                             id="inlineFormInput" placeholder="Coupon Code">
                                                     </div>
                                                     <div class="col-auto">
-                                                        <button type="submit"
-                                                            class="btn btn-primary mb-2">Submit</button>
+                                                        <button type="submit" class="btn_cart">Submit</button>
                                                     </div>
                                                 </div>
                                             </form>
