@@ -41,6 +41,12 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::post('/update','VideoController@update')->name('admin.video.update');
 
   });
+  Route::prefix('order')->group(function(){
+    Route::get('/','OrderController@index')->name('admin.order.index');
+    Route::get('/order/show/{id}','OrderController@showOrder')->name('admin.show.order');
+    Route::get('/order/delete/{id}','OrderController@orderDelete')->name('admin.order.delete');
+
+  });
 
   Route::prefix('partner')->group(function(){
     Route::get('/','PartnerController@index')->name('admin.partner.index');
@@ -233,6 +239,7 @@ Route::prefix('customer')->namespace('Frontend')->group(function(){
   Route::post('/profile/update','AdminController@profileUpdate')->name('customar.profile.update'); 
   Route::get('/customar/verification/{token}','AuthController@verification')->name('customar.verification'); 
   Route::post('/customar/verify','AuthController@verifyAccount')->name('customar.verify'); 
+  Route::post('/cart/delete','AddToCartController@cartDelete')->name('cart.data.delete');
   
 
 });
@@ -241,8 +248,9 @@ Route::prefix('customer')->middleware('auth:web')->namespace('Frontend')->group(
 
   Route::get('/dashboard','AdminController@index')->name('customar.dashboard');
   Route::post('/checkout','AddToCartController@customarBilling')->name('customar.billing');
-  Route::post('/cart/delete','AddToCartController@cartDelete')->name('cart.data.delete');
   Route::post('/stripe','AddToCartController@stripePayment')->name('payment.stripe.submit');
+  Route::get('/invoice/details/{orderid}','AddToCartController@invoiceDetails')->name('customar.invoice.details');
+  Route::get('/invoice/download/{orderid}','AddToCartController@invoiceDownload')->name('customar.invoice.download');
   
 
 });

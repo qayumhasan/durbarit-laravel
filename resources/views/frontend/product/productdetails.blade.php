@@ -198,7 +198,13 @@
                                     <input type="hidden" name="product_type" value="1"/>
                                     <input type="hidden" id="package_id" name="package_id" value="1"/>
                                     <input style="opacity: 0;" type="checkbox" id="chk2" name="extra_price" value="500">
-                                    <button type="button" id="purchase-now" class="cart_btn margin-top-30"> <i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                    <!-- <button type="button" id="purchase-now" class="cart_btn margin-top-30"> <i class="fas fa-shopping-cart"></i> Add to Cart</button> -->
+                                    <div class="page-wrapper">
+                                        <button type="button" id="addtocart"><i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                            <!-- <span class="cart-item"></span> -->
+                                        </button>
+                                        </div>
                                 </form>
 
                             </div>
@@ -276,7 +282,12 @@
 <script>
 
         $(document).ready(function() {
-            $('#purchase-now').on('click', function() {
+
+            $('#addtocart').on('click', function() {
+                
+                
+                
+                
 
                 $.ajax({
                     type: 'GET',
@@ -286,6 +297,8 @@
                     success: function(data) {
 
                         toastr.success(data.data);
+                        const cart = document.querySelector('#cart');
+                        cart.dataset.totalitems=data.count;
                         document.getElementById('cartdatacount').innerHTML = data.count;
                     }
                 });

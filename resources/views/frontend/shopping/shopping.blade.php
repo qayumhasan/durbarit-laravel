@@ -164,6 +164,8 @@
             function(data) {
                 $('#cartdata').html(data);
                 if (data) {
+                    const cart = document.querySelector('#cart');
+                    cart.dataset.totalitems=data.count;
                     document.getElementById("cartdelete"+el.value).style.display = "none";
                     toastr.success(data.data);
                     document.getElementById('cartdatacount').innerHTML = data.count;

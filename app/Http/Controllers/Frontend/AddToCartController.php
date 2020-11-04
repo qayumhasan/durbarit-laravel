@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Stripe;
+use PDF;
 
 class AddToCartController extends Controller
 {
@@ -126,7 +127,12 @@ class AddToCartController extends Controller
         $total = 0;
         $qty =0;
         foreach($cartcount as $row){
-            $total = $total + $row->product->reqular_price + $row->extra_price;
+            if($row->package_id == 1){
+                $total = $total + $row->product->reqular_price + $row->extra_price;
+            }else{
+                $total = $total + $row->product->premium_price + $row->extra_price;
+            }
+            
             $qty = $qty + $row->qty;
         }
         
@@ -145,6 +151,7 @@ class AddToCartController extends Controller
             }
             $item['extra_price']=$row->extra_price;
             $item['package_id']=$row->package_id;
+            $item['qty']=$row->qty;
 
             array_push($cartproduct, $item);
             $product = Product::findOrFail($row->product_id);
@@ -403,6 +410,7 @@ class AddToCartController extends Controller
 
      public function cartDelete(Request $request)
      {
+         
          AddToCart::findOrFail($request->cart_id)->delete();
          $cartcount =AddToCart::where('user_ip',\Request::ip())->get();
          $cartcount = $cartcount->sum('qty');
@@ -421,6 +429,23 @@ class AddToCartController extends Controller
             'alert-type' => 'error'
         ); 
         return view('frontend.payment.success')->with($notification);
+     }
+
+
+     public function invoiceDetails ($order)
+     {
+         $order = Billing::where('order_id',$order)->where('user_id',auth()->user()->id)->first();
+         return view('frontend.shopping.invoice',compact('order'));
+     }
+     public function invoiceDownload ($order)
+     {
+       $order = Billing::where('order_id',$order)->where('user_id',auth()->user()->id)->first();
+
+        $pdf = PDF::loadView('frontend.shopping.invoicedownload',compact('order'));
+        $ordername='invoice_no_'.$order->order_id;
+        return $pdf->download($ordername.'.pdf');
+         
+         
      }
 
     

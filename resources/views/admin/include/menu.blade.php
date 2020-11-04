@@ -71,6 +71,12 @@
                           <span class="menu-text">Apply Candidate</span>
                       </a>
                     </li>
+                     <li class="single-nav-wrapper">
+                      <a href="{{route('admin.order.index')}}" class="menu-item">
+                          <span class="left-icon"><i class="fa fa-shopping-basket"></i></span>
+                          <span class="menu-text">InHouse Orders</span>
+                      </a>
+                    </li>
 
                    <li class="single-nav-wrapper">
                       <a class="has-arrow menu-item" href="#" aria-expanded="false">

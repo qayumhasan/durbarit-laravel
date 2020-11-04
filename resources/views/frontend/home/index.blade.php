@@ -394,7 +394,7 @@
                             @foreach($teatimonial as $test)
                             <div class="testimonial_slider_item">
                                 <div class="testimonial_slider_content_text">
-                                    <p>{{$test->review}} </p>
+                                    <p>{!!$test->review!!} </p>
                                     <div class="qoute_btn">
                                         <span>
                                             <i class="fas fa-quote-left"></i>
