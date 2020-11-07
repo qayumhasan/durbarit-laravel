@@ -64,6 +64,27 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::get('/delete/{id}','PartnerController@delete')->name('admin.partner.delete');
   });
 
+  Route::prefix('human/resource')->group(function(){
+    Route::get('/','StaffDirectoryController@index')->name('admin.staff.index');
+    Route::get('/create','StaffDirectoryController@create')->name('admin.staff.create');
+    Route::post('/create','StaffDirectoryController@store')->name('admin.staff.store');
+    Route::get('/edit/{id}','StaffDirectoryController@edit')->name('admin.staff.edit');
+    Route::post('/update','StaffDirectoryController@update')->name('admin.staff.update');
+    Route::get('/status/{id}','StaffDirectoryController@status')->name('admin.staff.status');
+    Route::get('/delete/{id}','StaffDirectoryController@delete')->name('admin.staff.delete');
+  });
+
+
+  Route::prefix('staff/role')->group(function(){
+    Route::get('/','StaffRoleController@index')->name('admin.staff.role.index');
+    Route::get('/create','StaffRoleController@create')->name('admin.staff.role.create');
+    Route::post('/create','StaffRoleController@store')->name('admin.staff.role.store');
+    Route::get('/edit/{id}','StaffRoleController@edit')->name('admin.staff.role.edit');
+    Route::post('/update','StaffRoleController@update')->name('admin.staff.role.update');
+    Route::get('/status/{id}','StaffRoleController@status')->name('admin.staff.role.status');
+    Route::get('/delete/{id}','StaffRoleController@delete')->name('admin.staff.role.delete');
+  });
+
   Route::prefix('logo')->group(function(){
     Route::get('/','LogoController@index')->name('admin.logo.index');
     Route::post('/update','LogoController@update')->name('admin.logo.update');
