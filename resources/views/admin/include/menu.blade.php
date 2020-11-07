@@ -54,6 +54,16 @@
 
 	                        </ul>
 	                  </li>
+	                  <li class="single-nav-wrapper">
+	                      <a class="has-arrow menu-item" href="#" aria-expanded="false">
+	                        <span class="left-icon"><i class="fas fa-cogs"></i></span>
+	                          <span class="menu-text">Human resource</span>
+	                      </a>
+	                        <ul class="dashboard-menu">
+	                          <li><a href="{{route('admin.staff.index')}}">Staff Directory</a></li>
+                            <li><a href="{{route('admin.staff.role.index')}}">Staff Role</a></li>
+	                        </ul>
+	                  </li>
                     <li class="single-nav-wrapper">
 	                    <a href="{{route('admin.whychoseus.index')}}" class="menu-item">
 	                        <span class="left-icon"><i class="fas fa-crop-alt"></i></span>
