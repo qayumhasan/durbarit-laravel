@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\StaffRole;
+use App\Department;
 use Illuminate\Http\Request;
 
-class StaffRoleController extends Controller
+class DepartmentController extends Controller
 {
     public function __construct(){
         $this->middleware('auth:admin');
@@ -19,8 +19,8 @@ class StaffRoleController extends Controller
     public function index()
     {
         
-        $roles = StaffRole::all();
-        return view('admin.human_resource.role.index',compact('roles'));
+        $departments = Department::all();
+        return view('admin.human_resource.department.index',compact('departments'));
     }
 
  
@@ -34,9 +34,9 @@ class StaffRoleController extends Controller
     public function store(Request $request)
     {
         
-        $role = new StaffRole();
-        $role->name = $request->role;
-        $role->save();
+        $department = new Department();
+        $department->name = $request->department;
+        $department->save();
 
         $notification=array(
             'messege'=>' Staff Role Created Successfully.',
@@ -48,23 +48,23 @@ class StaffRoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\StaffRole  $slider
+     * @param  \App\Department  $slider
      * @return \Illuminate\Http\Response
      */
     public function status($id)
     {
-        $staffrole = StaffRole::findOrFail($id);
-        $status = $staffrole->status;
+        $staffdepartment = Department::findOrFail($id);
+        $status = $staffdepartment->status;
         if($status==0){
-            $staffrole->status =1;
-            $staffrole->save();
+            $staffdepartment->status =1;
+            $staffdepartment->save();
         }else{
-            $staffrole->status =0;
-            $staffrole->save();   
+            $staffdepartment->status =0;
+            $staffdepartment->save();   
         }
 
         $notification=array(
-            'messege'=>' StaffRole Status Changed Successfully.',
+            'messege'=>' Department Status Changed Successfully.',
             'alert-type'=>'success'
              );
          return redirect()->back()->with($notification);
@@ -73,30 +73,30 @@ class StaffRoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\StaffRole  $slider
+     * @param  \App\Department  $slider
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $staffrole = StaffRole::findOrFail($id);
-        return response()->json($staffrole);
+        $staffdepartment = Department::findOrFail($id);
+        return response()->json($staffdepartment);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\StaffRole  $slider
+     * @param  \App\Department  $slider
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
         
-        $role =StaffRole::findOrFail($request->id);
-        $role->name = $request->role;
-        $role->save();
+        $department =Department::findOrFail($request->id);
+        $department->name = $request->department;
+        $department->save();
         $notification=array(
-            'messege'=>' StaffRole Updated Successfully.',
+            'messege'=>' Department Updated Successfully.',
             'alert-type'=>'success'
              );
          return redirect()->back()->with($notification);
@@ -105,7 +105,7 @@ class StaffRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\StaffRole  $slider
+     * @param  \App\Department  $slider
      * @return \Illuminate\Http\Response
      */
     public function delete ($id)
@@ -113,9 +113,9 @@ class StaffRoleController extends Controller
         
         
            
-        $role =StaffRole::findOrFail($id)->delete();
+        $department =Department::findOrFail($id)->delete();
         $notification=array(
-            'messege'=>' StaffRole Deleted Successfully.',
+            'messege'=>' Department Deleted Successfully.',
             'alert-type'=>'success'
              );
          return redirect()->back()->with($notification);

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\StaffRole;
+use App\Designation;
 use Illuminate\Http\Request;
 
-class StaffRoleController extends Controller
+class DesignationController extends Controller
 {
     public function __construct(){
         $this->middleware('auth:admin');
@@ -19,8 +19,8 @@ class StaffRoleController extends Controller
     public function index()
     {
         
-        $roles = StaffRole::all();
-        return view('admin.human_resource.role.index',compact('roles'));
+        $designations = Designation::all();
+        return view('admin.human_resource.designation.index',compact('designations'));
     }
 
  
@@ -34,9 +34,9 @@ class StaffRoleController extends Controller
     public function store(Request $request)
     {
         
-        $role = new StaffRole();
-        $role->name = $request->role;
-        $role->save();
+        $designation = new Designation();
+        $designation->name = $request->designation;
+        $designation->save();
 
         $notification=array(
             'messege'=>' Staff Role Created Successfully.',
@@ -48,23 +48,23 @@ class StaffRoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\StaffRole  $slider
+     * @param  \App\Designation  $slider
      * @return \Illuminate\Http\Response
      */
     public function status($id)
     {
-        $staffrole = StaffRole::findOrFail($id);
-        $status = $staffrole->status;
+        $staffdesignation = Designation::findOrFail($id);
+        $status = $staffdesignation->status;
         if($status==0){
-            $staffrole->status =1;
-            $staffrole->save();
+            $staffdesignation->status =1;
+            $staffdesignation->save();
         }else{
-            $staffrole->status =0;
-            $staffrole->save();   
+            $staffdesignation->status =0;
+            $staffdesignation->save();   
         }
 
         $notification=array(
-            'messege'=>' StaffRole Status Changed Successfully.',
+            'messege'=>' Designation Status Changed Successfully.',
             'alert-type'=>'success'
              );
          return redirect()->back()->with($notification);
@@ -73,30 +73,30 @@ class StaffRoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\StaffRole  $slider
+     * @param  \App\Designation  $slider
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $staffrole = StaffRole::findOrFail($id);
-        return response()->json($staffrole);
+        $staffdesignation = Designation::findOrFail($id);
+        return response()->json($staffdesignation);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\StaffRole  $slider
+     * @param  \App\Designation  $slider
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
         
-        $role =StaffRole::findOrFail($request->id);
-        $role->name = $request->role;
-        $role->save();
+        $designation =Designation::findOrFail($request->id);
+        $designation->name = $request->designation;
+        $designation->save();
         $notification=array(
-            'messege'=>' StaffRole Updated Successfully.',
+            'messege'=>' Designation Updated Successfully.',
             'alert-type'=>'success'
              );
          return redirect()->back()->with($notification);
@@ -105,7 +105,7 @@ class StaffRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\StaffRole  $slider
+     * @param  \App\Designation  $slider
      * @return \Illuminate\Http\Response
      */
     public function delete ($id)
@@ -113,9 +113,9 @@ class StaffRoleController extends Controller
         
         
            
-        $role =StaffRole::findOrFail($id)->delete();
+        $designation =Designation::findOrFail($id)->delete();
         $notification=array(
-            'messege'=>' StaffRole Deleted Successfully.',
+            'messege'=>' Designation Deleted Successfully.',
             'alert-type'=>'success'
              );
          return redirect()->back()->with($notification);

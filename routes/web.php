@@ -72,6 +72,7 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::post('/update','StaffDirectoryController@update')->name('admin.staff.update');
     Route::get('/status/{id}','StaffDirectoryController@status')->name('admin.staff.status');
     Route::get('/delete/{id}','StaffDirectoryController@delete')->name('admin.staff.delete');
+    Route::get('/show/{id}','StaffDirectoryController@show')->name('admin.staff.show');
   });
 
 
@@ -79,10 +80,38 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::get('/','StaffRoleController@index')->name('admin.staff.role.index');
     Route::get('/create','StaffRoleController@create')->name('admin.staff.role.create');
     Route::post('/create','StaffRoleController@store')->name('admin.staff.role.store');
-    Route::get('/edit/{id}','StaffRoleController@edit')->name('admin.staff.role.edit');
+    Route::get('/edit/{id}','StaffRoleController@edit');
     Route::post('/update','StaffRoleController@update')->name('admin.staff.role.update');
     Route::get('/status/{id}','StaffRoleController@status')->name('admin.staff.role.status');
     Route::get('/delete/{id}','StaffRoleController@delete')->name('admin.staff.role.delete');
+  });
+  Route::prefix('staff/department')->group(function(){
+    Route::get('/','DepartmentController@index')->name('admin.staff.department.index');
+    Route::get('/create','DepartmentController@create')->name('admin.staff.department.create');
+    Route::post('/create','DepartmentController@store')->name('admin.staff.department.store');
+    Route::get('/edit/{id}','DepartmentController@edit');
+    Route::post('/update','DepartmentController@update')->name('admin.staff.department.update');
+    Route::get('/status/{id}','DepartmentController@status')->name('admin.staff.department.status');
+    Route::get('/delete/{id}','DepartmentController@delete')->name('admin.staff.department.delete');
+  });
+
+  Route::prefix('staff/designation')->group(function(){
+    Route::get('/','DesignationController@index')->name('admin.staff.designation.index');
+    Route::get('/create','DesignationController@create')->name('admin.staff.designation.create');
+    Route::post('/create','DesignationController@store')->name('admin.staff.designation.store');
+    Route::get('/edit/{id}','DesignationController@edit');
+    Route::post('/update','DesignationController@update')->name('admin.staff.designation.update');
+    Route::get('/status/{id}','DesignationController@status')->name('admin.staff.designation.status');
+    Route::get('/delete/{id}','DesignationController@delete')->name('admin.staff.designation.delete');
+  });
+  Route::prefix('staff/attendance')->group(function(){
+    Route::get('/','AttendanceController@index')->name('admin.staff.attendance.index');
+    Route::get('/create','AttendanceController@create')->name('admin.staff.attendance.create');
+    Route::post('/create','AttendanceController@store')->name('admin.staff.attendance.store');
+    Route::get('/edit/{id}','AttendanceController@edit');
+    Route::post('/update','AttendanceController@update')->name('admin.staff.attendance.update');
+    Route::get('/status/{id}','AttendanceController@status')->name('admin.staff.attendance.status');
+    Route::get('/delete/{id}','AttendanceController@delete')->name('admin.staff.attendance.delete');
   });
 
   Route::prefix('logo')->group(function(){

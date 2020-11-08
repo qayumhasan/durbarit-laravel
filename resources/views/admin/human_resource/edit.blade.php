@@ -13,7 +13,7 @@
         <div class="panel_header">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="panel_title"><span class="panel_icon"><i class="fas fa-plus-square"></i></span><span>Add Staff</span></div>
+                    <div class="panel_title"><span class="panel_icon"><i class="fas fa-plus-square"></i></span><span>Update Staff</span></div>
                 </div>
                 <div class="col-md-6 text-right">
 
@@ -26,8 +26,10 @@
         <div class="panel_body">
 
 
-            <form method="POST" action="{{route('admin.staff.store')}}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data"><input name="_token" type="hidden">
+            <form method="POST" action="{{route('admin.staff.update')}}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data"><input name="_token" type="hidden">
             @csrf
+
+            <input type="hidden" name="id" value="{{$staff->id}}"/>
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -55,7 +57,7 @@
                                         <div class="input-effect">
 
                                             <label>Staff No. <span>*</span> </label>
-                                            <input class="primary-input form-control" disabled name="staff_no" type="text" value="">
+                                            <input class="primary-input form-control" name="staff_no" type="text" disabled value="{{$staff->staff_no}}">
                                         </div>
                                     </div>
 
@@ -67,7 +69,7 @@
 
                                                 <option data-display="Role *" value="">Select</option>
                                                 @foreach($roles as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    <option value="{{$row->id}}" @if($staff->role == $row->id) selected @endif>{{$row->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="focus-border"></span>
@@ -80,7 +82,7 @@
                                             <select class="niceSelect w-100 bb form-control" name="department_id" id="department_id">
                                                 <option data-display="Department *" value="">Select </option>
                                                 @foreach($depatments as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    <option value="{{$row->id}}" @if($staff->department_id == $row->id) selected @endif>{{$row->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="focus-border"></span>
@@ -94,7 +96,7 @@
                                             <select class="niceSelect w-100 bb form-control" name="designation_id" id="designation_id">
                                                 <option data-display="Designations *" value="">Select </option>
                                                 @foreach($desiignations as $row)
-                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                    <option value="{{$row->id}}" @if($staff->designation_id == $row->id) selected @endif>{{$row->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="focus-border"></span>
@@ -110,7 +112,7 @@
                                     <div class="col-lg-3">
                                         <label>First Name <span>*</span> </label>
                                         <div class="input-effect">
-                                            <input class="primary-input form-control  " type="text" name="first_name" value="">
+                                            <input class="primary-input form-control  " type="text" name="first_name" value="{{$staff->first_name}}">
 
 
                                         </div>
@@ -118,7 +120,7 @@
                                     <div class="col-lg-3">
                                         <label> Last Name <span>*</span> </label>
                                         <div class="input-effect">
-                                            <input class="primary-input form-control" type="text" name="last_name" value="">
+                                            <input class="primary-input form-control" type="text" name="last_name" value="{{$staff->last_name}}">
 
                                         </div>
                                     </div>
@@ -127,7 +129,7 @@
                                     <div class="col-lg-3">
                                         <label>Father Name</label>
                                         <div class="input-effect">
-                                            <input class="primary-input form-control" type="text" name="fathers_name" value="">
+                                            <input class="primary-input form-control" type="text" name="fathers_name" value="{{$staff->fathers_name}}">
                                         </div>
                                     </div>
 
@@ -135,7 +137,7 @@
                                     <div class="col-lg-3">
                                         <label>Mother Name</label>
                                         <div class="input-effect">
-                                            <input class="primary-input form-control" type="text" name="mothers_name" value="">
+                                            <input class="primary-input form-control" type="text" name="mothers_name" value="{{$staff->fathers_name}}">
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +146,7 @@
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>Email <span>*</span> </label>
-                                            <input class="primary-input form-control" type="email" name="email" value="">
+                                            <input class="primary-input form-control" type="email" name="email" value="{{$staff->email}}">
                                         </div>
                                     </div>
 
@@ -153,9 +155,9 @@
                                             <label>Gender <span>*</span> </label>
                                             <select class="niceSelect w-100 bb form-control" name="gender_id">
                                                 <option data-display="Gender *" value="">Gender *</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                                <option value="3">Others</option>
+                                                <option @if($staff->genter_id == 1) selected @endif value="1">Male</option>
+                                                <option @if($staff->genter_id == 2) selected @endif value="2">Female</option>
+                                                <option @if($staff->genter_id == 3) selected @endif value="3">Others</option>
                                             </select>
                                             <span class="focus-border"></span>
                                         </div>
@@ -167,7 +169,7 @@
 
                                                 <div class="input-effect">
                                                     <label>Date Of Birth</label>
-                                                    <input class="primary-input date form-control" id="startDate" type="date" name="date_of_birth" autocomplete="off">
+                                                    <input class="primary-input date form-control" value="{{$staff->date_of_birth}}" id="startDate" type="date" name="date_of_birth" autocomplete="off">
                                                 </div>
                                             </div>
 
@@ -180,7 +182,7 @@
                                             <div class="col">
                                                 <div class="input-effect">
                                                     <label>Date of Joining<span>*</span> </label>
-                                                    <input class="primary-input date form-control" id="date_of_joining" type="date" name="date_of_joining" value="11/07/2020">
+                                                    <input class="primary-input date form-control"  id="date_of_joining" type="date" name="date_of_joining" value="{{$staff->date_of_joining}}">
                                                 </div>
                                             </div>
 
@@ -193,7 +195,7 @@
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>Mobile <span>*</span> </label>
-                                            <input class="primary-input form-control" type="text" name="mobile" value="">
+                                            <input class="primary-input form-control" type="text" name="mobile" value="{{$staff->mobile}}">
                                         </div>
                                     </div>
 
@@ -214,7 +216,7 @@
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>Emergency Mobile </label>
-                                            <input class="primary-input form-control" type="text" name="emergency_mobile" value="">
+                                            <input class="primary-input form-control" type="text" name="emergency_mobile" value="{{$staff->emergency_mobile}}">
 
                                         </div>
                                     </div>
@@ -222,7 +224,7 @@
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>Driving License</label>
-                                            <input class="primary-input form-control" type="text" name="driving_license" value="">
+                                            <input class="primary-input form-control" type="text" name="driving_license" value="{{$staff->driving_license}}">
                                         </div>
                                     </div>
 
@@ -267,14 +269,14 @@
                                     <div class="col-lg-6">
                                         <div class="input-effect">
                                             <label>Current Address <span>*</span> </label>
-                                            <textarea class="primary-input form-control " cols="0" rows="4" name="current_address" id="current_address"></textarea>
+                                            <textarea class="primary-input form-control " cols="0" rows="4" name="current_address" id="current_address">{{$staff->current_address}}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="input-effect">
                                             <label>Permanent Address <span></span> </label>
-                                            <textarea class="primary-input form-control " cols="0" rows="4" name="permanent_address" id="permanent_address"></textarea>
+                                            <textarea class="primary-input form-control " cols="0" rows="4" name="permanent_address" id="permanent_address">{{$staff->permanent_address}}</textarea>
 
                                         </div>
                                     </div>
@@ -284,14 +286,14 @@
                                     <div class="col-lg-6">
                                         <div class="input-effect">
                                             <label>Qualifications </label>
-                                            <textarea class="primary-input form-control" cols="0" rows="4" name="qualification" id="qualification"></textarea>
+                                            <textarea class="primary-input form-control" cols="0" rows="4" name="qualification" id="qualification">{{$staff->qualification}}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="input-effect">
                                             <label>Experience </label>
-                                            <textarea class="primary-input form-control" cols="0" rows="4" name="experience" id="experience" value=""></textarea>
+                                            <textarea class="primary-input form-control" cols="0" rows="4" name="experience" id="experience" value="">{{$staff->experience}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -318,14 +320,14 @@
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>EPF NO</label>
-                                            <input class="primary-input form-control" type="text" name="epf_no" value="">
+                                            <input class="primary-input form-control" type="text" name="epf_no" value="{{$staff->epf_no}}">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>Basic Salary</label>
-                                            <input class="primary-input form-control" type="number" name="basic_salary" value="" autocomplete="off">
+                                            <input class="primary-input form-control" type="number" name="basic_salary" value="{{$staff->basic_salary}}" autocomplete="off">
                                         </div>
                                     </div>
 
@@ -343,7 +345,7 @@
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>Location</label>
-                                            <input class="primary-input form-control" type="text" name="location">
+                                            <input class="primary-input form-control" type="text" value="{{$staff->location}}" name="location">
                                         </div>
                                     </div>
 
@@ -368,28 +370,28 @@
                                 <div class="col-lg-3">
                                     <div class="input-effect">
                                         <label>Bank Account Name</label>
-                                        <input class="primary-input form-control" type="text" name="bank_account_name" value="">
+                                        <input class="primary-input form-control" type="text" name="bank_account_name" value="{{$staff->bank_account_name}}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="input-effect">
                                         <label>Account No.</label>
-                                        <input class="primary-input form-control" type="text" name="bank_account_no" value="">
+                                        <input class="primary-input form-control" type="text" name="bank_account_no" value="{{$staff->bank_account_no}}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="input-effect">
                                         <label>Bank Name</label>
-                                        <input class="primary-input form-control" type="text" name="bank_name" value="">
+                                        <input class="primary-input form-control" type="text" name="bank_name" value="{{$staff->bank_name}}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="input-effect">
                                         <label>Branch Name</label>
-                                        <input class="primary-input form-control" type="text" name="bank_brach" value="">
+                                        <input class="primary-input form-control" type="text" name="bank_brach" value="{{$staff->bank_brach}}">
                                     </div>
                                 </div>
 
@@ -413,7 +415,7 @@
                                 <div class="col-lg-3">
                                     <div class="input-effect">
                                         <label>Facebook Url</label>
-                                        <input class="primary-input form-control" type="text" name="facebook_url" value=>
+                                        <input class="primary-input form-control" type="text" name="facebook_url" value="{{$staff->facebook_url}}"/>
 
                                     </div>
                                 </div>
@@ -421,7 +423,7 @@
                                 <div class="col-lg-3">
                                     <div class="input-effect">
                                         <label>Twitter Url</label>
-                                        <input class="primary-input form-control" type="text" name="twiteer_url" value="">
+                                        <input class="primary-input form-control" type="text" name="twiteer_url" value="{{$staff->twiteer_url}}">
 
                                     </div>
                                 </div>
@@ -429,14 +431,14 @@
                                 <div class="col-lg-3">
                                     <div class="input-effect">
                                         <label>Linkedin Url</label>
-                                        <input class="primary-input form-control" type="text" name="linkedin_url" value="">
+                                        <input class="primary-input form-control" type="text" name="linkedin_url" value="{{$staff->linkedin_url}}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="input-effect">
                                         <label>Instragram Url</label>
-                                        <input class="primary-input form-control" type="text" name="instragram_url" value="">
+                                        <input class="primary-input form-control" type="text" name="instragram_url" value="{{$staff->instragram_url}}">
                                     </div>
                                 </div>
 

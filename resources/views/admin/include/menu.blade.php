@@ -62,6 +62,9 @@
 	                        <ul class="dashboard-menu">
 	                          <li><a href="{{route('admin.staff.index')}}">Staff Directory</a></li>
                             <li><a href="{{route('admin.staff.role.index')}}">Staff Role</a></li>
+                            <li><a href="{{route('admin.staff.department.index')}}">Staff Department</a></li>
+                            <li><a href="{{route('admin.staff.designation.index')}}">Staff Designation</a></li>
+                            <li><a href="{{route('admin.staff.attendance.index')}}">Staff Attendance</a></li>
 	                        </ul>
 	                  </li>
                     <li class="single-nav-wrapper">
