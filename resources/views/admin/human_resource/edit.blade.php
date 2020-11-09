@@ -65,7 +65,7 @@
                                         <label>Staff Role. <span>*</span> </label>
                                         <div class="input-effect">
 
-                                            <select class="niceSelect w-100 bb form-control" name="role_id" id="role_id">
+                                            <select class="niceSelect w-100 bb form-control" name="role_id" id="role_id" required>
 
                                                 <option data-display="Role *" value="">Select</option>
                                                 @foreach($roles as $row)
@@ -79,7 +79,7 @@
                                     <div class="col-lg-3">
                                         <label>Staff Department. <span>*</span> </label>
                                         <div class="input-effect">
-                                            <select class="niceSelect w-100 bb form-control" name="department_id" id="department_id">
+                                            <select class="niceSelect w-100 bb form-control" name="department_id" id="department_id" required>
                                                 <option data-display="Department *" value="">Select </option>
                                                 @foreach($depatments as $row)
                                                     <option value="{{$row->id}}" @if($staff->department_id == $row->id) selected @endif>{{$row->name}}</option>
@@ -93,7 +93,7 @@
                                     <div class="col-lg-3">
                                         <label>Staff Designations. <span>*</span> </label>
                                         <div class="input-effect">
-                                            <select class="niceSelect w-100 bb form-control" name="designation_id" id="designation_id">
+                                            <select class="niceSelect w-100 bb form-control" name="designation_id" id="designation_id" required>
                                                 <option data-display="Designations *" value="">Select </option>
                                                 @foreach($desiignations as $row)
                                                     <option value="{{$row->id}}" @if($staff->designation_id == $row->id) selected @endif>{{$row->name}}</option>
@@ -112,7 +112,7 @@
                                     <div class="col-lg-3">
                                         <label>First Name <span>*</span> </label>
                                         <div class="input-effect">
-                                            <input class="primary-input form-control  " type="text" name="first_name" value="{{$staff->first_name}}">
+                                            <input class="primary-input form-control  " type="text" name="first_name" value="{{$staff->first_name}}" required>
 
 
                                         </div>
@@ -120,7 +120,7 @@
                                     <div class="col-lg-3">
                                         <label> Last Name <span>*</span> </label>
                                         <div class="input-effect">
-                                            <input class="primary-input form-control" type="text" name="last_name" value="{{$staff->last_name}}">
+                                            <input class="primary-input form-control" type="text" name="last_name" value="{{$staff->last_name}}" required>
 
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                                     <div class="col-lg-3">
                                         <label>Father Name</label>
                                         <div class="input-effect">
-                                            <input class="primary-input form-control" type="text" name="fathers_name" value="{{$staff->fathers_name}}">
+                                            <input class="primary-input form-control" type="text" name="fathers_name" value="{{$staff->fathers_name}}" required>
                                         </div>
                                     </div>
 
@@ -137,7 +137,7 @@
                                     <div class="col-lg-3">
                                         <label>Mother Name</label>
                                         <div class="input-effect">
-                                            <input class="primary-input form-control" type="text" name="mothers_name" value="{{$staff->fathers_name}}">
+                                            <input class="primary-input form-control" type="text" name="mothers_name" value="{{$staff->fathers_name}}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -146,18 +146,18 @@
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>Email <span>*</span> </label>
-                                            <input class="primary-input form-control" type="email" name="email" value="{{$staff->email}}">
+                                            <input class="primary-input form-control" type="email" name="email" value="{{$staff->email}}" required>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>Gender <span>*</span> </label>
-                                            <select class="niceSelect w-100 bb form-control" name="gender_id">
+                                            <select class="niceSelect w-100 bb form-control" name="gender_id" required>
                                                 <option data-display="Gender *" value="">Gender *</option>
-                                                <option @if($staff->genter_id == 1) selected @endif value="1">Male</option>
-                                                <option @if($staff->genter_id == 2) selected @endif value="2">Female</option>
-                                                <option @if($staff->genter_id == 3) selected @endif value="3">Others</option>
+                                                <option value="1" @if($staff->gender_id == 1) selected @endif>Male</option>
+                                                <option value="2"  @if($staff->genter_id == 2) selected @endif>Female</option>
+                                                <option value="3"  @if($staff->genter_id == 3) selected @endif>Others</option>
                                             </select>
                                             <span class="focus-border"></span>
                                         </div>
@@ -169,7 +169,7 @@
 
                                                 <div class="input-effect">
                                                     <label>Date Of Birth</label>
-                                                    <input class="primary-input date form-control" value="{{$staff->date_of_birth}}" id="startDate" type="date" name="date_of_birth" autocomplete="off">
+                                                    <input class="primary-input date form-control" value="{{$staff->date_of_birth}}" id="startDate" type="date" required name="date_of_birth" autocomplete="off">
                                                 </div>
                                             </div>
 
@@ -182,7 +182,7 @@
                                             <div class="col">
                                                 <div class="input-effect">
                                                     <label>Date of Joining<span>*</span> </label>
-                                                    <input class="primary-input date form-control"  id="date_of_joining" type="date" name="date_of_joining" value="{{$staff->date_of_joining}}">
+                                                    <input class="primary-input date form-control"  id="date_of_joining" type="date" name="date_of_joining" required value="{{$staff->date_of_joining}}">
                                                 </div>
                                             </div>
 
@@ -195,17 +195,17 @@
                                     <div class="col-lg-3">
                                         <div class="input-effect">
                                             <label>Mobile <span>*</span> </label>
-                                            <input class="primary-input form-control" type="text" name="mobile" value="{{$staff->mobile}}">
+                                            <input class="primary-input form-control" type="text" name="mobile" required value="{{$staff->mobile}}">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-3">
                                         <div class="input-effect">
-                                            <label>Mobile <span>*</span> </label>
-                                            <select class="niceSelect w-100 bb form-control" name="marital_status">
+                                            <label>Marital Status <span>*</span> </label>
+                                            <select class="niceSelect w-100 bb form-control" name="marital_status" required>
                                                 <option data-display="Marital Status" value="">Marital Status</option>
-                                                <option value="married">Married</option>
-                                                <option value="unmarried">Unmarried</option>
+                                                <option value="married" @if($staff->marital_status == 'married') selected @endif>Married</option>
+                                                <option value="unmarried" @if($staff->marital_status == 'unmarried') selected @endif>Unmarried</option>
 
                                             </select>
 
@@ -269,14 +269,14 @@
                                     <div class="col-lg-6">
                                         <div class="input-effect">
                                             <label>Current Address <span>*</span> </label>
-                                            <textarea class="primary-input form-control " cols="0" rows="4" name="current_address" id="current_address">{{$staff->current_address}}</textarea>
+                                            <textarea class="primary-input form-control " cols="0" rows="4" name="current_address" required id="current_address">{{$staff->current_address}}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="input-effect">
                                             <label>Permanent Address <span></span> </label>
-                                            <textarea class="primary-input form-control " cols="0" rows="4" name="permanent_address" id="permanent_address">{{$staff->permanent_address}}</textarea>
+                                            <textarea class="primary-input form-control " cols="0" rows="4" required name="permanent_address" id="permanent_address">{{$staff->permanent_address}}</textarea>
 
                                         </div>
                                     </div>
@@ -286,7 +286,7 @@
                                     <div class="col-lg-6">
                                         <div class="input-effect">
                                             <label>Qualifications </label>
-                                            <textarea class="primary-input form-control" cols="0" rows="4" name="qualification" id="qualification">{{$staff->qualification}}</textarea>
+                                            <textarea class="primary-input form-control" required cols="0" rows="4" name="qualification" id="qualification">{{$staff->qualification}}</textarea>
                                         </div>
                                     </div>
 

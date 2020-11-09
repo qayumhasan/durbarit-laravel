@@ -41,7 +41,7 @@
                 <div class="col-sm-7">
                     <div class="ab_head wow animate__animated animate__fadeIn">
                         <h3>Welcome to <span>Durbar It Limited</span>:<br>Always Ready To Help</h3>
-                        <p>{{$aboutus->details}}
+                        <p>{!! $aboutus->details !!}
                         </p>
                         <div class="ab_link">
                             <a href="{{url('/about-us')}}">Read More</a>

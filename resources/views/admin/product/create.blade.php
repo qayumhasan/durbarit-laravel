@@ -199,6 +199,27 @@
 				</section>
 
 
+        <script>
+            $(document).ready(function() {
+            $('#container').removeClass('mainnav-lg').addClass('mainnav-sm');
+            $("#thumbnail_img").spartanMultiImagePicker({
+                fieldName: 'thumbnail_img',
+                maxCount: 1,
+                rowHeight: '200px',
+                groupClassName: 'col-lg-3 col-md-4 col-sm-4 col-xs-6',
+                maxFileSize: '',
+                dropFileLabel: "Drop Here",
+                onExtensionErr: function(index, file) {
+                    console.log(index, file, 'extension err');
+                    alert('Please only input png or jpg type file')
+                },
+                onSizeErr: function(index, file) {
+                    console.log(index, file, 'file size too big');
+                    alert('File size too big');
+                }
+            });
+        });
+        </script>
 
 
 @endsection

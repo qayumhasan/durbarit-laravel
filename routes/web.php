@@ -112,6 +112,11 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::post('/update','AttendanceController@update')->name('admin.staff.attendance.update');
     Route::get('/status/{id}','AttendanceController@status')->name('admin.staff.attendance.status');
     Route::get('/delete/{id}','AttendanceController@delete')->name('admin.staff.attendance.delete');
+    Route::get('/search','AttendanceController@staffSearch')->name('admin.staff.attendance.search');
+  });
+  Route::prefix('staff/attendance/report')->group(function(){
+    Route::get('/','AttendanceController@reportShow')->name('admin.staff.attendance.report.index');
+    Route::get('/search','AttendanceController@reportSearch')->name('admin.staff.attendance.report.search');
   });
 
   Route::prefix('logo')->group(function(){

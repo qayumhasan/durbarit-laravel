@@ -169,7 +169,7 @@
                     </div>
 
                     <ul class="point" id="regular">
-                        @foreach($product->reqularpricefeture as $row)
+                        @foreach($product->reqularpricefetureforproductdetails as $row)
                         <li><i class="fas fa-check-circle"></i> {{$row}}</li>
                         @endforeach
 
@@ -178,7 +178,7 @@
 
 
                     <ul class="point" id="premium" style="display: none;">
-                        @foreach($product->premiumpricefeture as $row)
+                        @foreach($product->premiumpricefetureforproductdetails as $row)
                         <li><i class="fas fa-check-circle"></i> {{$row}}</li>
                         @endforeach
 
