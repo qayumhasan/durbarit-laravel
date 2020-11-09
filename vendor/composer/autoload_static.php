@@ -617,6 +617,7 @@ class ComposerStaticInitdf453bd97a560f1c4c3ce4cf7726529f
         'App\\Admin' => __DIR__ . '/../..' . '/app/Admin.php',
         'App\\Apply' => __DIR__ . '/../..' . '/app/Apply.php',
         'App\\Attendance' => __DIR__ . '/../..' . '/app/Attendance.php',
+        'App\\AttendanceCount' => __DIR__ . '/../..' . '/app/AttendanceCount.php',
         'App\\Billing' => __DIR__ . '/../..' . '/app/Billing.php',
         'App\\Career' => __DIR__ . '/../..' . '/app/Career.php',
         'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',

@@ -200,7 +200,7 @@ class StaffDirectoryController extends Controller
         
         $dir->save();
         $notification=array(
-            'messege'=>' Staff Created Successfully.',
+            'messege'=>' Staff Updated Successfully.',
             'alert-type'=>'success'
              );
          return redirect()->back()->with($notification);

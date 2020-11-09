@@ -11,6 +11,7 @@ return array(
     'App\\Admin' => $baseDir . '/app/Admin.php',
     'App\\Apply' => $baseDir . '/app/Apply.php',
     'App\\Attendance' => $baseDir . '/app/Attendance.php',
+    'App\\AttendanceCount' => $baseDir . '/app/AttendanceCount.php',
     'App\\Billing' => $baseDir . '/app/Billing.php',
     'App\\Career' => $baseDir . '/app/Career.php',
     'App\\Category' => $baseDir . '/app/Category.php',

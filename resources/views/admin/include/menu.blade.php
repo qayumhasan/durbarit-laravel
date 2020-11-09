@@ -65,6 +65,7 @@
                             <li><a href="{{route('admin.staff.department.index')}}">Staff Department</a></li>
                             <li><a href="{{route('admin.staff.designation.index')}}">Staff Designation</a></li>
                             <li><a href="{{route('admin.staff.attendance.index')}}">Staff Attendance</a></li>
+                            <li><a href="{{route('admin.staff.attendance.report.index')}}">Attendance Report</a></li>
 	                        </ul>
 	                  </li>
                     <li class="single-nav-wrapper">
