@@ -149,7 +149,7 @@ date_default_timezone_set('Asia/Dhaka');
                                                 <td>
 
                                                     
-                                                    <a href="{{route('admin.staff.show',$row->id)}}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-placement="right" title="Delete" data-original-title="Delete"><i class="far fa-eye"></i></a>
+                                                    <a href="{{route('admin.staff.attendance.show',[$row->staff_id,$row->year])}}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-placement="right" title="Delete" data-original-title="Delete"><i class="far fa-eye"></i></a>
 
                                                 </td>
                                             </tr>

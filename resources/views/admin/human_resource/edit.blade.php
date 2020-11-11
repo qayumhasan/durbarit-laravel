@@ -241,13 +241,23 @@
                                                 <div class="input-effect">
                                                     <label for="staff_photo">Staff Photo</label>
                                                     <input type="file" name="image">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-effect card m-2 p-2">
+                                                    <img height="140" width="140" src="{{ asset('public/images/staff/'.$staff->image) }}">
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                            
+
                                 <!--upload-->
+
 
 
 
@@ -467,7 +477,8 @@
                                         <div class="col-lg-6">
                                             <div class="input-effect">
                                                 <label for="staff_photo">Resume</label>
-                                                <input type="file" name="resume">
+                                                <input type="file" name="resume" placeholder="PDF file Only!">
+                                                <label>PDF file Only!</label>
                                             </div>
                                         </div>
                                     </div>
@@ -480,7 +491,8 @@
                                         <div class="col-lg-6">
                                             <div class="input-effect">
                                                 <label for="staff_photo">Joining Letter</label>
-                                                <input type="file" name="joining_letter">
+                                                <input type="file" name="joining_letter" placeholder="PDF file Only!">
+                                                <label>PDF file Only!</label>
                                             </div>
                                         </div>
                                     </div>
@@ -492,7 +504,8 @@
                                         <div class="col-lg-6">
                                             <div class="input-effect">
                                                 <label for="staff_photo">Other Document</label>
-                                                <input type="file" name="other_document">
+                                                <input type="file" name="other_document" placeholder="PDF file Only!">
+                                                <label>PDF file Only!</label>
                                             </div>
                                         </div>
                                     </div>

@@ -41,4 +41,9 @@ class StaffDirectory extends Model
     {
         return $this->hasOne('App\Designation','id','designation_id')->withDefault();
     }
+
+    public function attendance()
+    {
+        return $this->hasOne('App\Attendance','id','staff_id')->withDefault();
+    }
 }

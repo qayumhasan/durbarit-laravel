@@ -53,6 +53,7 @@ class AttendanceController extends Controller
             $att->attendance = $row;
             $att->month = date('F');
             $att->year = date('Y');
+            $att->day = date('d');
             if($row=='present'){
                 $this->countAttendance($key,'present');
             }elseif($row=='absent'){
@@ -137,7 +138,16 @@ class AttendanceController extends Controller
     {
         
         $attents = Attendance::where('month',$request->month)->where('year',$request->year)->get();
+        $unique = $attents->unique('staff_id');
+
+        $attents =$unique->values()->all();
      
         return view('admin.human_resource.attendance_report.index',compact('attents'));
+    }
+
+    public function singleReportShow($id,$year)
+    {
+        $staff = StaffDirectory::findOrFail($id);
+        return view('admin.human_resource.attendance_report.show',compact('staff','id','year'));
     }
 }

@@ -117,6 +117,7 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
   Route::prefix('staff/attendance/report')->group(function(){
     Route::get('/','AttendanceController@reportShow')->name('admin.staff.attendance.report.index');
     Route::get('/search','AttendanceController@reportSearch')->name('admin.staff.attendance.report.search');
+    Route::get('/show/{id}/{year}','AttendanceController@singleReportShow')->name('admin.staff.attendance.show');
   });
 
   Route::prefix('logo')->group(function(){
@@ -150,6 +151,25 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::post('/update','CareerController@update')->name('admin.career.update');
     Route::get('/status/{id}','CareerController@status')->name('admin.career.status');
     Route::get('/delete/{id}','CareerController@delete')->name('admin.career.delete');
+  });
+
+  Route::prefix('invoice/project/category')->group(function(){
+    Route::get('/','ProjectCategoryController@index')->name('admin.invoice.project.category.index');
+    Route::get('/create','ProjectCategoryController@create')->name('admin.invoice.project.category.create');
+    Route::post('/create','ProjectCategoryController@store')->name('admin.invoice.project.category.store');
+    Route::get('/edit/{id}','ProjectCategoryController@edit');
+    Route::post('/update','ProjectCategoryController@update')->name('admin.invoice.project.category.update');
+    Route::get('/status/{id}','ProjectCategoryController@status')->name('admin.invoice.project.category.status');
+    Route::get('/delete/{id}','ProjectCategoryController@delete')->name('admin.invoice.project.category.delete');
+  });
+  Route::prefix('invoice')->group(function(){
+    Route::get('/','InvoiceController@create')->name('admin.invoice.create');
+    Route::post('/store','InvoiceController@store')->name('admin.invoice.store');
+    Route::get('/get/product','InvoiceController@getProduct');
+    Route::get('/list','InvoiceController@invoiceList')->name('admin.invoice.list');
+    Route::get('/setting','InvoiceController@invoiceSetting')->name('admin.invoice.setting');
+    Route::post('/setting/update','InvoiceController@invoiceSettingUpdate')->name('admin.invoice.setting.update');
+    
   });
 
   Route::prefix('team')->group(function(){
@@ -351,4 +371,9 @@ Route::get('/about-us','Frontend\FrontendController@about');
 Route::post('/contact/insert','Frontend\FrontendController@contactinsert');
 // cart controller
 Route::get('/cart','Frontend\CartController@cart');
+
+
+Route::get('/test',function(){
+  return view('test');
+});
 

@@ -67,7 +67,21 @@
                             <li><a href="{{route('admin.staff.attendance.index')}}">Staff Attendance</a></li>
                             <li><a href="{{route('admin.staff.attendance.report.index')}}">Attendance Report</a></li>
 	                        </ul>
-	                  </li>
+                    </li>
+                    
+	                  <li class="single-nav-wrapper">
+	                      <a class="has-arrow menu-item" href="#" aria-expanded="false">
+	                        <span class="left-icon"><i class="fas fa-cogs"></i></span>
+	                          <span class="menu-text">Invoice</span>
+	                      </a>
+	                        <ul class="dashboard-menu">
+	                          <li><a href="{{route('admin.invoice.project.category.index')}}">Project Category</a></li>
+                            <li><a href="{{route('admin.invoice.create')}}">Invoice Create</a></li>
+                            <li><a href="{{route('admin.invoice.list')}}">Invoice List</a></li>
+                            <li><a href="{{route('admin.invoice.setting')}}">Invoice Setting</a></li>
+	                        </ul>
+                    </li>
+                    
                     <li class="single-nav-wrapper">
 	                    <a href="{{route('admin.whychoseus.index')}}" class="menu-item">
 	                        <span class="left-icon"><i class="fas fa-crop-alt"></i></span>
