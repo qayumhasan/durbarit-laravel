@@ -164,8 +164,10 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
   });
   Route::prefix('invoice')->group(function(){
     Route::get('/','InvoiceController@create')->name('admin.invoice.create');
+    Route::get('/view/{id}','InvoiceController@invoiceView')->name('admin.invoice.project.view');
     Route::post('/store','InvoiceController@store')->name('admin.invoice.store');
     Route::get('/get/product','InvoiceController@getProduct');
+    Route::get('/product/value/{id}','InvoiceController@getSingleProduct');
     Route::get('/list','InvoiceController@invoiceList')->name('admin.invoice.list');
     Route::get('/setting','InvoiceController@invoiceSetting')->name('admin.invoice.setting');
     Route::post('/setting/update','InvoiceController@invoiceSettingUpdate')->name('admin.invoice.setting.update');

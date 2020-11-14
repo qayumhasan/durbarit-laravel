@@ -122,7 +122,7 @@ date_default_timezone_set('Asia/Dhaka');
 
                                                     </div>
                                                 </td>
-                                                <td><input type="text" placeholder="Note" name="note[{{$row->id}}]" class=" form-control form-control-sm">
+                                                <td><input type="text" placeholder="Note" name="note[]" class=" form-control form-control-sm">
                                                 </td>
                                             </tr>
                                             @endforeach

@@ -59,7 +59,7 @@
                                 @else
                                 <a href="{{route('admin.invoice.project.category.status',$row->id)}}" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-placement="right" title="active" data-original-title="active"><i class="far fa-thumbs-down"></i></a>
                                 @endif
-                                | <a class="btn btn-info btn-sm text-white updatemodal" data-toggle="modal" data-target="#updatemodal" data-whatever="{{$row->id}}" title="edit" data-original-title="edit"><i class="fas fa-pencil-alt"></i></a> |
+                                | <a href="{{route('admin.invoice.project.view',$row->id)}}" class="btn btn-info btn-sm text-white updatemodal"  title="view"><i class="fas fa-eye"></i></a> |
 
                                 <a type="submit" id="delete" onclick="form_submit()" href="{{route('admin.invoice.project.category.delete',$row->id)}}" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-placement="right" title="Delete" data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
 

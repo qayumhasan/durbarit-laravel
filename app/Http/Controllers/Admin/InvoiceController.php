@@ -31,6 +31,11 @@ class InvoiceController extends Controller
     }
     public function store(Request $request)
     {
+        $product_no = $request->product;
+        $note = $request->note;
+        $quantity = $request->quantity;
+        $totalprice = $request->totalprice;
+
         $request->validate([
             'customer' => 'required',
             'payment_method' => 'required',
@@ -45,7 +50,9 @@ class InvoiceController extends Controller
             'unpaid' => 'required',
             'discount' => 'required',
             'product' => 'required',
+            
         ]);
+
         $invoice = new CustomInvoice();
         $invoice->created_by = auth()->user()->id;
         $invoice->customer = $request->customer;
@@ -61,7 +68,11 @@ class InvoiceController extends Controller
         $invoice->unpaid = $request->unpaid;
         $invoice->discount = $request->discount;
         $invoice->discount_type = $request->discount_type;
-        $invoice->option = 'sdafldsak';
+        $invoice->product_id = json_encode($product_no);
+        $invoice->note = json_encode($note);
+        $invoice->note = json_encode($note);
+        $invoice->quantity = json_encode($quantity);
+        $invoice->totalprice = json_encode($totalprice);
         $invoice->save();
         
         $notification=array(
@@ -102,5 +113,20 @@ class InvoiceController extends Controller
             'alert-type'=>'success'
              );
          return redirect()->back()->with($notification);
+    }
+
+    public function getSingleProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        if($product){
+            $price = $product->reqular_price;
+            return response()->json($price);
+        }
+    }
+
+    public function invoiceView($id)
+    {
+        $invoice = CustomInvoice::findOrFail($id);
+        return view('admin.invoice.show',compact('invoice'));
     }
 }

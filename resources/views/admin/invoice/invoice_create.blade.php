@@ -238,7 +238,7 @@
                                 <tbody id="add_product" class="add_product">
                                     <tr>
                                         <td>
-                                            <select class="form-control" name="product[]" id="exampleFormControlSelect1">
+                                            <select class="form-control" onchange="getProductPrice(this)" name="product[]" id="exampleFormControlSelect1">
                                             <option selected disabled>Choose A Product...</option>
                                                 @foreach($products as $row)
                                                 
@@ -256,15 +256,15 @@
                                         </td>
 
                                         <td>
-                                            <input type="number" name="quantity[]" class="form-control" id="quantity" placeholder="Quantity">
+                                            <input type="number" onkeyup="quentitycount()" name="quantity[]" class="form-control" id="quantity" placeholder="Quantity">
                                         </td>
 
                                         <td>
-                                            <input type="number" name="price[]" class="form-control" id="exampleFormControlInput1" placeholder="Price">
+                                            <input type="number" name="price[]" class="form-control" id="price" placeholder="Price">
                                         </td>
 
                                         <td>
-                                            <input type="number" name="totalprice[]" class="form-control" id="totalprice0" placeholder="Total Price">
+                                            <input type="number" name="totalprice[]" class="form-control" id="totalprice" placeholder="Total Price">
                                         </td>
 
 
@@ -442,6 +442,47 @@
             }
         });
 
+    }
+</script>
+
+<script>
+     function delete_row(row) {
+        
+        $(row).closest('.product_row').remove();
+    }
+
+    function countTotal(){
+        
+    }
+
+
+    function quentitycount(){
+        
+        var price = document.getElementById('price');
+        var totalPrice = document.getElementById('totalprice');
+        var qty = document.getElementById('quantity');
+        var total =qty.value * price.value;
+        totalPrice.value = total;
+        
+    }
+
+    function getProductPrice(el){
+        
+        var id = el.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: "{{ url('/admin/invoice/product/value') }}/"+id,
+             dataType:"json",
+            success: function(data) {
+                var price = document.getElementById('price');
+                price.value = data;
+            }
+        });
     }
 </script>
 
