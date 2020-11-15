@@ -40,8 +40,12 @@ date_default_timezone_set('Asia/Dhaka');
                                         @foreach($roles as $row)
                                         <option value="{{$row->id}}">{{$row->name}}</option>
                                         @endforeach
+                                       
 
                                     </select>
+                                    @error('role')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                                 </div>
                                 <div class="col-md-3">
                                     <label class="m-0"><b>Department :</b> </label>
@@ -53,6 +57,9 @@ date_default_timezone_set('Asia/Dhaka');
                                         @endforeach
 
                                     </select>
+                                    @error('department')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="col-md-3">
@@ -60,19 +67,22 @@ date_default_timezone_set('Asia/Dhaka');
 
                                     <select class="w-100 niceSelect bb form-control" name="month">
                                         <option data-display="Select Month *" value="">Select Month *</option>
-                                        <option value="January">January</option>
-                                        <option value="February">February</option>
-                                        <option value="March">March</option>
-                                        <option value="April">April</option>
-                                        <option value="May">May</option>
-                                        <option value="June">June</option>
-                                        <option value="July">July</option>
-                                        <option value="August">August</option>
-                                        <option value="September">September</option>
-                                        <option value="October">October</option>
-                                        <option value="November">November</option>
-                                        <option value="December">December</option>
+                                        <option @if(date('F') == 'January' ) selected @endif value="January">January</option>
+                                        <option @if(date('F') == 'February' ) selected @endif value="February">February</option>
+                                        <option @if(date('F') == 'March' ) selected @endif value="March">March</option>
+                                        <option @if(date('F') == 'April' ) selected @endif value="April">April</option>
+                                        <option @if(date('F') == 'May' ) selected @endif value="May">May</option>
+                                        <option @if(date('F') == 'June' ) selected @endif value="June">June</option>
+                                        <option @if(date('F') == 'July' ) selected @endif value="July">July</option>
+                                        <option @if(date('F') == 'August' ) selected @endif value="August">August</option>
+                                        <option @if(date('F') == 'September' ) selected @endif value="September">September</option>
+                                        <option @if(date('F') == 'October' ) selected @endif value="October">October</option>
+                                        <option @if(date('F') == 'November' ) selected @endif value="November">November</option>
+                                        <option @if(date('F') == 'December' ) selected @endif value="December">December</option>
                                     </select>
+                                    @error('month')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                                 </div>
                                 <div class="col-md-3">
                                     <label class="m-0"><b>Years :</b> </label>
@@ -110,6 +120,9 @@ date_default_timezone_set('Asia/Dhaka');
                                         <option value="1991">1991</option>
                                         <option value="1990">1990</option>
                                     </select>
+                                    @error('year')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-sm btn-blue float-right mt-2">Search</button>
@@ -158,125 +171,129 @@ date_default_timezone_set('Asia/Dhaka');
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12" style="overflow-x: scroll;">
 
-                        <table id="dataTableExample1" class="table table-sm student_attendance_report_table table-bordered mb-2">
+                                <table id="dataTableExample1" class="table table-sm student_attendance_report_table table-bordered mb-2">
 
-                            <thead>
-                                <tr class="text-center">
-                                    <th>S.Name</th>
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>Staff Name</th>
 
-                                    @foreach ($monthDates as $monthDate)
-                                    @php
-                                    $splitDateDay = explode('-', $monthDate);
-                                    $day = $splitDateDay[1];
-                                    $date = $splitDateDay[0];
-                                    @endphp
-                                    <th>{{ $day }} <br> {{ $date }}</th>
-                                    @endforeach
+                                            @foreach ($monthDates as $monthDate)
+                                            @php
+                                            $splitDateDay = explode('-', $monthDate);
+                                            $day = $splitDateDay[1];
+                                            $date = $splitDateDay[0];
+                                            @endphp
+                                            <th>{{ $day }} <br> {{ $date }}</th>
+                                            @endforeach
 
-                                    <th class="text-success"> Total <br> Present </th>
-                                    <th class="text-danger"> Total <br> Absent </th>
-                                    <th class="text-primary"> Total <br> Late </th>
-                                </tr>
-                            </thead>
+                                            <th class="text-success"> Total <br> Present </th>
+                                            <th class="text-danger"> Total <br> Absent </th>
+                                            <th class="text-primary"> Total <br> Late </th>
+                                        </tr>
+                                    </thead>
 
-                            <tbody>
+                                    <tbody>
 
-                                @foreach ($staffs as $student)
-                                <tr class="text-center">
-                                    <td>
-                                        {{ $student->first_name.' '. $student->last_name }}
-                                    </td>
-                                    @php
-                                    $attendances = App\Attendance::where('staff_id',$student->id)->where('month',$month)->where('year',$year)->get();
+                                        @foreach ($staffs as $student)
+                                        <tr class="text-center">
+                                            <td>
+                                                {{ $student->first_name.' '. $student->last_name }}
+                                            </td>
+                                            @php
+                                            $attendances = App\Attendance::where('staff_id',$student->id)->where('month',$month)->where('year',$year)->get();
 
-                                    $totalPresent = 0;
-                                    $totalAbsent = 0;
-                                    $totalLate = 0;
-                                    $totalHalfDay = 0;
+                                            $totalPresent = 0;
+                                            $totalAbsent = 0;
+                                            $totalLate = 0;
+                                            $totalHalfDay = 0;
 
-                                    @endphp
-                                    @foreach ($monthDates as $monthDate)
-                                    @php
-                                    $splitDateDay = explode('-', $monthDate);
-                                    $day = $splitDateDay[1];
-                                    $date = $splitDateDay[0];
+                                            @endphp
+                                            @foreach ($monthDates as $monthDate)
+                                            @php
+                                            $splitDateDay = explode('-', $monthDate);
+                                            $day = $splitDateDay[1];
+                                            $date = $splitDateDay[0];
 
-                                    @endphp
-                                    <td>
-                                        @php
-                                        $checkEmpty = 0;
-                                        @endphp
-                                        @foreach ($attendances as $attendance)
-                                        @php
-                                        $spliteAttendanceDate = explode('-',$attendance->date);
-                                        @endphp
-                                        @if ($date == $spliteAttendanceDate[0])
-                                        @if ($attendance->attendance === "present")
-                                        <h5 class="badge badge-success"><b> P </b> </h5>
-                                        @php
-                                        $totalPresent +=1;
-                                        @endphp
-                                        @elseif($attendance->attendance === "absent")
-                                        <h6 class="badge badge-danger"><b> A </b> </h6>
-                                        @php
-                                        $totalAbsent +=1;
-                                        @endphp
-                                        @elseif($attendance->attendance === "half_day")
-                                        <h5 class="badge badge-info"><b> H </b> </h5>
-                                        @php
-                                        $totalHalfDay +=1;
-                                        @endphp
-                                        @endif
-                                        @php
-                                        $checkEmpty = 1;
-                                        @endphp
-                                        @endif
+                                            @endphp
+                                            <td>
+                                                @php
+                                                $checkEmpty = 0;
+                                                @endphp
+                                                @foreach ($attendances as $attendance)
+                                                @php
+                                                $spliteAttendanceDate = explode('-',$attendance->date);
+                                                @endphp
+                                                @if ($date == $spliteAttendanceDate[0])
+                                                @if ($attendance->attendance === "present")
+                                                <h5 class="badge badge-success"><b> P </b> </h5>
+                                                @php
+                                                $totalPresent +=1;
+                                                @endphp
+                                                @elseif($attendance->attendance === "absent")
+                                                <h6 class="badge badge-danger"><b> A </b> </h6>
+                                                @php
+                                                $totalAbsent +=1;
+                                                @endphp
+                                                @elseif($attendance->attendance === "late")
+                                                <h5 class="badge badge-info"><b> L </b> </h5>
+                                                @php
+                                                $totalHalfDay +=1;
+                                                @endphp
+                                                @endif
+                                                @php
+                                                $checkEmpty = 1;
+                                                @endphp
+                                                @endif
+                                                @endforeach
+                                                @if ($checkEmpty == 0)
+                                                <h5 class="badge badge-info "><b>H</b></h5>
+                                                @endif
+                                            </td>
+
+                                            @endforeach
+
+                                            <td>
+                                                @if ($attendances->count() > 0)
+                                                <b> {{ round($totalPresent / $attendances->count() * 100, 2) }}% </b>
+                                                @else
+                                                <b> 0% </b>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($attendances->count() > 0)
+                                                <b> {{ round($totalAbsent / $attendances->count() * 100, 2) }}%</b>
+                                                @else
+                                                <b> 0% </b>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($attendances->count() > 0)
+                                                <b> {{ round($totalHalfDay / $attendances->count() * 100, 2) }}% </b>
+                                                @else
+                                                <b> 0% </b>
+                                                @endif
+                                            </td>
+                                        </tr>
+
                                         @endforeach
-                                        @if ($checkEmpty == 0)
-                                        <h5 class="badge badge-info "><b>H</b></h5>
-                                        @endif
-                                    </td>
+                                    </tbody>
 
-                                    @endforeach
-
-                                    <td>
-                                        @if ($attendances->count() > 0)
-                                        <b> {{ round($totalPresent / $attendances->count() * 100, 2) }}% </b>
-                                        @else
-                                        <b> 0% </b>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($attendances->count() > 0)
-                                        <b> {{ round($totalAbsent / $attendances->count() * 100, 2) }}%</b>
-                                        @else
-                                        <b> 0% </b>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($attendances->count() > 0)
-                                        <b> {{ round($totalHalfDay / $attendances->count() * 100, 2) }}% </b>
-                                        @else
-                                        <b> 0% </b>
-                                        @endif
-                                    </td>
-                                </tr>
-
-                                @endforeach
-                            </tbody>
-
-                        </table>
+                                </table>
+                            </div>
+                        </div>
 
                         @else
-                        <span class="alert alert-danger mt-3 d-block">There is no student in this class section</span>
+                        <span class="alert alert-danger mt-3 d-block">There is no Staff</span>
                         @endif
 
                         <script src="{{asset('public/admins/plugins/datatables/dataTables.min.js')}}"></script>
                         <script src="{{asset('public/admins/plugins/datatables/dataTables-active.js')}}"></script>
                     </div>
                     @else
-                        <span class="alert alert-danger mt-3 d-block">No Data Found!</span>
+                    <span class="alert alert-danger mt-3 d-block">No Data Found!</span>
                     @endif
                 </div>
             </div>

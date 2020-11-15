@@ -25,12 +25,14 @@
                                     <li>
                                         <a href="#service">Services</a>
                                         <div class="drop_menu">
+
                                             <ul>
                                             @foreach($service as $serv)
                                                 <li><a href="{{url('service/'.$serv->id)}}"><i class="fas fa-circle"></i>{{$serv->name}}</a></li>
                                             @endforeach
 
                                             </ul>
+                                            
                                         </div>
 
                                     </li>

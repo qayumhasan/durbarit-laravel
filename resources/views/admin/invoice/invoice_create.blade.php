@@ -191,14 +191,14 @@
 
                                     <div class="form-group col-md-3">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="discount_type" type="radio" id="inlineCheckbox1" value="option1" />
+                                            <input class="form-check-input" name="discount_type" type="radio" id="inlineCheckbox1" value="1" />
                                             <label class="form-check-label" for="inlineCheckbox1"> % </label>
                                             @error('discount_type')
                                                 <small class="text-danger">{{$message}}</small>
                                             @enderror
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="discount_type" id="inlineCheckbox2" value="option2" />
+                                            <input class="form-check-input" type="radio" name="discount_type" id="inlineCheckbox2" value="2" />
                                             <label class="form-check-label" for="inlineCheckbox2">Fixed</label>
                                             @error('discount_type')
                                                 <small class="text-danger">{{$message}}</small>
@@ -242,7 +242,7 @@
                                             <option selected disabled>Choose A Product...</option>
                                                 @foreach($products as $row)
                                                 
-                                                <option value="{{$row->id}}">{{$row->product_name}}</option>
+                                                <option value="{{$row->id}}">{{$row->name}}</option>
                                                 @endforeach
                                             </select>
                                             @error('option')
@@ -291,31 +291,27 @@
                         <div class="invo_tab">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Note</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Signature</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Officia perferendis perspiciatis animi dicta sequi
-                                    blanditiis sint, cumque neque. Rem, pariatur!
+                                    <textarea rows="5" class="form-control" name="customar_note"></textarea>
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    Facere ipsa possimus incidunt doloremque beatae quo quae
-                                    molestiae consequatur id necessitatibus.
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Persone Name</label>
+                                    <input type="text" class="form-control-file" name="persone_name" id="exampleFormControlFile1">
                                 </div>
-                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Quisquam at quod autem iure alias fugit quos repellat beatae
-                                    vero pariatur.
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Company Name</label>
+                                    <input type="text" class="form-control-file" name="company_name" id="exampleFormControlFile1">
                                 </div>
+                                </div>
+
                             </div>
                         </div>
                     

@@ -75,7 +75,8 @@
 	                          <span class="menu-text">Invoice</span>
 	                      </a>
 	                        <ul class="dashboard-menu">
-	                          <li><a href="{{route('admin.invoice.project.category.index')}}">Project Category</a></li>
+	                          <li><a href="{{route('admin.invoice.product.index')}}">Invoice Product</a></li>
+	                          <li><a href="{{route('admin.invoice.project.category.index')}}">Category</a></li>
                             <li><a href="{{route('admin.invoice.create')}}">Invoice Create</a></li>
                             <li><a href="{{route('admin.invoice.list')}}">Invoice List</a></li>
                             <li><a href="{{route('admin.invoice.setting')}}">Invoice Setting</a></li>

@@ -89,6 +89,8 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Resources\\ProductCollection' => $baseDir . '/app/Http/Resources/ProductCollection.php',
     'App\\Http\\Resources\\ServiceResources' => $baseDir . '/app/Http/Resources/ServiceResources.php',
+    'App\\InvoiceProduct' => $baseDir . '/app/InvoiceProduct.php',
+    'App\\InvoiceSetting' => $baseDir . '/app/InvoiceSetting.php',
     'App\\Logo' => $baseDir . '/app/Logo.php',
     'App\\Notifications\\sendEmail' => $baseDir . '/app/Notifications/sendEmail.php',
     'App\\Page' => $baseDir . '/app/Page.php',

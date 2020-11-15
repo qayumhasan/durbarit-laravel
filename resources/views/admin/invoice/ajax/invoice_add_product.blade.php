@@ -8,7 +8,7 @@
         <option selected disabled>Choose A Product...</option>
             @foreach($products as $row)
                 
-                <option value="{{$row->id}}">{{$row->product_name}}</option>
+                <option value="{{$row->id}}">{{$row->name}}</option>
             @endforeach
         </select>
     </td>

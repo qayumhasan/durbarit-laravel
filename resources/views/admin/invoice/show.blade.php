@@ -11,12 +11,8 @@
     <div class="col-sm-12">
         <div class="invoice_box">
             <div class="row">
-                <div class="col-sm-6 text-left">
-                    <div class="in_logo">
-                        <img src="assets/images/logo.png" alt="no-logo">
-                    </div>
-                </div>
-                <div class="col-sm-6 text-right">
+                
+                <div class="col-sm-6">
                     <div class="in_head">
                         <h4>Invoice</h4>
                     </div>
@@ -121,19 +117,33 @@
                             </tbody>
                         </table>
                         <table class="table">
+                        @php
+                        $countdata = count(json_decode($invoice->totalprice));
+
+                        $total = 0;
+                        for($i =0; $i < $countdata; $i ++){
+                            $arr1 =(int) json_decode($invoice->totalprice)[$i];
+                            
+                            $total = $total + $arr1;
+                        }
+
+                           
+                        @endphp
 
                             <tbody>
                                 <tr class="in_bottom">
 
                                     <td>
-                                        <h5><span>Subtotal:</span> $ 50000</h5>
+                                        <h5><span>Subtotal:</span> $ {{$total}}</h5>
                                     </td>
                                 </tr>
 
                                 <tr class="in_bottom">
 
+                                
+                      
                                     <td>
-                                        <h5><span>Total:</span> $ 50000</h5>
+                                        <h5><span>Total:</span> $ {{$total}}</h5>
                                     </td>
                                 </tr>
                             </tbody>
@@ -146,26 +156,7 @@
         </div>
     </div>
 </div>
-<div class="nb">
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <div class="nb_m">
-                <span><b>NOTE:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Veritatis, aspernatur.</span>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="nb_button">
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <div class="nb_m">
-                <a href="#">Print</a>
-                <a href="#">Download</a>
-            </div>
-        </div>
-    </div>
-</div>
+
 <style>
     .invoice_box {
         width: 100%;

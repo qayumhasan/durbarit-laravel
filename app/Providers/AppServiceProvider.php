@@ -8,6 +8,7 @@ use App\Logo;
 use App\partner;
 use App\Social;
 use App\Page;
+use App\ProjectCategory;
 use App\Service;
 
 class AppServiceProvider extends ServiceProvider
@@ -44,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
         $allpage=Page::where('status',1)->get();
         view()->share('allpage',$allpage);
 
-        $service=Service::where('status',1)->get();
+        $service=ProjectCategory::where('status',1)->get();
         view()->share('service',$service);
     }
 }
