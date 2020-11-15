@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\CustomInvoice;
 use App\Http\Controllers\Controller;
+use App\InvoiceProduct;
 use App\InvoiceSetting;
 use App\Product;
 use App\ProjectCategory;
@@ -16,7 +17,7 @@ class InvoiceController extends Controller
     public function create()
     {
         $users = User::select(['id','name'])->get();
-        $products = Product::select('product_name','id')->get();
+        $products = InvoiceProduct::select('name','id')->get();
         $projects = ProjectCategory::select(['id','name'])->get();
         return view('admin.invoice.invoice_create',compact('users','projects','products'));
     }
@@ -24,13 +25,14 @@ class InvoiceController extends Controller
     public function getProduct()
     {
         // return  response("ok");
-        $products = Product::select('product_name','id')->get();
+        $products = InvoiceProduct::select('name','id')->get();
         // return response()->json($products->id);
         return view('admin.invoice.ajax.invoice_add_product',compact('products'));
 
     }
     public function store(Request $request)
     {
+        
         $product_no = $request->product;
         $note = $request->note;
         $quantity = $request->quantity;
@@ -73,6 +75,9 @@ class InvoiceController extends Controller
         $invoice->note = json_encode($note);
         $invoice->quantity = json_encode($quantity);
         $invoice->totalprice = json_encode($totalprice);
+        $invoice->customar_note = $request->customar_note;
+        $invoice->persone_name = $request->persone_name;
+        $invoice->company_name = $request->company_name;
         $invoice->save();
         
         $notification=array(
@@ -117,9 +122,10 @@ class InvoiceController extends Controller
 
     public function getSingleProduct($id)
     {
-        $product = Product::findOrFail($id);
+        $product = InvoiceProduct::findOrFail($id);
+        
         if($product){
-            $price = $product->reqular_price;
+            $price = $product->price;
             return response()->json($price);
         }
     }

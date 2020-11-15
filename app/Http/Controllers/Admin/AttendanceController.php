@@ -43,10 +43,23 @@ class AttendanceController extends Controller
 
     public function store(Request $request)
     {
+        $checkatt=Attendance::where('month',date('F'))->where('year',date('Y'))->where('date',date('d-m-Y'))->first();
+        if($checkatt){
+            $notification=array(
+                'messege'=>' You already Take Todays attendance.',
+                'alert-type'=>'warning'
+                 );
+             return redirect()->back()->with($notification);
+        }
         
 
         if ($request->attendance == NULL) {
-            return \response()->json(['errorMsg' => 'You did not check any Empaloye\'s attendance status.']);
+            $notification=array(
+                'messege'=>' You did not check any Empaloye\'s attendance status.',
+                'alert-type'=>'warning'
+                 );
+             return redirect()->back()->with($notification);
+            
         }
 
         
@@ -57,6 +70,8 @@ class AttendanceController extends Controller
 
         foreach ($request->attendance as $emapoly_id => $attendance_status) {
 
+            $staff = StaffDirectory::findOrFail($emapoly_id);
+
             
             $addCurrentDayAttendance = new Attendance();
 
@@ -66,94 +81,23 @@ class AttendanceController extends Controller
             $addCurrentDayAttendance->date = date('d-m-Y');
             $addCurrentDayAttendance->attendance = $attendance_status;
             $addCurrentDayAttendance->note = $notes[$index] ? $notes[$index] : NULL;
+            if($staff){
+                $addCurrentDayAttendance->role =$staff->role;
+                $addCurrentDayAttendance->department =$staff->department_id;
+                $addCurrentDayAttendance->designation =$staff->designation_id;
+            }
             $addCurrentDayAttendance->save();
             $index++;
         }
 
         
-        return \response()->json(['successMsg' => 'Successfully Current day attendance has been taken.']);
-
-    //     // return $request;
-    //     // return Carbon::now()->toDateString();
-    //     // return date('F');
-    //     // return date('Y');
-
         
-        
+        $notification=array(
+            'messege'=>' Successfully Current day attendance has been taken..',
+            'alert-type'=>'success'
+             );
+         return redirect()->back()->with($notification);
 
-        
-
-        
-    // $checkatt=Attendance::where('month',date('F'))->where('year',date('Y'))->first();
-    // if($checkatt){
-        
-    //     foreach(json_decode($checkatt->attendance) as $key=> &$row){
-
-    //     }
-        
-
-
-    // }else{
-       
-
-    //     $attents = array();
-    //     foreach($request->attendance as $key=>$row){
-           
-    //         $item['1']=date('d') == 1?$row:0;
-    //         $item['2']=date('d') == 2?$row:0;
-    //         $item['3']=date('d') == 3?$row:0;
-    //         $item['4']=date('d') == 4?$row:0;
-    //         $item['5']=date('d') == 5?$row:0;
-    //         $item['6']=date('d') == 6?$row:0;
-    //         $item['7']=date('d') == 7?$row:0;
-    //         $item['8']=date('d') == 8?$row:0;
-    //         $item['9']=date('d') == 9?$row:0;
-    //         $item['10']=date('d') == 10?$row:0;
-    //         $item['11']=date('d') == 11?$row:0;
-    //         $item['12']=date('d') == 12?$row:0;
-    //         $item['13']=date('d') == 13?$row:0;
-    //         $item['14']=date('d') ==14?$row:0;
-    //         $item['15']=date('d') ==15?$row:0;
-    //         $item['16']=date('d') == 16?$row:0;
-    //         $item['17']=date('d') == 17?$row:0;
-    //         $item['18']=date('d') == 18?$row:0;
-    //         $item['19']=date('d') == 19?$row:0;
-    //         $item['20']=date('d') == 20?$row:0;
-    //         $item['21']=date('d') == 21?$row:0;
-    //         $item['22']=date('d') == 22?$row:0;
-    //         $item['23']=date('d') == 23?$row:0;
-    //         $item['24']=date('d') == 24?$row:0;
-    //         $item['25']=date('d') == 25?$row:0;
-    //         $item['26']=date('d') == 26?$row:0;
-    //         $item['27']=date('d') == 27?$row:0;
-    //         $item['28']=date('d') == 28?$row:0;
-    //         $item['29']=date('d') == 29?$row:0;
-    //         $item['30']=date('d') == 30?$row:0;
-    //         $item['31']=date('d') == 31?$row:0;
-    //         array_push($attents,$item);
-    //     }
-
-    //     $index = 0;
-    //     foreach($request->attendance as $key=>$row){
-    //         $att = new Attendance();
-    //         $att->month = date('F');
-    //         $att->year = date('Y');
-    //         $att->attendance = json_encode($attents[$index]);
-    //          if($row=='present'){
-    //             $att->present = 1;
-    //         }elseif($row=='absent'){
-    //             $att->absent = 1;
-    //         }elseif($row=='late'){
-    //             $att->late = 1;
-    //         }
-
-    //         $att->staff_id = $key;
-    //         $att->save();
-    //         $index ++;
-    //     }
-        
-    // }
-    // return 'ok';
         
     }
 
@@ -163,8 +107,21 @@ class AttendanceController extends Controller
     public function reportSearch(Request $request)
     {
         
+        $request->validate([
+            'role' => 'required',
+            'department' => 'required',
+            'month' => 'required',
+            'year' => 'required',
+        ]);
         
-        
+        $checkatt=Attendance::where('month',$request->month)->where('year',$request->year)->first(); 
+        if(!$checkatt){
+            $notification=array(
+                'messege'=>' No Data Found Of your selected Month and Year.',
+                'alert-type'=>'success'
+                 );
+             return redirect()->back()->with($notification);
+        }
         $staffs = StaffDirectory::where('role',$request->role)->where('department_id',$request->department)->get();
         $roles = StaffRole::all();
         $department = Department::all();

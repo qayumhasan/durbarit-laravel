@@ -23,6 +23,7 @@ use App\ContactMessage;
 use App\Subscriber;
 use App\Whychoseus;
 use App\Apply;
+use App\ProjectCategory;
 use App\Video;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -130,7 +131,7 @@ class FrontendController extends ApiController
         }
         public function servicepage($id){
             //return $id;
-            $serviclle=Service::where('id',$id)->first();
+            $serviclle=ProjectCategory::where('id',$id)->first();
             return view('frontend.service.servicepage',compact('serviclle'));
         }
 

@@ -184,6 +184,17 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::get('/delete/{id}','TeamController@delete')->name('admin.team.delete');
   });
 
+
+  Route::prefix('product')->group(function(){
+    Route::get('/','InvoieProductController@index')->name('admin.invoice.product.index');
+    
+    Route::post('/create','InvoieProductController@store')->name('admin.invoice.product.store');
+    Route::get('/invoice/edit/{id}','InvoieProductController@edit');
+    Route::post('/update','InvoieProductController@update')->name('admin.invoice.product.update');
+    
+    Route::get('/delete/{id}','InvoieProductController@delete')->name('admin.invoice.product.delete');
+  });
+
   Route::prefix('page')->group(function(){
     Route::get('/','PageController@index')->name('admin.page.index');
     Route::get('/create','PageController@create')->name('admin.page.create');
