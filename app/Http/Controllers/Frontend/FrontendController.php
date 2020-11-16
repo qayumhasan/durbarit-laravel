@@ -23,6 +23,7 @@ use App\ContactMessage;
 use App\Subscriber;
 use App\Whychoseus;
 use App\Apply;
+use App\InvoiceProduct;
 use App\ProjectCategory;
 use App\Video;
 use Carbon\Carbon;
@@ -38,7 +39,8 @@ class FrontendController extends ApiController
             $projects = Project::all();
             $categores = Category::all();
             $video = Video::findOrFail(1);
-            return view('frontend.home.index',compact('slider','aboutus','whyschochus','teatimonial','categores','projects','video'));
+            $services = Service::all();
+            return view('frontend.home.index',compact('slider','aboutus','whyschochus','teatimonial','categores','projects','video','services'));
         }
         public function product(){
             $product=Product::where('status',1)->latest()->get();
@@ -131,8 +133,8 @@ class FrontendController extends ApiController
         }
         public function servicepage($id){
             //return $id;
-            $serviclle=ProjectCategory::where('id',$id)->first();
-            return view('frontend.service.servicepage',compact('serviclle'));
+            $services=InvoiceProduct::where('categores_id',$id)->get();
+            return view('frontend.service.servicepage',compact('services'));
         }
 
         public function subcrive(Request $request){

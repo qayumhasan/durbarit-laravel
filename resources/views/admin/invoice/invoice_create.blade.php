@@ -130,7 +130,11 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Invoice No</label>
-                                            <input type="text" name="invoice_no" class="form-control" placeholder="Invoice No" />
+                                            @php
+                                            $id =rand(1111,9999);
+                                            @endphp
+                                            <input type="text" disabled class="form-control" value="{{$id}}" placeholder="Invoice No" />
+                                            <input type="hidden" name="invoice_no" class="form-control" value="{{$id}}" placeholder="Invoice No" />
                                             @error('invoice_no')
                                                 <small class="text-danger">{{$message}}</small>
                                             @enderror
@@ -453,7 +457,6 @@
 
 
     function quentitycount(){
-        
         var price = document.getElementById('price');
         var totalPrice = document.getElementById('totalprice');
         var qty = document.getElementById('quantity');
@@ -481,6 +484,8 @@
         });
     }
 </script>
+
+
 
 
 

@@ -82,7 +82,7 @@
                 <div class="col-sm-12 m-0">
                     <div class="tab_list_part">
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                        @foreach($service as $key => $serv)
+                        @foreach($services as $key => $serv)
                             <li class="nav-item" style="margin-bottom: 20px;">
                                 <a @if($key==0) class="nav-link active" @else class="nav-link" @endif id="pills-home-tab" data-toggle="pill" href="#pills-content{{++$key}}"
                                     role="tab" aria-selected="true">
@@ -104,7 +104,7 @@
                 <div class="col-sm-12">
                     <div class="tab-content" id="pills-tabContent">
 
-                    @foreach($service as $key => $serv)
+                    @foreach($services as $key => $serv)
                         <div @if($key==0)  class="tab-pane fade show active" @else class="tab-pane fade show" @endif id="pills-content{{++$key}}" role="tabpanel">
                             <div class="row">
                                 <div class="col-sm-4">

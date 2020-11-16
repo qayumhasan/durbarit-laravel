@@ -6,6 +6,7 @@ use App\AddToCart;
 use App\Billing;
 use App\Collection;
 use App\Http\Controllers\Controller;
+use App\InvoiceProduct;
 use App\Product;
 use Illuminate\Http\Request;
 use DB;
@@ -54,11 +55,52 @@ class AddToCartController extends Controller
         ]);
      }
 
+     public function serviceAddToCart(Request $request)
+     {
+        $productdetails =InvoiceProduct::findOrFail($request->product_id);
+        $cart =AddToCart::where('product_id',$request->product_id)->first();
+ 
+         $product=[
+             'name'=>$productdetails->name,
+             'image'=>$productdetails->image,
+             'owner'=>'DurbarIt',
+            'demourl'=>'NULL',
+             'reqular_price'=>$productdetails->price,
+             'premium_price'=>0,
+         ];
+ 
+         if($cart){
+             $cart->increment('qty');
+         }else{
+             AddToCart::create([
+                 'user_ip'=>\Request::ip(),
+                 'product_id'=>$request->product_id,
+                 'package_id'=>$request->package_id,
+                 'product'=>json_encode($product),
+                 'extra_price'=>$request->extra_price,
+
+             ]);
+         }
+ 
+       
+ 
+         $cartcount =AddToCart::where('user_ip',\Request::ip())->get();
+         $cartcount = $cartcount->sum('qty');
+ 
+         return response()->json([
+             'data'=>'Product Add Successfully!',
+             'count'=>$cartcount
+         ]);
+     }
+
      public function showCart()
      {
          
         $cartcount =AddToCart::where('user_ip',\Request::ip())->simplePaginate(10);
         
+     
+
+      
         if($cartcount->count() == 0){
             $notification = array(
                 'messege' => 'Please!Add Some Product😄😄',
@@ -67,15 +109,29 @@ class AddToCartController extends Controller
             return Redirect()->back()->with($notification);
         }
         
-        $total = 0;
-        foreach($cartcount as $row){
-            if($row->package_id == 1){
-                $total = $total + $row->product->reqular_price + $row->extra_price;
+       
+
+        $totalcount =$cartcount->map(function($value){
+            if($value->package_id == 1){
+                return ($value->product->reqular_price + $value->extra_price) * $value->qty;
+                
+            }elseif($value->package_id == 2){
+                return ($value->product->premium_price + $value->extra_price) * $value->qty;
             }else{
-                $total = $total + $row->product->premium_price + $row->extra_price;
+                return $value->product->reqular_price * $value->qty;
             }
             
-        }
+          });
+
+          
+
+          $total = 0;
+          foreach($totalcount as $row){
+              $total = $total + $row;
+          }
+          
+
+
         
         return view('frontend.shopping.shopping',compact('cartcount','total'));   
      }
@@ -99,15 +155,26 @@ class AddToCartController extends Controller
             return Redirect('/')->with($notification);
         }
         $user = auth()->user();
-        $total = 0;
-        foreach($cartcount as $row){
-            if($row->package_id == 1){
-                $total = $total + $row->product->reqular_price + $row->extra_price;
+
+        $totalcount =$cartcount->map(function($value){
+            if($value->package_id == 1){
+                return ($value->product->reqular_price + $value->extra_price) * $value->qty;
+                
+            }elseif($value->package_id == 2){
+                return ($value->product->premium_price + $value->extra_price) * $value->qty;
             }else{
-                $total = $total + $row->product->premium_price + $row->extra_price;
+                return $value->product->reqular_price * $value->qty;
             }
             
-        }
+          });
+
+          
+
+          $total = 0;
+          foreach($totalcount as $row){
+              $total = $total + $row;
+          }
+          
         
          return view('frontend.shopping.checkout',compact('countries','cartcount','total','user'));
      }
@@ -127,38 +194,70 @@ class AddToCartController extends Controller
         $cartcount =AddToCart::where('user_ip',\Request::ip())->get();
         $total = 0;
         $qty =0;
-        foreach($cartcount as $row){
-            if($row->package_id == 1){
-                $total = $total + $row->product->reqular_price + $row->extra_price;
-            }else{
-                $total = $total + $row->product->premium_price + $row->extra_price;
-            }
-            
+        foreach($cartcount as $row){ 
             $qty = $qty + $row->qty;
         }
+
+
+        $totalcount =$cartcount->map(function($value){
+            if($value->package_id == 1){
+                return ($value->product->reqular_price + $value->extra_price) * $value->qty;
+                
+            }elseif($value->package_id == 2){
+                return ($value->product->premium_price + $value->extra_price) * $value->qty;
+            }else{
+                return $value->product->reqular_price * $value->qty;
+            }
+            
+          });
+
+          
+
+          $total = 0;
+          foreach($totalcount as $row){
+              $total = $total + $row;
+          }
+        
+        
         
         $cartproduct = array();
         foreach($cartcount as $row){
-            
+                
             $item['product_id']=$row->product_id;
             $item['name']=$row->product->name;
             $item['owner']=$row->product->owner;
             $item['demourl']=$row->product->demourl;
-            $item['image']=$row->product->demourl;
+            $item['image']=$row->product->image;
+            
+            
             if($row->package_id == 1){
                 $item['price']=$row->product->reqular_price;
-            }else{
+            }elseif($row->package_id == 2){
                 $item['price']=$row->product->premium_price;
+            }else{
+                $item['price']=$row->product->reqular_price;
             }
+            
             $item['extra_price']=$row->extra_price;
             $item['package_id']=$row->package_id;
             $item['qty']=$row->qty;
+            
+            
 
             array_push($cartproduct, $item);
-            $product = Product::findOrFail($row->product_id);
-            $product->increment('number_of_sale', $row->qty);
-            $product->save();
+
+            if($row->package_id == 1 || $row->package_id == 2){
+                $product = Product::findOrFail($row->product_id);
+                if($product){
+                    $product->increment('number_of_sale', $row->qty);
+                    $product->save();
+                }
+            }
+            
+            
         }
+
+        
         
 
          $billing =Billing::create([
@@ -188,7 +287,7 @@ class AddToCartController extends Controller
             return view('frontend.payment.stripe',compact('billing'));
         }elseif($request->payment_method == 2){
             // $this->sslcommerz($billing);
-            $post_data = array();
+        $post_data = array();
         $post_data['store_id'] = env('SSLCOMMERZ_STORE_ID');
         $post_data['store_passwd'] = env('SSLCOMMERZ_STORE_PASSWORD');
         $post_data['total_amount'] = $billing->total;
@@ -416,11 +515,32 @@ class AddToCartController extends Controller
          
          AddToCart::findOrFail($request->cart_id)->delete();
          $cartcount =AddToCart::where('user_ip',\Request::ip())->get();
+
+         $totalcount =$cartcount->map(function($value){
+            if($value->package_id == 1){
+                return ($value->product->reqular_price + $value->extra_price) * $value->qty;
+                
+            }elseif($value->package_id == 2){
+                return ($value->product->premium_price + $value->extra_price) * $value->qty;
+            }else{
+                return $value->product->reqular_price * $value->qty;
+            }
+            
+          });
+
+          
+
+          $total = 0;
+          foreach($totalcount as $row){
+              $total = $total + $row;
+          }
+
          $cartcount = $cartcount->sum('qty');
 
          return response()->json([
              'data'=>'Product Delete From Cart!',
-             'count'=>$cartcount
+             'count'=>$cartcount,
+             'total'=>$total,
          ]);
 
      }

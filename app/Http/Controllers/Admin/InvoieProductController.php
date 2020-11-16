@@ -58,6 +58,41 @@ class InvoieProductController extends Controller
         return response()->json($product);
     }
 
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'price' => 'required',
+            'details' => 'required',
+            'categores_id' => 'required',
+            
+        ]);
+        $pro = InvoiceProduct::findOrFail($request->id);
+        $pro->name = $request->name;
+        $pro->details = $request->details;
+        $pro->start_date = $request->start_date;
+        $pro->end_date = $request->end_date;
+        $pro->categores_id = $request->categores_id;
+        $pro->price = $request->price;
+        if ($request->hasFile('image')) {
+            unlink(base_path('public/images/invoice_image/'.$pro->image));
+            $product_id =Str::random(6);
+            $product_img = $request->file('image');
+            $imagename = $product_id . '.' . $product_img->getClientOriginalExtension();
+            Image::make($product_img)->resize(600, 400)->save(base_path('public/images/invoice_image/' . $imagename), 50);
+            $pro->image = $imagename;
+        }
+        $pro->save();
+
+        $notification=array(
+            'messege'=>' Invoice Product Updated Successfully.',
+            'alert-type'=>'success'
+             );
+         return redirect()->back()->with($notification);
+    }
+
     public function delete($id)
     {
         $product = InvoiceProduct::findOrFail($id);

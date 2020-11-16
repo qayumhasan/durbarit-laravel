@@ -179,7 +179,7 @@
                         </div>
                         <div class="col-sm-6 ">
                             <div class="cal">
-                                <i class="far fa-calendar-alt"></i> <span>{{$row->start_date}}</span>
+                                <i class="far fa-calendar-alt"></i> <span>{{$row->end_date}}</span>
                             </div>
                         </div>
 
@@ -201,11 +201,15 @@
                 </div>
             </div>
             @endforeach
+
+            
            
         </div>
 
     </div>
 </section>
+
+
 
 <!-- insert modal -->
 
@@ -296,7 +300,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('admin.invoice.product.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('admin.invoice.product.update')}}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group row">
@@ -342,7 +346,7 @@
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Image:</label>
-                        <input type="file" class="form-control" id="image" required name="image">
+                        <input type="file" class="form-control" id="image" name="image">
                     </div>
 
                     <div class="modal-footer">

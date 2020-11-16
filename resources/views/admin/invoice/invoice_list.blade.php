@@ -7,15 +7,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel_title">
-                        <span class="panel_icon"><i class="fas fa-border-all"></i></span><span>All Project Category</span>
+                        <span class="panel_icon"><i class="fas fa-border-all"></i></span><span>All Custom Invoice</span>
                     </div>
                 </div>
-                <div class="col-md-6 text-right">
-                    <div class="panel_title">
-                        
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-plus"></i> <span>Add Category</span></button>
-                    </div>
-                </div>
+                
             </div>
 
         </div>
@@ -55,13 +50,13 @@
                             <td>
 
                                 @if($row->status == 1)
-                                <a href="{{route('admin.invoice.project.category.status',$row->id)}}" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="right" title="active" data-original-title="active"><i class="far fa-thumbs-up"></i></a>
+                                <!-- <a href="{{route('admin.invoice.project.category.status',$row->id)}}" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="right" title="active" data-original-title="active"><i class="far fa-thumbs-up"></i></a> -->
                                 @else
-                                <a href="{{route('admin.invoice.project.category.status',$row->id)}}" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-placement="right" title="active" data-original-title="active"><i class="far fa-thumbs-down"></i></a>
+                                <!-- <a href="{{route('admin.invoice.project.category.status',$row->id)}}" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-placement="right" title="active" data-original-title="active"><i class="far fa-thumbs-down"></i></a> -->
                                 @endif
                                 | <a href="{{route('admin.invoice.project.view',$row->id)}}" class="btn btn-info btn-sm text-white updatemodal"  title="view"><i class="fas fa-eye"></i></a> |
 
-                                <a type="submit" id="delete" onclick="form_submit()" href="{{route('admin.invoice.project.category.delete',$row->id)}}" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-placement="right" title="Delete" data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
+                                <a id="delete" href="{{route('admin.invoice.project.delete',$row->id)}}" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-placement="right" title="Delete" data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
 
                             </td>
                         </tr>

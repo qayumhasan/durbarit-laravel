@@ -116,9 +116,6 @@
                                         <a href="{{url('/contact')}}">Contact Us</a>
                                     </li>
                                   
-                                    <li>
-                                        <a href="{{route('product.cart.page')}}"><i class="fas fa-cart-arrow-down"></i><span id="cartdatacount" data-totalitems="0">@if($cart >0){{$cart}}@endif</span></a>
-                                    </li>
 
                                 </ul>
                             </nav>

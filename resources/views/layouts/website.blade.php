@@ -83,7 +83,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    z-index: 99999999999;
+    z-index: 9;
 }
 .cart-data i {
   font-size: 25px;
