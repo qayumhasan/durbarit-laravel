@@ -52,6 +52,7 @@ class InvoiceController extends Controller
             'unpaid' => 'required',
             'discount' => 'required',
             'product' => 'required',
+            'discount_type' => 'required',
             
         ]);
 
@@ -134,5 +135,15 @@ class InvoiceController extends Controller
     {
         $invoice = CustomInvoice::findOrFail($id);
         return view('admin.invoice.show',compact('invoice'));
+    }
+
+    public function invoiceDelete ($id)
+    {
+        $invoice = CustomInvoice::findOrFail($id);
+        $notification=array(
+            'messege'=>' Invoice Deleted Successfully.',
+            'alert-type'=>'success'
+             );
+         return redirect()->back()->with($notification);
     }
 }

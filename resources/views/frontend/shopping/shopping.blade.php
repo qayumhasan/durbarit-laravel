@@ -37,7 +37,7 @@
                                                         <th scope="col">Product Name</th>
                                                         <th scope="col">Quantity</th>
                                                         <th scope="col">Product Type</th>
-                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Per Item Price</th>
                                                         <th scope="col">Trash</th>
                                                     </tr>
                                                 </thead>
@@ -52,7 +52,11 @@
                                                         <td>{{$loop->iteration}}</td>
                                                         <td>
                                                             <div class="pro_img">
-                                                                <img src="{{asset('public/uploads/product/')}}/{{$row->product->image}}" alt="image">
+                                                                @if($row->package_id == 1 || $row->package_id == 2)
+                                                                    <img src="{{asset('public/uploads/product/')}}/{{$row->product->image}}" alt="image">
+                                                                @else
+                                                                    <img src="{{asset('public/images/invoice_image/')}}/{{$row->product->image}}" alt="image">
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         <td>
@@ -63,13 +67,17 @@
                                                         <td>{{$row->qty}}</td>
                                                         @if($row->package_id == 1)
                                                         <td>Reguler</td>
-                                                        @else
+                                                        @elseif($row->package_id == 2)
                                                         <td>Premium</td>
+                                                        @else
+                                                        <td>Service</td>
                                                         @endif
                                                         @if($row->package_id == 1)
                                                         <td><span class="price_bold"><b>$ {{$row->product->reqular_price}}</b></span></td>
-                                                        @else
+                                                        @elseif($row->package_id == 2)
                                                         <td><span class="price_bold"><b>$ {{$row->product->premium_price}}</b></span></td>
+                                                        @else
+                                                        <td><span class="price_bold"><b>$ {{$row->product->reqular_price}}</b></span></td>
                                                         @endif
                                                         <td><span><button onclick="cartDatadelete(this)" value="{{$row->id}}"><i
                                                                         class="fas fa-trash-alt"></i></button></span></td>
@@ -114,7 +122,7 @@
                                         <div class="right-content">
                                             <div class="total without-coupon" style="font-size: 18px;">
                                                 <span class="title"><b>Total Amount</b></span>
-                                                <span class="total-price"><b>US $ {{$total}}</b></span>
+                                                <span class="total-price"><b id="total_price">US $ {{$total}}</b></span>
                                             </div>
                                             <div class="mt-3">
                                                 <p class="text-info">You have to login before purchase!</p>
@@ -163,12 +171,16 @@
         $.post('{{ route('cart.data.delete') }}', {_token: '{{ csrf_token() }}',cart_id: el.value},
             function(data) {
                 $('#cartdata').html(data);
+                console.log(data);
                 if (data) {
+
                     const cart = document.querySelector('#cart');
                     cart.dataset.totalitems=data.count;
                     document.getElementById("cartdelete"+el.value).style.display = "none";
+                    document.getElementById('total_price').innerHTML ='$'+ data.total;
                     toastr.success(data.data);
                     document.getElementById('cartdatacount').innerHTML = data.count;
+                    
 
                 }
 

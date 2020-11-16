@@ -9,6 +9,10 @@ class Invoice extends Component
 
     public $data="qayum hasan";
     public $newmessage;
+    public function clickelement()
+    {
+        return 'clicked';
+    }
 
     public function render()
     {

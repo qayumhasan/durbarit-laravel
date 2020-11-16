@@ -165,6 +165,7 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
   Route::prefix('invoice')->group(function(){
     Route::get('/','InvoiceController@create')->name('admin.invoice.create');
     Route::get('/view/{id}','InvoiceController@invoiceView')->name('admin.invoice.project.view');
+    Route::get('/delete/{id}','InvoiceController@invoiceDelete')->name('admin.invoice.project.delete');
     Route::post('/store','InvoiceController@store')->name('admin.invoice.store');
     Route::get('/get/product','InvoiceController@getProduct');
     Route::get('/product/value/{id}','InvoiceController@getSingleProduct');
@@ -332,6 +333,7 @@ Route::prefix('customer')->namespace('Frontend')->group(function(){
   Route::post('/register','AuthController@register')->name('customar.register');
   Route::get('/logout','AuthController@logout')->name('customar.logout');
   Route::get('/add/to/cart','AddToCartController@addToCart')->name('product.add.cart');  
+  Route::get('/service/add/to/cart','AddToCartController@serviceAddToCart')->name('service.product.add.cart');  
   Route::get('/product/cart','AddToCartController@showCart')->name('product.cart.page'); 
   Route::get('/checkout','AddToCartController@checkout')->name('customar.checkout'); 
   Route::post('/profile/update','AdminController@profileUpdate')->name('customar.profile.update'); 

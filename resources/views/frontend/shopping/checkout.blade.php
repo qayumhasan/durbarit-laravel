@@ -126,11 +126,13 @@
 
                                     @foreach($cartcount as $row)
                                         <tr>
-                                            <td>{{$row->product->name}}</td>
+                                                <td>{{$row->product->name}}</td>
                                             @if($row->package_id == 1)
-                                            <td class="dlr">{{$row->product->reqular_price}}</td>
+                                                <td class="dlr">{{$row->qty}}<small>×</small>{{$row->product->reqular_price}}</td>
+                                            @elseif($row->package_id == 2)
+                                                <td class="dlr">{{$row->qty}}<small>×</small>{{$row->product->premium_price}}</td>
                                             @else
-                                            <td class="dlr">{{$row->product->premium_price}}</td>
+                                                <td class="dlr">{{$row->qty}}<small>×</small>{{$row->product->reqular_price}}</td>
                                             @endif
                                         </tr>
 

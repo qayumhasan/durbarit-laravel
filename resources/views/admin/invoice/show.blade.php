@@ -88,11 +88,11 @@
 
                                     @foreach(json_decode($invoice->product_id) as$key =>$row))
                                     @php
-                                    $product = App\Product::findOrFail($row);
+                                    $product = App\InvoiceProduct::where('id',$row)->first();
                                     @endphp
-                                    <td>1</td>
-                                    <td>{{$product->product_name}}</td>
-                                    <td>$ {{$product->reqular_price}}</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$product->name??'Deleted'}}</td>
+                                    <td>$ {{$product->price ??'Deleted'}}</td>
 
                                     <td>
                                         <?php
