@@ -9,6 +9,7 @@ use App\partner;
 use App\Social;
 use App\Page;
 use App\ProjectCategory;
+use App\Seo;
 use App\Service;
 
 class AppServiceProvider extends ServiceProvider
@@ -47,5 +48,12 @@ class AppServiceProvider extends ServiceProvider
 
         $service=ProjectCategory::where('status',1)->get();
         view()->share('service',$service);
+
+        $seo=Seo::findOrFail(1);
+        view()->share('seo',$seo);
+
+
+        $seo=Logo::findOrFail(1);
+        view()->share('logo',$logo);
     }
 }

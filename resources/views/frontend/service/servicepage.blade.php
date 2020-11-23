@@ -1,4 +1,5 @@
 @extends('layouts.website')
+@section('title', $category->name.' | '.$seo->meta_title)
 @section('content')
 <style>
     .main_box_logo img {
@@ -163,7 +164,7 @@
             <div class="col-sm-12 text-center">
                 <div class="service_header">
 
-                    <h4>grhgfds</h4>
+                    <h4>{{$category->name}}</h4>
                     <div class="title_border">
                         <span></span>
                     </div>

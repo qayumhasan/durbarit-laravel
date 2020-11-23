@@ -39,7 +39,6 @@
                          <ul class="dashboard-menu">
                            <li><a href="{{route('slider.index')}}">Slider/Banner</a></li>
                            <li><a href="{{route('admin.service.index')}}">Our Services</a></li>
-                           <li><a href="{{route('admin.logo.index')}}">Site Logo</a></li>
                            <li><a href="{{route('admin.video.index')}}">Video Section</a></li>
                            <li><a href="{{route('admin.aboutus.index')}}">About Us</a></li>
                             <li><a href="{{route('admin.project.index')}}">Our Project</a></li>
@@ -75,6 +74,18 @@
                             <li><a href="{{route('admin.invoice.create')}}">Invoice Create</a></li>
                             <li><a href="{{route('admin.invoice.list')}}">Invoice List</a></li>
                             <li><a href="{{route('admin.invoice.setting')}}">Invoice Setting</a></li>
+	                        </ul>
+                    </li>
+
+
+	                  <li class="single-nav-wrapper">
+	                      <a class="has-arrow menu-item" href="#" aria-expanded="false">
+	                        <span class="left-icon"><i class="fas fa-cogs"></i></span>
+	                          <span class="menu-text">Leave Management</span>
+	                      </a>
+	                        <ul class="dashboard-menu">
+                            <li><a href="{{route('admin.leave.index')}}">Apply Leave</a></li>
+                            <li><a href="{{route('admin.leave.type.index')}}">Leave Type</a></li>
 	                        </ul>
                     </li>
 	                 
@@ -128,6 +139,7 @@
 	                          <li><a href="{{route('admin.subscriber.index')}}">Subscriber</a></li>
 	                          <li><a href="{{route('admin.user.index')}}">Users</a></li>
 	                          <li><a href="{{route('admin.sms.setting')}}">Sms Setting</a></li>
+                            <li><a href="{{route('admin.logo.index')}}">Site Logo</a></li>
 
 
 	                        </ul>

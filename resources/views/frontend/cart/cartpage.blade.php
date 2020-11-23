@@ -1,4 +1,5 @@
 @extends('layouts.website')
+@section('title', 'Cart | '.$seo->meta_title)
 @section('content')
 <section id="shop_cart">
         <div class="container">

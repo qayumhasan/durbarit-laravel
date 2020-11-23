@@ -1,4 +1,5 @@
 @extends('layouts.website')
+
 @section('content')
 
 <section id="banner">

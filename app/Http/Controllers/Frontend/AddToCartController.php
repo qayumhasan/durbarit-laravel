@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Frontend;
 use App\AddToCart;
 use App\Billing;
 use App\Collection;
+use App\CustomInvoice;
 use App\Http\Controllers\Controller;
 use App\InvoiceProduct;
 use App\Product;
+use App\SmsModel;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Stripe;
 use PDF;
 
@@ -260,10 +263,11 @@ class AddToCartController extends Controller
         
         
 
+        $orderid =rand(9999,999999);
          $billing =Billing::create([
              'user_id'=>auth()->user()->id,
              'name'=>$request->name,
-             'order_id'=>rand(9999,999999),
+             'order_id'=>$orderid,
              'email'=>$request->email,
              'phone'=>$request->phone,
              'company'=>$request->company,
@@ -277,6 +281,8 @@ class AddToCartController extends Controller
          foreach($cartcount as $row){
              AddToCart::findOrFail($row->id)->delete();
          }
+
+         $this->sendSMS($billing,$orderid);
 
 
         
@@ -382,10 +388,44 @@ class AddToCartController extends Controller
             ); 
             return redirect()->route('customar.dashboard')->with($notification);
         }elseif($request->payment_method == 3){
-            return redirect()->route('paypal.submit');
+            return redirect()->route('paypal.submit',$billing);
         }
          
      }
+
+     
+    public function sendSMS($request,$verify_code){
+
+        
+        $siteUrl = URL::to("/");
+        $sms_text = $request->name . "Your Order ID is:" . $verify_code . ' ' . $siteUrl;
+        $smsinfo =SmsModel::first();
+        $smsurl =$smsinfo->sms_url;
+        $smsname =$smsinfo->sms_username; #durbar2020
+        $smspassword =$smsinfo->sms_password; #12345678
+        
+        $postData = array(
+            'username'=>urlencode($smsname),
+            'password'=>urlencode($smspassword),
+            'sms_content'=>$sms_text,
+            'number'=>urlencode($request->phone),
+            'sms_type'=>1,
+            
+        );
+
+        $ch = curl_init();
+            curl_setopt_array($ch, array(
+            CURLOPT_URL => $smsurl,
+            // CURLOPT_URL => 'http://gosms.xyz/api/v1/sendSms',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $postData,
+            CURLOPT_FOLLOWLOCATION => true
+            ));
+            
+            return $output = curl_exec($ch);
+            
+    }
 
      public function stripePayment(Request $request)
      {
@@ -559,6 +599,13 @@ class AddToCartController extends Controller
      {
          $order = Billing::where('order_id',$order)->where('user_id',auth()->user()->id)->first();
          return view('frontend.shopping.invoice',compact('order'));
+     }
+
+     public function adminInvoiceDetails ($id)
+     {
+         
+         $invoice = CustomInvoice::findOrFail($id);
+         return view('frontend.shopping.invoice_details',compact('invoice'));
      }
      public function invoiceDownload ($order)
      {

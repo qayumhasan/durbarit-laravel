@@ -8,8 +8,10 @@ use App\InvoiceProduct;
 use App\InvoiceSetting;
 use App\Product;
 use App\ProjectCategory;
+use App\SmsModel;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class InvoiceController extends Controller
 {
@@ -81,11 +83,47 @@ class InvoiceController extends Controller
         $invoice->company_name = $request->company_name;
         $invoice->save();
         
+        $user = User::findOrFail($request->customer);
+        $this->sendSMS($user,$request->invoice_no);
         $notification=array(
             'messege'=>' Invoice Created Successfully.',
             'alert-type'=>'success'
              );
          return redirect()->back()->with($notification);
+    }
+
+
+    public function sendSMS($request,$verify_code){
+        
+        
+        $siteUrl = URL::to("/");
+        $sms_text = $request->name . " an Invoice Created By Admin and  Order ID is:" . $verify_code . ' ' . $siteUrl;
+        $smsinfo =SmsModel::first();
+        $smsurl =$smsinfo->sms_url;
+        $smsname =$smsinfo->sms_username; #durbar2020
+        $smspassword =$smsinfo->sms_password; #12345678
+        
+        $postData = array(
+            'username'=>urlencode($smsname),
+            'password'=>urlencode($smspassword),
+            'sms_content'=>$sms_text,
+            'number'=>urlencode($request->phone),
+            'sms_type'=>1,
+            
+        );
+
+        $ch = curl_init();
+            curl_setopt_array($ch, array(
+            CURLOPT_URL => $smsurl,
+            // CURLOPT_URL => 'http://gosms.xyz/api/v1/sendSms',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $postData,
+            CURLOPT_FOLLOWLOCATION => true
+            ));
+            
+            return $output = curl_exec($ch);
+            
     }
 
 

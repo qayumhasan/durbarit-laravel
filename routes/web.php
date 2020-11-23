@@ -35,7 +35,29 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::get('/status/{id}','ServiceController@status')->name('admin.service.status');
     Route::get('/delete/{id}','ServiceController@delete')->name('admin.service.delete');
   });
+
+
+  Route::prefix('leave')->group(function(){
+    Route::get('/','LeaveController@index')->name('admin.leave.index');
+
+    Route::post('/create','LeaveController@store')->name('admin.leave.store');
+    Route::get('/edit/{id}','LeaveController@edit')->name('admin.leave.edit');
+    Route::post('/update','LeaveController@update')->name('admin.leave.update');
+    Route::get('/status/{id}','LeaveController@status')->name('admin.leave.status');
+    Route::get('/delete/{id}','LeaveController@delete')->name('admin.leave.delete');
+  });
+  Route::prefix('leave/type')->group(function(){
+    Route::get('/','LeaveController@leaveType')->name('admin.leave.type.index');
+
+    Route::post('/create','LeaveController@leaveTypeStore')->name('admin.leave.type.store');
+    Route::get('/edit/{id}','LeaveController@edit')->name('admin.leave.type.edit');
+    Route::post('/update','LeaveController@typeUpdate')->name('admin.leave.type.update');
+    
+    Route::get('/delete/{id}','LeaveController@deleteType')->name('admin.leave.type.delete');
+  });
   
+
+
   Route::prefix('video')->group(function(){
     Route::get('/section','VideoController@index')->name('admin.video.index');
     Route::post('/update','VideoController@update')->name('admin.sms.update');
@@ -358,17 +380,21 @@ Route::prefix('customer')->middleware('auth:web')->namespace('Frontend')->group(
   Route::post('/checkout','AddToCartController@customarBilling')->name('customar.billing');
   Route::post('/stripe','AddToCartController@stripePayment')->name('payment.stripe.submit');
   Route::get('/invoice/details/{orderid}','AddToCartController@invoiceDetails')->name('customar.invoice.details');
+  Route::get('/admin/invoice/details/{orderid}','AddToCartController@adminInvoiceDetails')->name('admin.customar.invoice.details');
   Route::get('/invoice/download/{orderid}','AddToCartController@invoiceDownload')->name('customar.invoice.download');
   
-  
-
 });
 
 
 Route::get('/product/collection/{id}','Frontend\AddToCartController@addToCollect');
 
 
-Route::get('/paypal','Frontend\PaymentController@paywithpaypal')->name('paypal.submit');
+
+Route::get('/paypal/{billing}','Frontend\PaymentController@paywithpaypal')->name('paypal.submit');
+
+Route::get('/paypal/payment/success','Frontend\PaymentController@paypalsucess');
+
+
 Route::get('/','Frontend\FrontendController@index');
 Route::get('/product','Frontend\FrontendController@product');
 Route::get('/product/details/{id}','Frontend\FrontendController@productdetails');
@@ -387,8 +413,11 @@ Route::post('/contact/insert','Frontend\FrontendController@contactinsert');
 // cart controller
 Route::get('/cart','Frontend\CartController@cart');
 
+Route::get('payment', 'Admin\PayPalController@payment')->name('payment');
+Route::get('cancel', 'Admin\PayPalController@cancel')->name('payment.cancel');
+Route::get('payment/success', 'Admin\PayPalController@success')->name('payment.success');
 
 Route::get('/test',function(){
-  return view('test');
+  return view('welcome');
 });
 

@@ -15,32 +15,61 @@ class PaymentController extends Controller
 
     protected function cartData($invoiceId)
     {
+        
+    
+    }
+
+
+    public function paywithpaypal($billing)
+    {
+
         $data = [];
-        $data['items'] = [];
-        // $invoiceId = uniqid();
-        // $userid =  \Request::getClientIp(true);
-        // $usercartdatas = Cart::session($userid)->getContent();
+        
+       
         
         $userid = Auth::user()->id;
-        $usercartdatas = Billing::where('user_id', $userid)->orderBy('id', 'DESC')->first();
+        $usercartdatas = Billing::where('user_id',$userid)->where('id',$billing)->first();
+        if(!$usercartdatas){
+            $notification=array(
+                'messege'=>' Data Not Found!.',
+                'alert-type'=>'success'
+                 );
+             return redirect()->back()->with($notification);
+        }
+        $data['items'][] = [
+            'name' => 'ItSolutionStuff.com',
+            'price' => $usercartdatas->total,
+            'desc'  => 'Durbar IT Payment',
+            'qty' => $usercartdatas->qty,
+        ];
         $cartid = $usercartdatas->order_id;
         $data['invoice_id'] = $usercartdatas->order_id;
         $data['invoice_description'] = $usercartdatas->order_id;
         $data['return_url'] = url('/payment/success');
         $data['cancel_url'] = url('/text');
         $data['total'] = 150;
-        return $data;
+        
+        $provider = new ExpressCheckout;
+  
+        
+        $response = $provider->setExpressCheckout($data);
+  
+        
+        $response = $provider->setExpressCheckout($data, true);
+        
+  
+        // return redirect($response['paypal_link']);
+        return redirect('/paypal/payment/success');
+
     }
 
 
-    public function paywithpaypal()
+    public function paypalsucess()
     {
-        $provider = new ExpressCheckout;
-        $invoiceId = uniqid();
-         $data = $this->cartData($invoiceId);
-        //$provider->setExpressCheckout($data);
-        $response = $provider->setExpressCheckout($data);
-        return $response;
-        return redirect($response['paypal_link']);
+        $notification = array(
+            'messege' => 'Your Order Is Completed!Check Your Invoice!',
+            'alert-type' => 'error'
+        ); 
+        return view('frontend.payment.success')->with($notification);
     }
 }
