@@ -1,4 +1,5 @@
 @extends('layouts.website')
+@section('title', 'Login & Registation | '.$seo->meta_title)
 @section('content')
 
     <!--- team part start -->

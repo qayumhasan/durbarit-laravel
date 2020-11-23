@@ -1,4 +1,5 @@
 @extends('layouts.website')
+@section('title', 'Contact | '.$seo->meta_title)
 @section('content')
     <!--- contact part start -->
     <section id="contact">

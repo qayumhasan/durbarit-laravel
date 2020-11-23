@@ -1,4 +1,4 @@
-<!-- <div> -->
+
 @extends('admin.master')
 @section('contents')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -260,7 +260,7 @@
                                         </td>
 
                                         <td>
-                                            <input type="number" onkeyup="quentitycount()" name="quantity[]" class="form-control" id="quantity" placeholder="Quantity">
+                                            <input type="number" onkeyup="quentitycount()" onkeypress="totalcount()" name="quantity[]" class="form-control" id="quantity" placeholder="Quantity">
                                         </td>
 
                                         <td>
@@ -425,6 +425,12 @@
 </script>  -->
 
 <script>
+
+function totalcount(el){
+    var counttotal =$('td[name^="totalprice"]' );
+    // var counttotal = document.getElementsByName("totalprice");
+    console.log(counttotal);
+}
     function getProduct() {
 
         $.ajaxSetup({

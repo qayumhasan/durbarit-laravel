@@ -3,9 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Durbar-IT</title>
-    <link rel="icon" href="{{asset('public/frontend')}}/images/fav.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="author" content="{{$seo->meta_author}}">
+    <title>@yield('title',$seo->meta_title)</title>
+    <meta name="keywords" content="{{$seo->meta_keyword}}">
+    <meta name="description" content="{{$seo->meta_description}}">
+    <link rel="canonical" href="{{url()->current()}}"/>
+    @yield('meta')
+    
+
+    
+    <link rel="icon" href="{{asset('public/images/logo/')}}/{{$logo->favicon}}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"rel="stylesheet">
     <link rel="stylesheet" href="{{asset('public/frontend')}}/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>

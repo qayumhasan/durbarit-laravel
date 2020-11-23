@@ -133,8 +133,9 @@ class FrontendController extends ApiController
         }
         public function servicepage($id){
             //return $id;
+            $category = ProjectCategory::findOrFail($id);
             $services=InvoiceProduct::where('categores_id',$id)->get();
-            return view('frontend.service.servicepage',compact('services'));
+            return view('frontend.service.servicepage',compact('services','category'));
         }
 
         public function subcrive(Request $request){
@@ -200,6 +201,14 @@ class FrontendController extends ApiController
 
 
         }
+
+
+        public function adminCreatedInvoice()
+        {
+            
+        }
+
+
 
 
 

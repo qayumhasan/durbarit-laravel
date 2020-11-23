@@ -1,4 +1,5 @@
 @extends('layouts.website')
+@section('title', 'Carrer Apply | '.$seo->meta_title)
 @section('content')
 <section id="career_box">
         <div class="container">

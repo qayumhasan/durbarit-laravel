@@ -1,4 +1,5 @@
 @extends('layouts.website')
+@section('title', 'Product | '.$seo->meta_title)
 @section('content')
 
 <!--- product part start -->

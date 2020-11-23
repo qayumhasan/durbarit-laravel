@@ -1,4 +1,5 @@
 @extends('layouts.website')
+@section('title', 'Stripe | '.$seo->meta_title)
 @section('content')
 
 <style>

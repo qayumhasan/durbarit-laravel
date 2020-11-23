@@ -1,5 +1,15 @@
 @extends('layouts.website')
+@section('title', $product->product_name)
 @section('content')
+@section('meta')
+   <meta property="og:url" content="{{URL::current()}}"/>
+   <meta property="og:type" content="website"/>
+   <meta property="og:title" content="{{$product->product_name}}"/>
+   <meta property="og:description" content="{{$product->meta_description}}"/>
+   <meta property="og:tag" content="{{$product->meta_tag}}"/>
+   <meta property="og:image" content="{{asset('public/uploads/products/thumbnail_img/'.$product->thumbnail_img)}}" />
+@endsection
+
 <section id="product_detail">
     <div class="container wow animate__animated animate__fadeIn animate__delay-1s">
         <div class="row">

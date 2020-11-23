@@ -1,46 +1,47 @@
 @extends('layouts.website')
+@section('title',$user->name. ' Dashboard | '.$seo->meta_title)
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
-     .icon {
-                                                                        position: relative;
-                                                                    }
+    .icon {
+        position: relative;
+    }
 
-                                                                    .action_list ul li {
-                                                                        list-style: none;
-                                                                        display: block;
-                                                                        margin-bottom: 10px;
-                                                                    }
+    .action_list ul li {
+        list-style: none;
+        display: block;
+        margin-bottom: 10px;
+    }
 
-                                                                    .action_list {
-                                                                        background-color: #000;
-                                                                        color: #fff;
-                                                                        text-align: center;
-                                                                        padding: 10px;
-                                                                        position: absolute;
-                                                                        width: 150px;
-                                                                        right: 0px;
-                                                                    }
+    .action_list {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        position: absolute;
+        width: 150px;
+        right: 0px;
+    }
 
-                                                                    .action_list {
-                                                                        background-color: #000;
-                                                                        color: #fff;
-                                                                        border-radius: 5px;
-                                                                        text-align: center;
+    .action_list {
+        background-color: #000;
+        color: #fff;
+        border-radius: 5px;
+        text-align: center;
 
-                                                                        padding: 10px;
-                                                                        position: absolute;
-                                                                        width: 150px;
-                                                                        right: 0px;
-                                                                    }
+        padding: 10px;
+        position: absolute;
+        width: 150px;
+        right: 0px;
+    }
 
-                                                                    button.icon {
-                                                                        background: none;
-                                                                        border-style: none;
-                                                                        /* text-align: right; */
-                                                                        position: relative;
-                                                                        left: 57px;
-                                                                    }
+    button.icon {
+        background: none;
+        border-style: none;
+        /* text-align: right; */
+        position: relative;
+        left: 57px;
+    }
 </style>
 <!--- user part start -->
 <section id="user">
@@ -73,6 +74,7 @@
                         Add Fund</a> -->
 
                     <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-invoice" role="tab" aria-selected="false"><i class="fas fa-receipt"></i> My Invoice</a>
+                    <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-admin-invoice" role="tab" aria-selected="false"><i class="fas fa-receipt"></i> Admin Invoice</a>
 
                     <!-- <a class="nav-link" id="v-pills-transaction-tab" data-toggle="pill" href="#v-pills-transaction" role="tab" aria-selected="false"><i class="fab fa-typo3"></i> Transaction</a> -->
 
@@ -278,43 +280,43 @@
                                     <h3 style="font-size: 22px;text-transform: capitalize;font-weight: 600;">My
                                         Favourite</h3>
                                     <div class="tran_box">
-                                    <div class="tran_box">
+                                        <div class="tran_box">
 
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">SL</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Product Type</th>
-            <!-- <th scope="col">Action</th> -->
+                                            <table class="table">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">SL</th>
+                                                        <th scope="col">Product Name</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Product Type</th>
+                                                        <!-- <th scope="col">Action</th> -->
 
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($favourit as $row)
-        
-        <tr>
-            <th scope="row">{{$loop->iteration}}</th>
-            <td><a href="{{url('/product/details/'.$row->id)}}"> {{$row->product->product_name}} </a></td>
-            <td>{{$row->product->reqular_price}}</td>
-            <td>{{$row->product->category_id}}</td>
-            
-                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($favourit as $row)
 
-        </tr>
-
-        
-        @endforeach
-    </tbody>
-</table>
+                                                    <tr>
+                                                        <th scope="row">{{$loop->iteration}}</th>
+                                                        <td><a href="{{url('/product/details/'.$row->id)}}"> {{$row->product->product_name}} </a></td>
+                                                        <td>{{$row->product->reqular_price}}</td>
+                                                        <td>{{$row->product->category_id}}</td>
 
 
 
-<h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">No
-    Transaction Yet!</h4>
-</div>
+                                                    </tr>
+
+
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
+
+
+                                            <h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">No
+                                                Transaction Yet!</h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -449,29 +451,29 @@
 
                                                     <td><a class="icon" id="icon{{$row->id}}">
 
-                                                                    <i class="fas fa-ellipsis-v"></i>
-                                                                </a>
-                                                                <div id="action_list{{$row->id}}" class="action_list" style="display: none;">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a  href="{{route('customar.invoice.details',$row->order_id)}}">View</a>
-                                                                        </li>
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </a>
+                                                        <div id="action_list{{$row->id}}" class="action_list" style="display: none;">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="{{route('customar.invoice.details',$row->order_id)}}">View</a>
+                                                                </li>
 
-                                                                    </ul>
-                                                                </div>
-                                                                
+                                                            </ul>
+                                                        </div>
+
 
                                                 </tr>
 
                                                 <script>
-                                                      $(document).ready(function(){
-                                                        $("#icon{{$row->id}}").click(function(){
+                                                    $(document).ready(function() {
+                                                        $("#icon{{$row->id}}").click(function() {
                                                             $(".action_list").fadeOut();
                                                             $("#action_list{{$row->id}}").fadeToggle();
-                                                            
+
 
                                                         });
-                                                        });
+                                                    });
                                                 </script>
                                                 @endforeach
                                             </tbody>
@@ -484,6 +486,122 @@
                                     </div>
                                 </div>
                             </div>
+                            @php
+                            $products = App\CustomInvoice::where('customer',auth()->user()->id)->paginate(10);
+                            @endphp
+                            
+
+                            <div class="tab-pane fade" id="v-pills-admin-invoice" role="tabpanel">
+                                <div class="invoice_part">
+                                    <h3 style="font-size: 22px;text-transform: capitalize;font-weight: 600;">Admin Created
+                                        Invoice</h3>
+                                    <div class="tran_box">
+
+                                        <table class="table">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col">Order Number</th>
+                                                    <th scope="col">Quantity</th>
+                                                    <th scope="col">Product Satatus</th>
+                                                    <th scope="col">Total Price</th>
+                                                    <th scope="col">Action</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($products as $row)
+                                                <tr>
+                                                    <th scope="row">{{$row->invoice_no}}</th>
+                                                    @php
+                                                    $data = array();
+                                                    $total = array();
+                                                    
+                                                    @endphp
+                                                    @foreach(json_decode($row->quantity) as $key=>$dataitem)
+                                                    @php
+                                                    $item['key']=$dataitem;
+                                                    array_push($data,$item);
+
+                                                    @endphp
+                                                    @endforeach
+
+                                                    <td>
+                                                    <?php
+                                        $qty = 0;
+                                        array_map(function ($value) {
+                                            print_r($value);
+                                        }, $data[$key])
+
+                                        ?>
+                                                    </td>
+
+                                                    
+                                                    
+                                                    <td>{{$row->unpaid}}</td>
+
+
+                                                    @foreach(json_decode($row->totalprice) as $key=>$totaldata)
+                                                    @php
+                                                    $item['key']=$totaldata;
+                                                    array_push($total,$item);
+
+                                                    @endphp
+                                                    @endforeach
+                                                    <td>
+                                                    <?php
+
+                                            array_map(function ($value) {
+                                                print_r($value);
+                                            }, $total[$key])
+                                            ?>
+                                                    </td>
+                                                    
+
+                                                    <td><a class="icon" id="icon{{$row->id}}">
+
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </a>
+                                                        <div id="action_list{{$row->id}}" class="action_list" style="display: none;">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="{{route('admin.customar.invoice.details',$row->id)}}">View</a>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+
+
+                                                </tr>
+
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $("#icon{{$row->id}}").click(function() {
+                                                            $(".action_list").fadeOut();
+                                                            $("#action_list{{$row->id}}").fadeToggle();
+
+
+                                                        });
+                                                    });
+                                                </script>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        {{$products->links()}}
+
+
+                                        <h4 style="font-size: 16px;text-transform: capitalize;margin-top: 40px;">No
+                                            Transaction Yet!</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
                             <div class="tab-pane fade" id="v-pills-transaction" role="tabpanel">
                                 <div class="tran_part">
                                     <h3 style="font-size: 22px;text-transform: capitalize;font-weight: 600;">

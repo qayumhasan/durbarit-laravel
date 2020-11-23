@@ -1,4 +1,5 @@
 @extends('layouts.website')
+@section('title', 'Teams | '.$seo->meta_title)
 @section('content')
     <!--- team part start -->
     <section id="team">
