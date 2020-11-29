@@ -290,7 +290,7 @@
             var modal = $(this)
             var data = modal.data('whatever');
             
-            document.getElementById('view_leave_type').innerHTML = data.leave_type;
+            document.getElementById('view_leave_type').innerHTML = data.apply_type.type;
             document.getElementById('view_leave_date').innerHTML = data.apply_date;
             document.getElementById('view_leave_from').innerHTML = data.leave_form;
             document.getElementById('view_leave_to').innerHTML = data.leave_to;
