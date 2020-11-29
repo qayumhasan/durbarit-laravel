@@ -55,6 +55,7 @@ class FrontendController extends ApiController
             $carrer=Career::where('status',1)->latest()->get();
             return view('frontend.carrer.carrerpage',compact('carrer'));
         }
+
          public function carrerapply($id){
 
             $apply=Career::where('id',$id)->first();

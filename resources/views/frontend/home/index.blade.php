@@ -35,6 +35,9 @@
 
     </section>
     <!--- banner part end -->
+
+    
+    
  <!--- about part start -->
     <section id="about">
         <div class="container">
@@ -101,6 +104,10 @@
                     </div>
                 </div>
             </div>
+
+            
+            
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="tab-content" id="pills-tabContent">

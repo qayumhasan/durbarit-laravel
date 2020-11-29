@@ -62,6 +62,7 @@
                             <li><a href="{{route('admin.staff.designation.index')}}">Staff Designation</a></li>
                             <li><a href="{{route('admin.staff.attendance.index')}}">Staff Attendance</a></li>
                             <li><a href="{{route('admin.staff.attendance.report.index')}}">Attendance Report</a></li>
+                            <li><a href="{{route('admin.payroll.index')}}">Payroll</a></li>
 	                        </ul>
                     </li>
                     
@@ -140,6 +141,7 @@
 	                          <li><a href="{{route('admin.user.index')}}">Users</a></li>
 	                          <li><a href="{{route('admin.sms.setting')}}">Sms Setting</a></li>
                             <li><a href="{{route('admin.logo.index')}}">Site Logo</a></li>
+                            <li><a href="{{route('admin.payment.setting.index')}}">Payment Setting</a></li>
 
 
 	                        </ul>

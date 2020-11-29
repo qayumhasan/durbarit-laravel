@@ -37,6 +37,15 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
   });
 
 
+  Route::prefix('payroll')->group(function(){
+    Route::get('/','PayrollController@index')->name('admin.payroll.index');
+    Route::get('/search','PayrollController@payrollSearch')->name('admin.staff.attendance.payroll.search');
+    Route::get('/show/{id}/{month}','PayrollController@payrollGenerate')->name('admin.payroll.genaretor');
+
+  });
+
+
+
   Route::prefix('leave')->group(function(){
     Route::get('/','LeaveController@index')->name('admin.leave.index');
 
@@ -60,7 +69,15 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
 
   Route::prefix('video')->group(function(){
     Route::get('/section','VideoController@index')->name('admin.video.index');
-    Route::post('/update','VideoController@update')->name('admin.sms.update');
+    Route::post('/update','VideoController@update')->name('admin.video.update');
+
+  });
+
+  Route::prefix('payment/setting')->group(function(){
+    Route::get('/','PaymentSettingController@index')->name('admin.payment.setting.index');
+    Route::post('/stripe/update','PaymentSettingController@stripeUpdate')->name('admin.stripe.setting.update');
+    Route::post('/paypal/update','PaymentSettingController@paypalUpdate')->name('admin.paypal.setting.update');
+    Route::post('/ssl/commerz/update','PaymentSettingController@sslCommerzUpdate')->name('admin.ssl.commerz.setting.update');
 
   });
   

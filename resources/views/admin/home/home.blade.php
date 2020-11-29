@@ -1,6 +1,7 @@
   
 @extends('admin.master')
 @section('contents')
+
 <section class="counter_area">
 						<div class="row">
 							<div class="col-lg-3 col-md-6">
@@ -205,6 +206,7 @@
 									</div>
 								</div> 
 							</div> -->
+							
 							<div class="col-lg-8 col-xl-6">
 								<div class="panel">
 									<div class="panel_header">
