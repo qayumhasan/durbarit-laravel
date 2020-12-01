@@ -26,6 +26,8 @@ class StaffDirectory extends Model
      }
     }
 
+    
+
       /**
      * Get the phone record associated with the user.
      */

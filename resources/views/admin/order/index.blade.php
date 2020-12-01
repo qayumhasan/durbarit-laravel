@@ -61,6 +61,23 @@
                         </tr>
                         @endforeach
                     </tbody>
+
+                    <tfoot>
+            <tr>
+            <th>
+                                SL
+                            </th>
+                            <th >Order Code</th>
+                            <th >Quentity</th>
+                            
+                            <th >Customar</th>
+                            <th >Amount</th>
+                            <th>Payment Method</th>
+                            <th>Payment Status</th>
+                            <th style="width: 10%;">manage</th>
+            </tr>
+        </tfoot>
+
                 </table>
             </div>
         </div>

@@ -40,7 +40,11 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
   Route::prefix('payroll')->group(function(){
     Route::get('/','PayrollController@index')->name('admin.payroll.index');
     Route::get('/search','PayrollController@payrollSearch')->name('admin.staff.attendance.payroll.search');
-    Route::get('/show/{id}/{month}','PayrollController@payrollGenerate')->name('admin.payroll.genaretor');
+    Route::get('/show/{id}/{month}/{year}','PayrollController@payrollGenerate')->name('admin.payroll.genaretor');
+    Route::get('/salary/count','PayrollController@payrollSalaryCount')->name('staff.salary.count');
+    Route::post('/payroll/generate','PayrollController@payrollGenerateCreate')->name('staff.salary.generate');
+    Route::post('/payroll/payment/method','PayrollController@payrollGeneratePaymentMethod')->name('admin.payroll.payment.method');
+    Route::get('/payroll/view','PayrollController@adminViewPayroll')->name('admin.view.payroll');
 
   });
 

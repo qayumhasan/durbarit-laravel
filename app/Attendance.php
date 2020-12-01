@@ -19,5 +19,8 @@ class Attendance extends Model
         return $this->hasOne('App\AttendanceCount','staff_id','staff_id')->withDefault();
     }
 
+
+    
+
    
 }
