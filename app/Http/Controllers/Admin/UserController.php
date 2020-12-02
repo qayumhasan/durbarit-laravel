@@ -49,6 +49,7 @@ class UserController extends Controller
 
     public function createUser($request)
     {
+        
         $user = new User();
         $user->name = $request->name;
         $user->username = $request->username;

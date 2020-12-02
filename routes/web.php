@@ -186,6 +186,11 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::get('/delete/{id}','CareerController@delete')->name('admin.career.delete');
   });
 
+  Route::prefix('header/text')->group(function(){
+    Route::post('/chooseus/update','HeaderTextController@whyChooseUs')->name('admin.choosus.header.update');
+    Route::post('/strength/update','HeaderTextController@strength')->name('admin.strength.header.update');
+  });
+
   Route::prefix('career')->group(function(){
     Route::get('/','CareerController@index')->name('admin.career.index');
     Route::get('/create','CareerController@create')->name('admin.career.create');
@@ -278,7 +283,19 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
     Route::get('/status/{type}/{id}','UserController@status')->name('admin.user.status');
     Route::get('/delete/{type}/{id}','UserController@delete')->name('admin.user.delete');
 
-    Route::get('/profile/{id}','UserController@profile')->name('');
+    
+  });
+
+
+  Route::prefix('customar')->group(function(){
+    Route::get('/','CustomarController@index')->name('admin.customar.index');
+    Route::get('/create','CustomarController@create')->name('admin.customar.create');
+    Route::post('/create','CustomarController@store')->name('admin.customar.store');
+    Route::get('/edit/{type}/{id}','CustomarController@edit')->name('admin.customar.edit');
+    Route::post('/update','CustomarController@update')->name('admin.customar.update');
+    Route::get('/status/{type}/{id}','CustomarController@status')->name('admin.customar.status');
+    Route::get('/delete/{type}/{id}','CustomarController@delete')->name('admin.customar.delete');
+    
   });
 
   Route::prefix('about/us')->group(function(){
@@ -319,6 +336,16 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
   Route::get('/whychoseus/edit/{id}','WhyChoseUsController@edit');
   Route::post('/whychoseus/update/{id}','WhyChoseUsController@update')->name('admin.whychoseus.update');
 });
+
+Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(function(){
+  Route::get(md5('/strength/create'),'StrengthController@create')->name('admin.strength.create');
+  Route::post('/strength/submit','StrengthController@store')->name('admin.strength.store');
+  Route::get(md5('/strength/index'),'StrengthController@index')->name('admin.strength.index');
+  Route::get('/strength/destroy/{id}','StrengthController@destroy');
+  Route::get('/strength/edit/{id}','StrengthController@edit');
+  Route::post('/strength/update/{id}','StrengthController@update')->name('admin.strength.update');
+});
+
 // ContactInformation
 Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(function(){
   Route::get('/contactinformation/edit','ContactInformationController@edit')->name('admin.contactinformation');

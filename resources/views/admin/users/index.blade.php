@@ -33,7 +33,7 @@
                             <th >User Name</th>
                             <th >Type</th>
                             <th >Created At</th>
-                            <th >Image</th>
+                            <th width="20%">Image</th>
                             <th>Status</th>
                             <th>manage</th>
                         </tr>
