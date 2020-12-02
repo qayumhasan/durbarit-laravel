@@ -134,7 +134,7 @@ date_default_timezone_set('Asia/Dhaka');
 
 
 
-                    
+
 
                     <div class="panel_body table_body mt-3">
 
@@ -158,6 +158,11 @@ date_default_timezone_set('Asia/Dhaka');
                                 </thead>
                                 <tbody>
                                     @foreach($atts as $row)
+
+                                    @php
+                                    $payroll = App\Payroll::with('staff')->where('month',$row->month )->where('year',$row->year)->where('staff_id',$row->staff_id)->first();
+                                    @endphp
+
                                     <tr>
                                         <td>
                                             {{$loop->iteration}}
@@ -173,14 +178,27 @@ date_default_timezone_set('Asia/Dhaka');
 
 
 
-                                        @if($row->status == 1)
-                                        <td class="center"><span class="btn btn-success">Active</span></td>
+
+
+                                        @if($payroll['ispaid'] == 1)
+                                        <td class="center"><span class="btn btn-success">Paid</span></td>
+                                        @elseif($payroll)
+
+                                        <td class="center"><span class="btn btn-success">Generated</span></td>
                                         @else
-                                        <td class="center"><span class="btn btn-danger">InActive</span></td>
+                                        <td class="center"><span class="btn btn-danger">Not Generate</span></td>
                                         @endif
 
 
-                                        <td class="center"><a href="{{route('admin.payroll.genaretor',[$row->staff_id,$row->month])}}"><span class="btn btn-success">Generate PayRoll</span></a></td>
+                                        @if($payroll['ispaid'] == 1)
+
+                                        <td><button type="button" class="btn btn-primary viewmodal" data-toggle="modal" data-target="#exampleModalCenter1" data-whatever="{{$row->staff_id}}">View PaySlip</span></button></td>
+
+                                        @elseif($payroll)
+                                        <td><button type="button" class="btn btn-primary editmodal" data-toggle="modal" data-target="#exampleModalCenter" data-whatever="{{$payroll}}">Proceed To Pay</span></button></td>
+                                        @else
+                                        <td class="center"><a href="{{route('admin.payroll.genaretor',[$row->staff_id,$row->month,$row->year])}}"><span class="btn btn-info">Generate A Payroll</span></a></td>
+                                        @endif
 
                                     </tr>
                                     @endforeach
@@ -188,7 +206,7 @@ date_default_timezone_set('Asia/Dhaka');
                             </table>
                         </div>
                         @else
-                            <td>No Data Found!</td>
+                        <td>No Data Found!</td>
                         @endif
 
 
@@ -204,5 +222,134 @@ date_default_timezone_set('Asia/Dhaka');
         </div>
     </section>
 </div>
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('admin.payroll.payment.method')}}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Staff Name:</label>
+                        <input type="hidden" class="form-control" name="id" id="id">
+                        <input type="text" disabled class="form-control" id="staff">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Month Year:</label>
+                        <input type="text" disabled class="form-control" name="month" id="month">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Payroll Generated Date:</label>
+                        <input type="text" disabled class="form-control" name="month" id="payrollgenerate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Payment Amount *:</label>
+                        <input type="text" class="form-control" name="" id="paymentamount">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Payment Method*:</label>
+                        <select class="form-control" name="payment_method" id="exampleFormControlSelect1">
+                            <option value="cash">Cash</option>
+                            <option value="bank">Bank</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" name="note" id="message"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Payslip</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered" id="viewpayroll">
+                    
+                    
+                </table>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".editmodal").click(function() {
+            var modal = $(this)
+            var data = modal.data('whatever');
+
+            document.getElementById('staff').value = data.staff.first_name + ' ' + data.staff.last_name;
+            document.getElementById('id').value = data.id;
+            document.getElementById('month').value = data.month + '-' + data.year;
+            document.getElementById('payrollgenerate').value = data.genared_date;
+            document.getElementById('paymentamount').value = data.net_salary;
+
+
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $(".viewmodal").click(function() {
+            var modal = $(this)
+            
+            var data = modal.data('whatever');
+            console.log(data)
+            $.ajax({
+                type: "GET",
+                url: '{{ route('admin.view.payroll')}}',
+
+                data: {data},
+                success: function(data) {
+                    $('#viewpayroll').html(data);
+                    
+                }
+            });
+            
+            
+
+
+        });
+    });
+</script>
 
 @endsection

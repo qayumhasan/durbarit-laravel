@@ -372,25 +372,175 @@
         </div>
     </div>
 
-    <div class="row tab_box ml-1 mr-1 mt-3">
-        <div class="col-sm-4">
-            <h6 class="text-center">Earnings </h6>
-            <hr>
+    <form id="calculate_salary" action="{{route('staff.salary.generate')}}" method="post">
+        @csrf
+        <div class="row tab_box ml-1 mr-1 mt-3">
+            <div class="col-sm-4">
+                <h6 style="display: inline-block;">Earnings </h6>
+                <span onclick="addMoreEarning()" title="Add More Earning" data-toggle="tooltip" data-placement="top" class="float-right" style="border:1px solid #dddddd;border-radius:50%;padding:5px 8px;background:rgb(19, 194, 176);color:honeydew;"><i class="fas fa-plus"></i></span>
+                <hr>
+                <div class="earning" id="earning">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <input type="hidden" required name="id" value="{{$staff->id}}">
+                            <input type="hidden" required name="month" value="{{$month}}">
+                            <input type="hidden" required name="year" value="{{$year}}">
+                            <input class="form-control"  type="text" name="earningtype[]" value="" placeholder="Earning Type" />
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control"  type="number" onblur="calculateSalary()" name="earningvalue[]" value="" placeholder="Value" />
+                        </div>
+                        <div class="col-sm-1">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+                <h6 style="display: inline-block;">Deductions</h6>
+                <span onclick="addMoreDeductions()" title="Add More Deductions" data-toggle="tooltip" data-placement="top" class="float-right" style="border:1px solid #dddddd;border-radius:50%;padding:4px 8px;background:rgb(19, 194, 176);color:honeydew;"><i class="fas fa-plus"></i></span>
+                <hr>
+
+
+                <div class="deductions" id="deductions">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <input class="form-control"  type="text" name="deductiontype[]" value="" placeholder="Deductions Type" />
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="number" onblur="calculateSalary()" name="deductionvalue[]" value="" placeholder="Value" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-sm-4" id="insertpayroll">
+                <h6 style="display: inline-block;">Payroll Summary </h6>
+                <span title="Calculate Salary" data-toggle="tooltip" data-placement="top" class="float-right" style="border-radius:50%;padding:4px 8px;"></span>
+                <hr>
+                <div class="deductionsarea" id="payroll_summary">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Basic Salary :</label>
+                        <input type="text" class="form-control"  value="{{$staff->basic_salary}}" name="basic" id="basic" aria-describedby="emailHelp" placeholder="Basic Salary">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Total Earning</label>
+                        <input type="text" class="form-control"  name="earning" id="salaryearning" placeholder="Earning">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Total Deductions</label>
+                        <input type="text" class="form-control"  name="deductions" id="salarydeductions" placeholder="Earning">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Gross Salary</label>
+                        <input type="text" class="form-control"  name="gslary" value="{{$staff->basic_salary}}" id="gsalry" placeholder="Earning">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Tax</label>
+                        <input type="text" class="form-control" onblur="calculateSalary()" name="tax" id="tax" placeholder="Earning">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Net Salary</label>
+                        <input type="text" class="form-control"  name="netsalary" value="{{$staff->basic_salary}}" id="netsalary" placeholder="Earning">
+                    </div>
+
+                    <button type="submit" class="btn btn-success mb-2 float-right">Submit</button>
+
+
+                </div>
+            </div>
 
         </div>
-
-        <div class="col-sm-4">
-            <h6 class="text-center">Deductions</h6>
-            <hr>
-            
-        </div>
-
-        <div class="col-sm-4">
-            <h6 class="text-center">Payroll Summary </h6>
-            <hr>
-        </div>
-    </div>
+    </form>
 </div>
+
+<script>
+    function addMoreEarning() {
+        var earningdata = '<div class="row mt-2">';
+        earningdata += '<div class="col-sm-7">';
+        earningdata += '<input class="form-control" required type="text" name="earningtype[]" value="" placeholder="Earning Type" />';
+        earningdata += '</div>';
+        earningdata += '<div class="col-sm-4">';
+        earningdata += '<input class="form-control" required type="number" onblur="calculateSalary()" name="earningvalue[]" value="" placeholder="Value" />';
+        earningdata += '</div>';
+        earningdata += '<div class="col-sm-1">';
+        earningdata += '<span title="Delete Earning" onClick="delete_row(this)" data-toggle="tooltip" data-placement="top" class="bg-danger float-right" style="border:1px solid #dddddd;border-radius:50%;padding:4px 8px;color:honeydew;"><i class="fa fa-trash" aria-hidden="true"></i></span>';
+        earningdata += '</div>';
+        earningdata += '</div>';
+        $('#earning').append(earningdata);
+    }
+
+    function delete_row(el) {
+
+        $(el).closest('.row').remove();
+    }
+</script>
+
+<script>
+    var i = 0;
+
+    function addMoreDeductions() {
+
+        var deductiondata = '<div class="row mt-2">';
+        deductiondata += '<div class="col-sm-7">';
+        deductiondata += '<input class="form-control"required id="deduction' + i + '" type="text" name="deductiontype[]" value="" placeholder="Deduction Type" />';
+        deductiondata += '</div>';
+        deductiondata += '<div class="col-sm-4">';
+        deductiondata += '<input class="form-control required deductionvalue" onblur="calculateSalary()" type="number" name="deductionvalue[]" value="" placeholder="Value" />';
+        deductiondata += '</div>';
+        deductiondata += '<div class="col-sm-1">';
+        deductiondata += '<span title="Delete Earning" onClick="delete_row(this)" data-toggle="tooltip" data-placement="top" class="bg-danger float-right" style="border:1px solid #dddddd;border-radius:50%;padding:4px 8px;color:honeydew;"><i class="fa fa-trash" aria-hidden="true"></i></span>';
+        deductiondata += '</div>';
+        deductiondata += '</div>';
+        $('#deductions').append(deductiondata);
+        i++;
+    }
+
+    function delete_row(el) {
+
+        $(el).closest('.row').remove();
+        calculateSalary();
+    }
+</script>
+
+<script>
+    function calculateSalary() {
+
+
+
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('staff.salary.count') }}",
+            data: $('#calculate_salary').serializeArray(),
+            success: function(data) {
+                // console.log(data);
+                // document.getElementById('salaryearning').value = data.earningvalue;
+                // document.getElementById('salarydeductions').value = data.deductionvalue;
+
+                console.log(data)
+                $('#payroll_summary').empty();
+
+                $('#insertpayroll').html(data);
+
+
+            }
+        });
+
+    }
+</script>
 
 
 @endsection
