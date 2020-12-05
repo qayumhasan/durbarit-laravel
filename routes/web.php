@@ -189,6 +189,9 @@ Route::prefix('admin')->middleware('auth:admin')->namespace('Admin')->group(func
   Route::prefix('header/text')->group(function(){
     Route::post('/chooseus/update','HeaderTextController@whyChooseUs')->name('admin.choosus.header.update');
     Route::post('/strength/update','HeaderTextController@strength')->name('admin.strength.header.update');
+    Route::post('/service/update','HeaderTextController@service')->name('admin.servce.header.update');
+    Route::post('/project/update','HeaderTextController@project')->name('admin.project.header.update');
+    Route::post('/client/update','HeaderTextController@client')->name('admin.client.header.update');
   });
 
   Route::prefix('career')->group(function(){
@@ -431,7 +434,10 @@ Route::prefix('customer')->middleware('auth:web')->namespace('Frontend')->group(
   Route::get('/admin/invoice/details/{orderid}','AddToCartController@adminInvoiceDetails')->name('admin.customar.invoice.details');
   Route::get('/invoice/download/{orderid}','AddToCartController@invoiceDownload')->name('customar.invoice.download');
   
+  
 });
+
+Route::post('/client/review','Admin\ClientController@clientReviews')->name('admin.client.review')->middleware('auth:web');
 
 
 Route::get('/product/collection/{id}','Frontend\AddToCartController@addToCollect');
