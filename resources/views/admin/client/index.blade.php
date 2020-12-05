@@ -12,6 +12,7 @@
                 </div>
                 <div class="col-md-6 text-right">
                     <div class="panel_title">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-plus"></i>Add Header Text</button>
                         <a href="{{route('admin.client.create')}}" class="btn btn-success"><i class="fas fa-plus"></i></span>
                             <span>Add Client Say</span></a>
                     </div>
@@ -90,5 +91,39 @@
         </form>
     </div>
 </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Client Say Header Text Update</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="{{route('admin.client.header.update')}}" method="post">
+					@csrf
+					<div class="form-group">
+						@php
+							$data = App\HeaderText::where('type','client')->first();
+						@endphp
+
+						<textarea name="details" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$data->details}}</textarea>
+
+					</div>
+					<div class="form-group float-right">
+
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Update</button>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 @endsection('contents')

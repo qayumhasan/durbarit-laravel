@@ -87,7 +87,7 @@ class AdminController extends Controller
         ]);
 
         $notification=array(
-            'messege'=>' User Insert Successfully',
+            'messege'=>' Admin created Successfully',
             'alert-type'=>'success'
              );
          return redirect()->route('admin.login.page')->with($notification);

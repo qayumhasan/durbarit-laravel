@@ -74,6 +74,9 @@
                         Add Fund</a> -->
 
                     <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-invoice" role="tab" aria-selected="false"><i class="fas fa-receipt"></i> My Invoice</a>
+
+                    <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-reviews" role="tab" aria-selected="false"><i class="fas fa-receipt"></i> Reviews</a>
+
                     <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-admin-invoice" role="tab" aria-selected="false"><i class="fas fa-receipt"></i> Admin Invoice</a>
 
                     <!-- <a class="nav-link" id="v-pills-transaction-tab" data-toggle="pill" href="#v-pills-transaction" role="tab" aria-selected="false"><i class="fab fa-typo3"></i> Transaction</a> -->
@@ -489,7 +492,7 @@
                             @php
                             $products = App\CustomInvoice::where('customer',auth()->user()->id)->paginate(10);
                             @endphp
-                            
+
 
                             <div class="tab-pane fade" id="v-pills-admin-invoice" role="tabpanel">
                                 <div class="invoice_part">
@@ -516,7 +519,7 @@
                                                     @php
                                                     $data = array();
                                                     $total = array();
-                                                    
+
                                                     @endphp
                                                     @foreach(json_decode($row->quantity) as $key=>$dataitem)
                                                     @php
@@ -527,17 +530,17 @@
                                                     @endforeach
 
                                                     <td>
-                                                    <?php
-                                        $qty = 0;
-                                        array_map(function ($value) {
-                                            print_r($value);
-                                        }, $data[$key])
+                                                        <?php
+                                                        $qty = 0;
+                                                        array_map(function ($value) {
+                                                            print_r($value);
+                                                        }, $data[$key])
 
-                                        ?>
+                                                        ?>
                                                     </td>
 
-                                                    
-                                                    
+
+
                                                     <td>{{$row->unpaid}}</td>
 
 
@@ -549,14 +552,14 @@
                                                     @endphp
                                                     @endforeach
                                                     <td>
-                                                    <?php
+                                                        <?php
 
-                                            array_map(function ($value) {
-                                                print_r($value);
-                                            }, $total[$key])
-                                            ?>
+                                                        array_map(function ($value) {
+                                                            print_r($value);
+                                                        }, $total[$key])
+                                                        ?>
                                                     </td>
-                                                    
+
 
                                                     <td><a class="icon" id="icon{{$row->id}}">
 
@@ -627,6 +630,50 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+                            @php
+                            $review = App\Client::where('user_id',auth()->user()->id)->first();
+                            @endphp
+                            
+                            <div class="tab-pane fade" id="v-pills-reviews" role="tabpanel">
+                                <div class="support_part">
+
+
+                                    <form action="{{route('admin.client.review')}}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Company Name:</label>
+                                            <input type="text" required class="form-control" id="exampleInputEmail1" value="{{$review->company ?? ' '}}" name="company" aria-describedby="emailHelp" placeholder="Enter Your Company Name">
+                                            @error('company')
+                                                <small id="emailHelp" class="form-text text-muted text-danger">{{$message}}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Designation</label>
+                                            <input type="text" required class="form-control" id="exampleInputEmail1" value="{{$review->designation ?? ' '}}" name="designation" aria-describedby="emailHelp" placeholder="Enter Your Designation">
+                                            @error('designation')
+                                                <small id="emailHelp" class="form-text text-muted text-danger">{{$message}}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Enter Your Reviews</label>
+
+                                            <textarea class="form-control" required id="editor2" placeholder="Enter Your Reviews" name="review" rows="5">{{$review->review ?? ' '}}</textarea>
+                                            @error('review')
+                                                <small id="emailHelp" class="form-text text-muted text-danger">{{$message}}</small>
+                                            @enderror
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+
+
+                                </div>
+                            </div>
+
+
                         </div>
 
                     </div>

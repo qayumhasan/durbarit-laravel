@@ -75,8 +75,7 @@
                     <div class="title_border">
                         <span></span>
                     </div>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                        classical Latin literature from 45 BC</p>
+                    <p>{{$header->active('service')->details}}</p>
                 </div>
             </div>
         </div>
@@ -303,8 +302,7 @@
                     <div class="title_border">
                         <span></span>
                     </div>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                        classical Latin literature from 45 BC</p>
+                    <p>{{$header->active('project')->details}}</p>
                 </div>
             </div>
         </div>
@@ -363,8 +361,7 @@
                     <div class="title_border">
                         <span></span>
                     </div>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                        classical Latin literature from 45 BC</p>
+                    <p>{{$header->active('client')->details}}</p>
                 </div>
             </div>
         </div>

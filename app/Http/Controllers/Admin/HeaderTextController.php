@@ -38,5 +38,50 @@ class HeaderTextController extends Controller
              );
          return redirect()->back()->with($notification);
     }
+
+    public function service(Request $request)
+    {
+        $request->validate([
+            'details'=>'required'
+        ]);
+        $data = HeaderText::where('type','service')->first();
+        $data->details = $request->details;
+        $data->save();
+        $notification=array(
+            'messege'=>' Services Header Text Updated Successfully.',
+            'alert-type'=>'success'
+             );
+         return redirect()->back()->with($notification);
+    }
+
+    public function project(Request $request)
+    {
+        $request->validate([
+            'details'=>'required'
+        ]);
+        $data = HeaderText::where('type','project')->first();
+        $data->details = $request->details;
+        $data->save();
+        $notification=array(
+            'messege'=>' Projects Header Text Updated Successfully.',
+            'alert-type'=>'success'
+             );
+         return redirect()->back()->with($notification);
+    }
+
+    public function client(Request $request)
+    {
+        $request->validate([
+            'details'=>'required'
+        ]);
+        $data = HeaderText::where('type','client')->first();
+        $data->details = $request->details;
+        $data->save();
+        $notification=array(
+            'messege'=>' Client Header Text Updated Successfully.',
+            'alert-type'=>'success'
+             );
+         return redirect()->back()->with($notification);
+    }
     
 }
